@@ -89,7 +89,6 @@ def edit_profile(request):
 def profile_only(request):
     """Test the Profile Model"""
     current_user = request.user
-    print(current_user)
     form = forms.ProfileForm(instance=current_user)
     if request.method == 'POST':
         form = forms.ProfileForm(data=request.POST, instance=current_user)
