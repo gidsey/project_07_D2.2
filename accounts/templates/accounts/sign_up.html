@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+
+{% block title %}Sign Up | {{ super }}{% endblock %}
+
+{% block body %}
+<form method="POST" action="{% url 'accounts:sign_up' %}">
+    {% csrf_token %}
+    {{ user_form.as_p }}
+    {{ form.as_p }}
+     {{ profile_form.as_p }}
+    <input type="submit" class="button-primary" value="Sign Up">
+</form>
+{% endblock %}
