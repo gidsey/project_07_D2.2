@@ -8,7 +8,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 
 from . import forms
-
+from . import models
 
 def sign_in(request):
     form = AuthenticationForm()
@@ -43,22 +43,23 @@ def sign_up(request):
         form = UserCreationForm(data=request.POST)
 
         if form.is_valid():
-            current_user = form.save(commit=False)
-            user_form = forms.UserForm(data=request.POST, instance=current_user)
-            profile_form = forms.ProfileForm(data=request.POST, instance=current_user)
-            if user_form.is_valid() and profile_form.is_valid():
-                current_user.save()
-                user_form.save()
-                profile_form.save()
-                user = authenticate(
-                    username=form.cleaned_data['username'],
-                    password=form.cleaned_data['password1']
-                )
-                login(request, user)
-                messages.success(
-                    request,
-                "You're now a user! You've been signed in, too."
-                )
+            user_profile = form.save(commit=False)
+            user_profile.user = request.user
+            user_form = forms.UserForm(data=request.POST, instance=user_profile)
+
+            user_profile.save()
+            user_form.save()
+
+
+            user = authenticate(
+                username=form.cleaned_data['username'],
+                password=form.cleaned_data['password1']
+            )
+            login(request, user)
+            messages.success(
+                request,
+            "You're now a user! You've been signed in, too."
+            )
             return HttpResponseRedirect(reverse('home'))  # TODO: go to profile
 
     return render(request, 'accounts/sign_up.html', {
@@ -85,18 +86,23 @@ def edit_profile(request):
     """Define the Edit Profile view"""
     return render(request, 'accounts/edit_profile.html', {'current_user': request.user})
 
-
+@login_required(login_url='accounts/sign_in/')
 def profile_only(request):
     """Test the Profile Model"""
-    current_user = request.user
-    form = forms.ProfileForm(instance=current_user)
+    form = forms.ProfileForm()
+
+    try:
+        user_profile = request.user.profile
+    except models.Profile.DoesNotExist:
+        user_profile = models.Profile(user=request.user)
+
     if request.method == 'POST':
-        form = forms.ProfileForm(data=request.POST, instance=current_user)
+        form = forms.ProfileForm(data=request.POST, instance=user_profile)
         if form.is_valid():
             form.save()
             messages.success(request, "Profile updated successfully")
             return HttpResponseRedirect(reverse('home'))
 
     return render(request, 'accounts/profile_only.html',
-                  {'form': form, 'current_user': current_user})
+                  {'form': form, 'current_user': request.user})
 
