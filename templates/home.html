@@ -7,6 +7,7 @@
         <h1>Welcome!</h1>
        {% if user.is_authenticated %}
         <p>View your profile <a href="{%  url 'accounts:profile' %}">here</a></p>
+           <p><a href="{%  url 'accounts:profile_only' %}">Edit Profile Only (test view)</a></p>
         {%  endif %}
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab ad amet assumenda beatae blanditiis, deserunt doloremque ea earum excepturi id, impedit ipsam magnam nulla obcaecati, quidem quis soluta tenetur vitae?</p>
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab ad amet assumenda beatae blanditiis, deserunt doloremque ea earum excepturi id, impedit ipsam magnam nulla obcaecati, quidem quis soluta tenetur vitae?</p>

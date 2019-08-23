@@ -10,4 +10,5 @@ urlpatterns = [
     path('sign_out/', views.sign_out, name='sign_out'),
     path('edit_profile/', views.edit_profile, name='edit_profile'),
     path('profile/', views.profile, name='profile'),
+    path('profile_only', views.profile_only, name='profile_only'),# Test Profile URL
 ]
