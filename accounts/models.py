@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
-
+from django.dispatch import receiver
 
 def user_directory_path(instance, filename):
     """Get the user directory path"""
@@ -32,9 +32,15 @@ class Profile(models.Model):
 #
 
 
+@receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
         Profile.objects.create(user=instance)
+
+
+# def create_user_profile(sender, instance, created, **kwargs):
+#     if created:
+#         Profile.objects.create(user=instance)
 
 
 def save_user_profile(sender, instance, **kwargs):

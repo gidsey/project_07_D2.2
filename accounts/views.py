@@ -2,6 +2,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.db import transaction
 from django.urls import reverse
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
@@ -33,7 +34,7 @@ def sign_in(request):
                 )
     return render(request, 'accounts/sign_in.html', {'form': form})
 
-
+@transaction.atomic
 def sign_up(request):
     form = UserCreationForm()
     user_form = forms.UserForm()
