@@ -6,7 +6,17 @@
 <form method="POST" action="{% url 'accounts:sign_up' %}">
     {% csrf_token %}
     {{ user_form.as_p }}
-    {{ form.as_p }}
+
+    {% for field in form %}
+        <div class="fieldWrapper">
+            {{ field.errors }}
+            {{ field.label_tag }} {{ field }}
+            {% if field.help_text %}
+                <p class="help">{{ field.help_text|safe }}</p>
+            {% endif %}
+        </div>
+    {% endfor %}
+
      {{ profile_form.as_p }}
     <input type="submit" class="button-primary" value="Sign Up">
 </form>

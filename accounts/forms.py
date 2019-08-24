@@ -15,13 +15,14 @@ class ProfileForm(forms.ModelForm):
 
     class Meta:
         model = models.Profile
-        fields = ('city', 'country')
-
+        fields = (
             # 'date_of_birth',
-            # 'bio',
+            'bio',
             # 'avatar',
-            # 'city',
-            # 'county',
-            # 'country',
-            # 'interests',
-            # 'website'
+            'city',
+            'county',
+            'country',
+            'interests',
+            'website',
+        )
+

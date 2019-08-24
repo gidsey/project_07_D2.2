@@ -1,7 +1,7 @@
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.db import transaction
 from django.urls import reverse
 from django.http import HttpResponseRedirect
@@ -9,6 +9,7 @@ from django.shortcuts import render
 
 from . import forms
 from . import models
+
 
 def sign_in(request):
     form = AuthenticationForm()
@@ -34,6 +35,7 @@ def sign_in(request):
                 )
     return render(request, 'accounts/sign_in.html', {'form': form})
 
+
 @transaction.atomic
 def sign_up(request):
     form = UserCreationForm()
@@ -46,12 +48,10 @@ def sign_up(request):
         if form.is_valid():
             user = form.save()
             user_profile = models.Profile.objects.create(user=user)
-
             user_form = forms.UserForm(data=request.POST, instance=user)
             profile_form = forms.ProfileForm(data=request.POST, instance=user_profile)
 
             if user_form.is_valid() and profile_form.is_valid():
-                user.save()
                 user_form.save()
                 profile_form.save()
 
