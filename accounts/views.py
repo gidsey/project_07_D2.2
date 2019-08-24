@@ -39,17 +39,21 @@ def sign_up(request):
     form = UserCreationForm()
     user_form = forms.UserForm()
     profile_form = forms.ProfileForm()
+
     if request.method == 'POST':
         form = UserCreationForm(data=request.POST)
 
         if form.is_valid():
-            user_profile = form.save(commit=False)
-            user_profile.user = request.user
-            user_form = forms.UserForm(data=request.POST, instance=user_profile)
+            user = form.save()
+            user_profile = models.Profile.objects.create(user=user)
 
-            user_profile.save()
-            user_form.save()
+            user_form = forms.UserForm(data=request.POST, instance=user)
+            profile_form = forms.ProfileForm(data=request.POST, instance=user_profile)
 
+            if user_form.is_valid() and profile_form.is_valid():
+                user.save()
+                user_form.save()
+                profile_form.save()
 
             user = authenticate(
                 username=form.cleaned_data['username'],
@@ -58,7 +62,7 @@ def sign_up(request):
             login(request, user)
             messages.success(
                 request,
-            "You're now a user! You've been signed in, too."
+                "You're now a user! You've been signed in, too."
             )
             return HttpResponseRedirect(reverse('home'))  # TODO: go to profile
 
@@ -90,11 +94,10 @@ def edit_profile(request):
 def profile_only(request):
     """Test the Profile Model"""
     form = forms.ProfileForm()
-
     try:
-        user_profile = request.user.profile
+        user_profile = request.user.profile  # Set Profile instance for the current user
     except models.Profile.DoesNotExist:
-        user_profile = models.Profile(user=request.user)
+        user_profile = models.Profile(user=request.user)  # Set the Profile instance for new user
 
     if request.method == 'POST':
         form = forms.ProfileForm(data=request.POST, instance=user_profile)
