@@ -46,14 +46,19 @@ def sign_up(request):
         form = UserCreationForm(data=request.POST)
 
         if form.is_valid():
-            user = form.save()
-            user_profile = models.Profile.objects.create(user=user)
-            user_form = forms.UserForm(data=request.POST, instance=user)
-            profile_form = forms.ProfileForm(data=request.POST, instance=user_profile)
+            user = form.save(commit=False)
+            user.profile = models.Profile(user=user)
+            user.save()
 
-            if user_form.is_valid() and profile_form.is_valid():
-                user_form.save()
-                profile_form.save()
+            # user_profile = models.Profile.objects.create(user=user)
+
+            # user_form = forms.UserForm(data=request.POST, instance=user)
+            # profile_form = forms.ProfileForm(data=request.POST, instance=user_profile)
+
+            # if user_form.is_valid() and profile_form.is_valid():
+            #     user.save()
+            #     # user_form.save()
+            #     profile_form.save()
 
             user = authenticate(
                 username=form.cleaned_data['username'],
