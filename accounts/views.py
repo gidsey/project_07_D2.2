@@ -48,7 +48,7 @@ def sign_up(request):
             user = form.save()
             user.profile = models.Profile.objects.create(user=user)
             profile_form = forms.ProfileForm(data=request.POST, instance=user.profile)
-            if profile_form.is_valid():
+            if form.is_valid() and profile_form.is_valid():
                 profile_form.save()
 
                 user = authenticate(
@@ -60,7 +60,11 @@ def sign_up(request):
                     request,
                     "You're now a user! You've been signed in, too."
                 )
-                return HttpResponseRedirect(reverse('home'))  # TODO: go to profile
+                return HttpResponseRedirect(reverse('accounts:profile'))
+
+        else:  # Re-render the form with data for user to correct errors
+            form = UserCreationForm(data=request.POST)
+            profile_form = forms.ProfileForm(data=request.POST)
 
     return render(request, 'accounts/sign_up.html', {
         'form': form,

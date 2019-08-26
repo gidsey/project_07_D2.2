@@ -22,7 +22,7 @@ class Profile(models.Model):
     bio = models.TextField(null=True)
     # avatar = models.ImageField(upload_to=user_directory_path, max_length=255, null=True)
     city = models.CharField(max_length=100, null=True)
-    county = models.CharField(max_length=255, null=True)
+    county = models.CharField(max_length=255, null=True, blank=True)
     country = models.CharField(max_length=100, null=True)
     interests = models.TextField(null=True)
     website = models.URLField(null=True)
