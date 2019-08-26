@@ -5,7 +5,7 @@
 {% block body %}
 <form method="POST" action="{% url 'accounts:sign_up' %}">
     {% csrf_token %}
-    {{ user_form.as_p }}
+{#    {{ user_form.as_p }}#}
 
     {% for field in form %}
         <div class="fieldWrapper">

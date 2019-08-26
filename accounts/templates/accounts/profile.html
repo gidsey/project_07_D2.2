@@ -6,10 +6,10 @@
     </div>
     <div class="grid-75">
         <h1>User Profile</h1>
-        <h2>{{ current_user.first_name }} {{ current_user.last_name }}</h2>
+        <h2>{{ current_user.profile.first_name }} {{ current_user.profile.last_name }}</h2>
         <p><a href="{%  url 'accounts:edit_profile' %}">Edit Profile</a></p>
         <p>Username: {{ current_user.username }}</p>
-        <p>Email: {{ current_user.email|urlize }}</p>
+        <p>Email: {{ current_user.profile.email|urlize }}</p>
         <p>City: {{ current_user.profile.city }}</p>
         <p>Country: {{ current_user.profile.country}}</p>
         <p>Date Joined: {{ current_user.date_joined }}</p>

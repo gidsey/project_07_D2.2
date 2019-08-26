@@ -4,10 +4,10 @@ from django.contrib.auth.models import User
 from . import models
 
 
-class UserForm(forms.ModelForm):
-    class Meta:
-        model = User
-        fields = ('first_name', 'last_name', 'email')
+# class UserForm(forms.ModelForm):
+#     class Meta:
+#         model = User
+#         fields = ('first_name', 'last_name', 'email')
 
 
 class ProfileForm(forms.ModelForm):
@@ -16,6 +16,9 @@ class ProfileForm(forms.ModelForm):
     class Meta:
         model = models.Profile
         fields = (
+            'first_name',
+            'last_name',
+            'email',
             # 'date_of_birth',
             'bio',
             # 'avatar',

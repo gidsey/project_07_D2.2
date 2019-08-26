@@ -5,7 +5,7 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.db import transaction
 from django.urls import reverse
 from django.http import HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 
 from . import forms
 from . import models
@@ -39,40 +39,30 @@ def sign_in(request):
 @transaction.atomic
 def sign_up(request):
     form = UserCreationForm()
-    user_form = forms.UserForm()
     profile_form = forms.ProfileForm()
 
     if request.method == 'POST':
         form = UserCreationForm(data=request.POST)
 
         if form.is_valid():
-            user = form.save(commit=False)
-            user.profile = models.Profile(user=user)
-            user.save()
+            user = form.save()
+            user.profile = models.Profile.objects.create(user=user)
+            profile_form = forms.ProfileForm(data=request.POST, instance=user.profile)
+            if profile_form.is_valid():
+                profile_form.save()
 
-            # user_profile = models.Profile.objects.create(user=user)
-
-            # user_form = forms.UserForm(data=request.POST, instance=user)
-            # profile_form = forms.ProfileForm(data=request.POST, instance=user_profile)
-
-            # if user_form.is_valid() and profile_form.is_valid():
-            #     user.save()
-            #     # user_form.save()
-            #     profile_form.save()
-
-            user = authenticate(
-                username=form.cleaned_data['username'],
-                password=form.cleaned_data['password1']
-            )
-            login(request, user)
-            messages.success(
-                request,
-                "You're now a user! You've been signed in, too."
-            )
-            return HttpResponseRedirect(reverse('home'))  # TODO: go to profile
+                user = authenticate(
+                    username=form.cleaned_data['username'],
+                    password=form.cleaned_data['password1']
+                )
+                login(request, user)
+                messages.success(
+                    request,
+                    "You're now a user! You've been signed in, too."
+                )
+                return HttpResponseRedirect(reverse('home'))  # TODO: go to profile
 
     return render(request, 'accounts/sign_up.html', {
-        'user_form': user_form,
         'form': form,
         'profile_form': profile_form
     })
