@@ -1,15 +1,14 @@
 """Account Models"""
-
+import os
 from django.db import models
 from django.contrib.auth.models import User
-from django.db.models.signals import post_save
+from django.core.files.storage import FileSystemStorage
 
-from . import signals
 
 def user_directory_path(instance, filename):
     """Get the user directory path"""
     # file will be uploaded to MEDIA_ROOT/user_<id>/<filename>
-    return 'user_{0}/{1}'.format(instance.user.id, filename)
+    return 'avatars/{0}/{1}'.format(instance.user, filename)
 
 
 class Profile(models.Model):
@@ -20,7 +19,8 @@ class Profile(models.Model):
     email = models.EmailField(null=True)
     # date_of_birth = models.DateField(null=True)
     bio = models.TextField(null=True)
-    # avatar = models.ImageField(upload_to=user_directory_path, max_length=255, null=True)
+    avatar = models.ImageField(
+        upload_to=user_directory_path, max_length=100, null=True, blank=True)
     city = models.CharField(max_length=100, null=True)
     county = models.CharField(max_length=255, null=True, blank=True)
     country = models.CharField(max_length=100, null=True)

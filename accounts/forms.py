@@ -16,16 +16,17 @@ class ProfileForm(forms.ModelForm):
     class Meta:
         model = models.Profile
         fields = (
+            'user',
             'first_name',
             'last_name',
             'email',
             # 'date_of_birth',
             'bio',
-            # 'avatar',
+            'avatar',
             'city',
             'county',
             'country',
             'interests',
             'website',
         )
-
+        exclude = ('user', )

@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -9,6 +10,7 @@ from django.shortcuts import render, get_object_or_404
 
 from . import forms
 from . import models
+
 
 
 def sign_in(request):
@@ -40,14 +42,15 @@ def sign_in(request):
 def sign_up(request):
     form = UserCreationForm()
     profile_form = forms.ProfileForm()
-
+    print('MEDIA_ROOT = {}'.format(settings.MEDIA_ROOT))
+    print('MEDIA_URL = {}'.format(settings.MEDIA_URL))
     if request.method == 'POST':
         form = UserCreationForm(data=request.POST)
 
         if form.is_valid():
             user = form.save()
             user.profile = models.Profile.objects.create(user=user)
-            profile_form = forms.ProfileForm(data=request.POST, instance=user.profile)
+            profile_form = forms.ProfileForm(data=request.POST, files=request.FILES, instance=user.profile)
             if form.is_valid() and profile_form.is_valid():
                 profile_form.save()
 
