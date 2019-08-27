@@ -42,8 +42,6 @@ def sign_in(request):
 def sign_up(request):
     form = UserCreationForm()
     profile_form = forms.ProfileForm()
-    print('MEDIA_ROOT = {}'.format(settings.MEDIA_ROOT))
-    print('MEDIA_URL = {}'.format(settings.MEDIA_URL))
     if request.method == 'POST':
         form = UserCreationForm(data=request.POST)
 
