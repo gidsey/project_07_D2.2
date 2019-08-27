@@ -1,6 +1,10 @@
 """Accounts Forms."""
+import datetime
+
 from django import forms
 from django.contrib.auth.models import User
+from django.core.exceptions import ValidationError
+
 from . import models
 
 
@@ -20,7 +24,8 @@ class ProfileForm(forms.ModelForm):
             'first_name',
             'last_name',
             'email',
-            # 'date_of_birth',
+            'verify_email',
+            'date_of_birth',
             'bio',
             'avatar',
             'city',
@@ -29,4 +34,21 @@ class ProfileForm(forms.ModelForm):
             'interests',
             'website',
         )
-        exclude = ('user', )
+        exclude = ('user',)
+
+    def clean(self):
+        """Clean the form"""
+        cleaned_data = super().clean()
+        email = cleaned_data.get('email')
+        verify = cleaned_data.get('verify_email')
+        # date_of_birth = cleaned_data.get('date_of_birth')
+
+        if email != verify:  # Verify that the emails match.
+            raise ValidationError(
+                "Emails do not match"
+            )
+
+        # if date_of_birth != datetime:  # Verify the date is valid.
+        #     raise ValidationError(
+        #         "Please enter a valid date"
+        #     )

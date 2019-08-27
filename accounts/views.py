@@ -49,7 +49,7 @@ def sign_up(request):
             user = form.save()
             user.profile = models.Profile.objects.create(user=user)
             profile_form = forms.ProfileForm(data=request.POST, files=request.FILES, instance=user.profile)
-            if form.is_valid() and profile_form.is_valid():
+            if profile_form.is_valid():
                 profile_form.save()
 
                 user = authenticate(
