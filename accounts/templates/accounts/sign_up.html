@@ -1,20 +1,101 @@
 {% extends "layout.html" %}
+{% load widget_tweaks %}
+{% load accounts_extras %}
+
 
 {% block title %}Sign Up | {{ super }}{% endblock %}
 
 {% block body %}
-<form method="POST" action="{% url 'accounts:sign_up' %}" enctype="multipart/form-data">
-    {% csrf_token %}
-    {% for field in form %}
-        <div class="fieldWrapper">
-            {{ field.errors }}
-            {{ field.label_tag }} {{ field }}
-            {% if field.help_text %}
-                <p class="help">{{ field.help_text|safe }}</p>
+    <div class="container">
+        <form method="POST" action="{% url 'accounts:sign_up' %}" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            {# login form #}
+            {% for hidden_field in form.hidden_fields %}
+                {{ hidden_field }}
+            {% endfor %}
+
+            {% if form.non_field_errors %}
+                <div class="alert alert-danger" role="alert">
+                    {% for error in form.non_field_errors %}
+                        {{ error }}
+                    {% endfor %}
+                </div>
             {% endif %}
-        </div>
-    {% endfor %}
-     {{ profile_form.as_p }}
-    <input type="submit" class="button-primary" value="Sign Up">
-</form>
+
+            {% for field in form.visible_fields %}
+                <div class="form-group">
+                    {{ field.label_tag }}
+
+                    {% if form.is_bound %}
+
+                        {% if field.errors %}
+                            {% render_field field class="form-control is-invalid" %}
+                            {% for error in field.errors %}
+                                <div class="invalid-feedback">
+                                    {{ error }}
+                                </div>
+                            {% endfor %}
+                        {% else %}
+                            {% render_field field class="form-control is-valid" %}
+                        {% endif %}
+                    {% else %}
+                        {% render_field field class="form-control" %}
+                    {% endif %}
+
+                    {% if field.help_text %}
+                        <small class="form-text text-info">{{ field.help_text|add_help_style|safe }}</small>
+                    {% endif %}
+                </div>
+            {% endfor %}
+            {# /login form #}
+
+            {# profile form #}
+                    {% for hidden_field in profile_form.hidden_fields %}
+                {{ hidden_field }}
+            {% endfor %}
+
+            {% if profile_form.non_field_errors %}
+                <div class="alert alert-danger" role="alert">
+                    {% for error in profile_form.non_field_errors %}
+                        {{ error }}
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            {% for field in profile_form.visible_fields %}
+                <div class="form-group">
+                    {{ field.label_tag }}
+
+                    {% if profile_form.is_bound %}
+
+                        {% if field.errors %}
+                            {% render_field field class="form-control is-invalid" %}
+                            {% for error in field.errors %}
+                                <div class="invalid-feedback">
+                                    {{ error }}
+                                </div>
+                            {% endfor %}
+                        {% else %}
+                            {% render_field field class="form-control is-valid" %}
+                        {% endif %}
+                    {% else %}
+                        {% render_field field class="form-control" %}
+                    {% endif %}
+
+                    {% if field.help_text %}
+                        <small class="form-text text-info">{{ field.help_text|add_help_style|safe }}</small>
+                    {% endif %}
+                </div>
+            {% endfor %}
+
+            {# /profile form #}
+
+
+
+
+            {#            {{ profile_form.as_p }}#}
+            <input type="submit" class="button-primary" value="Sign Up">
+        </form>
+    </div>
 {% endblock %}

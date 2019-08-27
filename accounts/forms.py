@@ -35,6 +35,14 @@ class ProfileForm(forms.ModelForm):
             'website',
         )
         exclude = ('user',)
+        labels = {
+            'bio': 'Bio (optional) ',
+        }
+        help_texts = {
+            'verify_email': 'Enter the same email as before, for verification.'
+
+        }
+
 
     def clean(self):
         """Clean the form"""
