@@ -7,8 +7,8 @@
 
 {% block body %}
     <div class="container">
-        <h1 class="display-3">Create your account</h1>
-        <p class="lead font-weight-bolder">Step 1 of 2</p>
+        <h1 class="display-3 mb-2">Create your account</h1>
+        <p class="lead font-weight-bolder ml-2">Step 1 of 2</p>
         <form method="POST" action="{% url 'accounts:sign_up' %}" enctype="multipart/form-data">
             {% csrf_token %}
 
@@ -46,7 +46,7 @@
                     {% endif %}
 
                     {% if field.help_text %}
-                        <small class="form-text text-info">{{ field.help_text|add_help_style|safe }}</small>
+                        <small class="alert-info">{{ field.help_text|add_help_style|safe }}</small>
                     {% endif %}
                 </div>
             {% endfor %}
