@@ -38,7 +38,6 @@ def sign_in(request):
     return render(request, 'accounts/sign_in.html', {'form': form})
 
 
-@transaction.atomic
 def sign_up(request):
     form = UserCreationForm()
     profile_form = forms.ProfileForm()
@@ -90,6 +89,7 @@ def profile(request):
 def edit_profile(request):
     """Define the Edit Profile view"""
     return render(request, 'accounts/edit_profile.html', {'current_user': request.user})
+
 
 @login_required(login_url='accounts/sign_in/')
 def profile_only(request):
