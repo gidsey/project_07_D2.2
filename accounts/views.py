@@ -44,8 +44,9 @@ def sign_up(request):
     profile_form = forms.ProfileForm()
     if request.method == 'POST':
         form = UserCreationForm(data=request.POST)
+        profile_form = forms.ProfileForm(data=request.POST, files=request.FILES)
 
-        if form.is_valid():
+        if form.is_valid and profile_form.is_valid():
             user = form.save()
             user.profile = models.Profile.objects.create(user=user)
             profile_form = forms.ProfileForm(data=request.POST, files=request.FILES, instance=user.profile)
