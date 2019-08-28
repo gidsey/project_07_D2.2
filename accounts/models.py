@@ -14,10 +14,10 @@ def user_directory_path(instance, filename):
 class Profile(models.Model):
     """Define the Profile Model (linked to the User Model)."""
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    first_name = models.CharField(max_length=255, null=True)
-    last_name = models.CharField(max_length=255, null=True)
-    email = models.EmailField(null=True)
-    verify_email = models.EmailField(null=True,)
+    # first_name = models.CharField(max_length=255, null=True)
+    # last_name = models.CharField(max_length=255, null=True)
+    # email = models.EmailField(null=True)
+    # verify_email = models.EmailField(null=True,)
     date_of_birth = models.DateField(null=True)
     bio = models.TextField(null=True)
     avatar = models.ImageField(upload_to=user_directory_path, max_length=100, null=True, blank=True)

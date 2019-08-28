@@ -10,6 +10,9 @@ from . import models
 
 class SignUpForm(UserCreationForm):
     """Define the SignUpForm which extends UserCreationForm"""
+    first_name = forms.CharField(required=True)
+    last_name = forms.CharField(required=True)
+    email = forms.EmailField(required=True)
     verify_email = forms.EmailField(
         required=True,
         label="Email confirmation:",
@@ -39,27 +42,13 @@ class SignUpForm(UserCreationForm):
                 "Emails do not match"
             )
 
-
-# class UserForm(forms.ModelForm):
-#     class Meta:
-#         model = User
-#         fields = (
-#             'first_name',
-#             'last_name',
-#             'email',
-#         )
-
 class ProfileForm(forms.ModelForm):
     """Define the Profile Form."""
 
     class Meta:
         model = models.Profile
         fields = (
-            'user',
-            'first_name',
-            'last_name',
-            'email',
-            'verify_email',
+            # 'user',
             'date_of_birth',
             'bio',
             'avatar',
@@ -69,22 +58,10 @@ class ProfileForm(forms.ModelForm):
             'interests',
             'website',
         )
-        exclude = ('user',)
+        # exclude = ('user',)
         labels = {
             'bio': 'Bio (optional) ',
         }
-        help_texts = {
-            'verify_email': 'Enter the same email as before, for verification.'
-        }
 
 
-    # def clean(self):
-    #     """Clean the form"""
-    #     cleaned_data = super().clean()
-    #     email = cleaned_data.get('email')
-    #     verify = cleaned_data.get('verify_email')
-    #
-    #     if email != verify:  # Verify that the emails match.
-    #         raise ValidationError(
-    #             "Emails do not match"
-    #         )
+

@@ -6,12 +6,12 @@
         nav here maybe?
     </div>
     <div class="grid-75">
-        <h1>{{ current_user.profile.first_name }} {{ current_user.profile.last_name }}</h1>
+        <h1>{{ current_user.first_name }} {{ current_user.last_name }}</h1>
         <img src="{{ current_user.profile.avatar.url }}" width="200px" alt="{{ current_user.profile.first_name }} {{ current_user.profile.last_name }}">
         <hr>
         <p><a href="{%  url 'accounts:edit_profile' %}">Edit Profile</a></p>
         <p>Username: {{ current_user.username }}</p>
-        <p>Email: {{ current_user.profile.email|urlize }}</p>
+        <p>Email: {{ current_user.email|urlize }}</p>
         <p>City: {{ current_user.profile.city }}</p>
         {% if current_user.profile.county %}
         <p>County: {{ current_user.profile.county }}</p>

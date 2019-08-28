@@ -43,33 +43,36 @@ def sign_up(request):
         form = forms.SignUpForm(data=request.POST)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect(reverse('accounts:create_profile'))
+            user = authenticate(
+                username=form.cleaned_data['username'],
+                password=form.cleaned_data['password1']
+            )
+            login(request, user)
             messages.success(
                 request,
-                "Account setup successully!"
+                "Account setup successully! You've been signed in too."
             )
+            return HttpResponseRedirect(reverse('accounts:create_profile'))
+
     return render(request, 'accounts/sign_up.html', {
         'form': form,
     })
 
 
+@login_required
 def create_profile(request):
     """Propulate the Profile after the user has been created."""
     profile_form = forms.ProfileForm()
+    user = request.user
     if request.method == 'POST':
-        # Get the user instance here and assign it to the profile_form
-        profile_form = forms.ProfileForm(data=request.POST, files=request.FILES)
-        # profile_form = forms.ProfileForm(data=request.POST, files=request.FILES, instance=user.profile)
-
-        user = authenticate(
-            username=form.cleaned_data['username'],
-            password=form.cleaned_data['password1']
-        )
-        login(request, user)
-        messages.success(
-            request,
-            "You're now a user! You've been signed in, too."
-        )
+        user.profile = models.Profile.objects.create(user=user)
+        profile_form = forms.ProfileForm(data=request.POST, files=request.FILES, instance=user.profile)
+        if profile_form.is_valid():
+            profile_form.save()
+            messages.success(
+                request,
+                "Profile saved successully."
+            )
         return HttpResponseRedirect(reverse('accounts:profile'))
 
     return render(request, 'accounts/create_profile.html', {
