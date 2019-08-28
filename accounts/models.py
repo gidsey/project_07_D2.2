@@ -1,6 +1,8 @@
 """Account Models"""
+
 from django.db import models
 from django.contrib.auth.models import User
+
 
 
 def user_directory_path(instance, filename):

@@ -3,33 +3,32 @@
 {% load accounts_extras %}
 
 
-{% block title %}Sign Up | {{ super }}{% endblock %}
+{% block title %}Create Profile | {{ super }}{% endblock %}
 
 {% block body %}
     <div class="container">
-        <h1 class="display-3">Create your account</h1>
-        <p class="lead font-weight-bolder">Step 1 of 2</p>
+    <h1>Complete your profile</h1>
         <form method="POST" action="{% url 'accounts:sign_up' %}" enctype="multipart/form-data">
             {% csrf_token %}
 
-            {# login form #}
-            {% for hidden_field in form.hidden_fields %}
+            {# profile form #}
+            {% for hidden_field in profile_form.hidden_fields %}
                 {{ hidden_field }}
             {% endfor %}
 
-            {% if form.non_field_errors %}
+            {% if profile_form.non_field_errors %}
                 <div class="alert alert-danger" role="alert">
-                    {% for error in form.non_field_errors %}
+                    {% for error in profile_form.non_field_errors %}
                         {{ error }}
                     {% endfor %}
                 </div>
             {% endif %}
 
-            {% for field in form.visible_fields %}
+            {% for field in profile_form.visible_fields %}
                 <div class="form-group">
                     {{ field.label_tag }}
 
-                    {% if form.is_bound %}
+                    {% if profile_form.is_bound %}
 
                         {% if field.errors %}
                             {% render_field field class="form-control is-invalid" %}
@@ -50,9 +49,10 @@
                     {% endif %}
                 </div>
             {% endfor %}
-            {# /login form #}
-            <br>
-            <input type="submit" class="button-primary" value="Create Account">
+
+            {# /profile form #}
+
+            <input type="submit" class="button-primary" value="Sign Up">
         </form>
     </div>
 {% endblock %}
