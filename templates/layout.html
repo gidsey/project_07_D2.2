@@ -85,10 +85,10 @@
 
 <div class="bounds circle--page">
     {% if messages %}
-        <ul class="messages centered grid-50">
+        <ul>
             {% for message in messages %}
                 <li{% if message.tags %}
-                    class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                    class="no-bullets alert alert-{{ message.tags }}"{% endif %}>{{ message }}</li>
             {% endfor %}
         </ul>
     {% endif %}
