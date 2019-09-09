@@ -7,7 +7,13 @@
     </div>
     <div class="grid-75">
         <h1>{{ current_user.first_name }} {{ current_user.last_name }}</h1>
-        <img src="{{ current_user.profile.avatar.url }}" width="200px" alt="{{ current_user.profile.first_name }} {{ current_user.profile.last_name }}">
+        <img src="{{ current_user.profile.avatar.url }}" width="200px"
+             alt="{{ current_user.profile.first_name }} {{ current_user.profile.last_name }}">
+        <form method="POST" action="{% url 'accounts:profile' %}" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ avatar_form.as_p }}
+            <input type="submit" class="button-primary" value="Upload image">
+        </form>
         <hr>
         <p><a href="{%  url 'accounts:edit_profile' %}">Edit Profile</a></p>
         <p>Username: {{ current_user.username }}</p>

@@ -65,7 +65,7 @@ def create_profile(request):
     user = request.user
     if request.method == 'POST':
         user.profile = models.Profile.objects.create(user=user)
-        profile_form = forms.ProfileForm(data=request.POST, files=request.FILES, instance=user.profile)
+        profile_form = forms.ProfileForm(data=request.POST, instance=user.profile)
         if profile_form.is_valid():
             profile_form.save()
             messages.success(
@@ -89,10 +89,30 @@ def sign_out(request):
 @login_required(login_url='accounts/sign_in/')
 def profile(request):
     """Define the Profile view"""
-    print('request.user.profile.avatar: {}'.format(request.user.profile.avatar))
-    if not request.user.profile.avatar:
+    user = request.user
+    avatar_form = forms.AvatarForm()
+    if not request.user.profile.avatar:  # Use defulat image if no avatar set
         request.user.profile.avatar = 'placeholder/default.png'
-    return render(request, 'accounts/profile.html', {'current_user': request.user})
+
+    if request.method == 'POST':
+        user.profile = models.Profile.objects.get(user=user)
+        avatar_form = forms.ProfileForm(data=request.POST, files=request.FILES, instance=user.profile)
+        print(request.FILES)
+        if avatar_form.is_valid():
+            cleaned_data = self.clean()
+            avatar = cleaned_data.get('avatar')
+            print('avatar = {}'.format(avatar))
+            models.Profile.avatar(user=user).update(avatar=avatar)
+            messages.success(
+                request,
+                "Avatar uploaded successully."
+            )
+            return HttpResponseRedirect(reverse('accounts:profile'))
+
+    return render(request, 'accounts/profile.html', {
+        'current_user': request.user,
+        'avatar_form': avatar_form,
+    })
 
 
 @login_required(login_url='accounts/sign_in/')

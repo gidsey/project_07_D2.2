@@ -56,7 +56,6 @@ class ProfileForm(forms.ModelForm):
             'bio',
             'interests',
             'website',
-            # 'avatar',
         )
 
         labels = {
@@ -67,3 +66,13 @@ class ProfileForm(forms.ModelForm):
         }
 
 
+class AvatarForm(forms.ModelForm):
+    """Define the Avatar Form."""
+
+    class Meta:
+        model = models.Profile
+        fields = ('avatar', )
+
+        labels = {
+            'avatar': 'Uplaod image',
+        }
