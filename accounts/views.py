@@ -11,7 +11,6 @@ from . import forms
 from . import models
 
 
-
 def sign_in(request):
     form = AuthenticationForm()
     if request.method == 'POST':
@@ -90,6 +89,7 @@ def sign_out(request):
 @login_required(login_url='accounts/sign_in/')
 def profile(request):
     """Define the Profile view"""
+    print('request.user: {}'.format(request.user.profile.avatar))
     return render(request, 'accounts/profile.html', {'current_user': request.user})
 
 

@@ -10,9 +10,11 @@
 
 .hint {
     display: inline-block;
-    color: #0c5460;
+    position: relative;
+    color: rgb(83, 125, 123);
     width: 80%;
-    margin: -1rem 0 2rem 0;
+    margin-bottom: 1.2rem;
+    top: -10px;
 }
 
 .no-bullets {

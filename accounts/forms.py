@@ -49,20 +49,21 @@ class ProfileForm(forms.ModelForm):
     class Meta:
         model = models.Profile
         fields = (
-            # 'user',
-            'date_of_birth',
-            'bio',
-            'avatar',
             'city',
             'county',
             'country',
+            'date_of_birth',
+            'bio',
             'interests',
             'website',
+            'avatar',
         )
-        # exclude = ('user',)
-        labels = {
-            'bio': 'Bio (optional) ',
-        }
 
+        labels = {
+            'bio': 'Short biography',
+            'county': 'State / County',
+            'interests': "Interests (optional)",
+            'website': "Website (optional)",
+        }
 
 
