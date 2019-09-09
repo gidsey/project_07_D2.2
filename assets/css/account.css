@@ -1,9 +1,16 @@
 
-.account-help-text {
-   font-size: 94%;
-    line-height: 1.2;
-}
+/*.account-help-text {*/
+/*    font-size: 94%;*/
+/*    line-height: 1.2;*/
+/*}*/
 
-.marnone {
-    background-color: #3f5e5d;
+/*.marnone {*/
+/*    background-color: #3f5e5d;*/
+/*}*/
+
+.hint {
+    display: inline-block;
+    color: #0c5460;
+    width: 80%;
+    margin: -1rem 0 2rem 0;
 }

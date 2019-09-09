@@ -42,6 +42,7 @@ class SignUpForm(UserCreationForm):
                 "Emails do not match"
             )
 
+
 class ProfileForm(forms.ModelForm):
     """Define the Profile Form."""
 
