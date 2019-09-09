@@ -89,7 +89,9 @@ def sign_out(request):
 @login_required(login_url='accounts/sign_in/')
 def profile(request):
     """Define the Profile view"""
-    print('request.user: {}'.format(request.user.profile.avatar))
+    print('request.user.profile.avatar: {}'.format(request.user.profile.avatar))
+    if not request.user.profile.avatar:
+        request.user.profile.avatar = 'placeholder/default.png'
     return render(request, 'accounts/profile.html', {'current_user': request.user})
 
 

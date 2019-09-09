@@ -56,7 +56,7 @@ class ProfileForm(forms.ModelForm):
             'bio',
             'interests',
             'website',
-            'avatar',
+            # 'avatar',
         )
 
         labels = {
