@@ -79,7 +79,6 @@ def create_profile(request):
     })
 
 
-
 def sign_out(request):
     logout(request)
     messages.success(request, "You've been signed out. Come back soon!")
@@ -89,25 +88,20 @@ def sign_out(request):
 @login_required(login_url='accounts/sign_in/')
 def profile(request):
     """Define the Profile view"""
-    user = request.user
     avatar_form = forms.AvatarForm()
+    user = request.user
     if not request.user.profile.avatar:  # Use defulat image if no avatar set
         request.user.profile.avatar = 'placeholder/default.png'
 
     if request.method == 'POST':
-        user.profile = models.Profile.objects.get(user=user)
-        avatar_form = forms.ProfileForm(data=request.POST, files=request.FILES, instance=user.profile)
-        print(request.FILES)
+        user.profile = request.user.profile
+        avatar_form = forms.AvatarForm(data=request.POST, files=request.FILES, instance=user.profile)
         if avatar_form.is_valid():
-            cleaned_data = self.clean()
-            avatar = cleaned_data.get('avatar')
-            print('avatar = {}'.format(avatar))
-            models.Profile.avatar(user=user).update(avatar=avatar)
-            messages.success(
-                request,
-                "Avatar uploaded successully."
-            )
-            return HttpResponseRedirect(reverse('accounts:profile'))
+            avatar_form.save()
+            messages.success(request,
+                             "Avatar uploaded successully."
+                             )
+        return HttpResponseRedirect(reverse('accounts:profile'))
 
     return render(request, 'accounts/profile.html', {
         'current_user': request.user,
@@ -139,4 +133,3 @@ def profile_only(request):
 
     return render(request, 'accounts/profile_only.html',
                   {'form': form, 'current_user': request.user})
-

@@ -16,7 +16,7 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     date_of_birth = models.DateField(null=True)
     bio = models.TextField(null=True, help_text='Required. Min 10 Characters')
-    avatar = models.ImageField(upload_to=user_directory_path, max_length=100, null=True, blank=True)
+    avatar = models.ImageField(upload_to=user_directory_path, max_length=255, null=True, blank=True)
     city = models.CharField(max_length=100, null=True)
     county = models.CharField(max_length=255, null=True)
     country = models.CharField(max_length=100, null=True)
