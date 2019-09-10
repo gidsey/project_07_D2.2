@@ -1,8 +1,7 @@
-from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm
 from django.urls import reverse
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
@@ -64,7 +63,12 @@ def create_profile(request):
     profile_form = forms.ProfileForm()
     user = request.user
     if request.method == 'POST':
-        user.profile = models.Profile.objects.create(user=user)
+        # user.profile = models.Profile.objects.get_or_create(user=user)
+        try:
+            user.profile = request.user.profile  # Set Profile instance for the current user
+        except models.Profile.DoesNotExist:
+            user.profile = models.Profile(user=request.user)  # Set the Profile instance for new user
+
         profile_form = forms.ProfileForm(data=request.POST, instance=user.profile)
         if profile_form.is_valid():
             profile_form.save()
@@ -72,7 +76,7 @@ def create_profile(request):
                 request,
                 "Profile saved successully."
             )
-        return HttpResponseRedirect(reverse('accounts:profile'))
+            return HttpResponseRedirect(reverse('accounts:profile'))
 
     return render(request, 'accounts/create_profile.html', {
         'profile_form': profile_form,

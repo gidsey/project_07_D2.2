@@ -4,7 +4,6 @@ from django.db import models
 from django.contrib.auth.models import User
 
 
-
 def user_directory_path(instance, filename):
     """Get the user directory path"""
     # file will be uploaded to MEDIA_ROOT/avatars/user/<filename>
@@ -22,7 +21,6 @@ class Profile(models.Model):
     country = models.CharField(max_length=100, null=True)
     interests = models.TextField(null=True, blank=True)
     website = models.URLField(null=True, blank=True,)
-
 
 
 
