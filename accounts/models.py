@@ -14,7 +14,7 @@ class Profile(models.Model):
     """Define the Profile Model (linked to the User Model)."""
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     date_of_birth = models.DateField(null=True)
-    bio = models.TextField(null=True, help_text='Required. Min 10 Characters')
+    bio = models.TextField(null=True, help_text='Required. Min 10 characters')
     avatar = models.ImageField(upload_to=user_directory_path, max_length=255, null=True, blank=True)
     city = models.CharField(max_length=100, null=True)
     county = models.CharField(max_length=255, null=True)
