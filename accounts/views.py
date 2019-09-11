@@ -119,7 +119,7 @@ def edit_profile(request):
     user = request.user
     form = forms.EditUserForm(instance=user)
     if request.method == 'POST':
-        form = forms.SignUpForm(data=request.POST, instance=user)
+        form = forms.EditUserForm(data=request.POST, instance=user)
         if form.is_valid():
             form.save()
             messages.success(request,

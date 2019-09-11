@@ -47,8 +47,8 @@ class SignUpForm(UserCreationForm):
         return cleaned_data
 
 
-class EditUserForm(UserCreationForm):
-    """Define the SignUpForm which extends UserCreationForm"""
+class EditUserForm(forms.ModelForm):
+    """Define the Edit User Form."""
     first_name = forms.CharField(required=True)
     last_name = forms.CharField(required=True)
     email = forms.EmailField(required=True)
@@ -58,7 +58,7 @@ class EditUserForm(UserCreationForm):
         help_text='Enter the same email as before, for verification.'
     )
 
-    class Meta(UserCreationForm.Meta):
+    class Meta:
         model = User
         fields = (
             'username',

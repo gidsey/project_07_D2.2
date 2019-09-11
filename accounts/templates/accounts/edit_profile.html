@@ -7,7 +7,7 @@
     <div class="container">
         <h1 class="display-3 mb-2">Edit Profile</h1>
         <p class="lead font-weight-bolder ml-2">{{ current_user.first_name }} {{ current_user.last_name }}</p>
-        <form method="POST" action="{% url 'accounts:sign_up' %}" enctype="multipart/form-data">
+        <form method="POST" action="{% url 'accounts:edit_profile' %}" enctype="multipart/form-data">
             {% csrf_token %}
 
             {# user form #}
@@ -42,7 +42,6 @@
                         {% endif %}
                     {% else %}
                         {% render_field field value=field.value class="form-control" %}
-                        {{ current_user }}
                     {% endif %}
 
                     {% if field.help_text %}
