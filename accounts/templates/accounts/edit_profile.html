@@ -1,4 +1,7 @@
-{% extends 'layout.html' %}
+{% extends "layout.html" %}
+{% load widget_tweaks %}
+{% load accounts_extras %}
+
 {% block title %}{{ current_user.first_name }} {{ current_user.last_name }} | Edit profile {% endblock %}
 {% block body %}
     <div class="grid-25">
