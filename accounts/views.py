@@ -116,7 +116,20 @@ def profile(request):
 @login_required(login_url='accounts/sign_in/')
 def edit_profile(request):
     """Define the Edit Profile view"""
-    return render(request, 'accounts/edit_profile.html', {'current_user': request.user})
+    user = request.user
+    form = forms.EditUserForm(instance=user)
+    if request.method == 'POST':
+        form = forms.SignUpForm(data=request.POST, instance=user)
+        if form.is_valid():
+            form.save()
+            messages.success(request,
+                             "Profile updated successully."
+                             )
+            return HttpResponseRedirect(reverse('accounts:profile'))
+    return render(request, 'accounts/edit_profile.html', {
+        'current_user': user,
+        'form': form,
+    })
 
 
 @login_required(login_url='accounts/sign_in/')
@@ -126,7 +139,7 @@ def profile_only(request):
     try:
         user_profile = request.user.profile  # Set Profile instance for the current user
     except models.Profile.DoesNotExist:
-        user_profile = models.Profile(user=request.user)  # Set the Profile instance for new user
+        user_profile = models.Profile(user=request.user)  # Set the Profile instance for a new user
 
     if request.method == 'POST':
         form = forms.ProfileForm(data=request.POST, instance=user_profile)

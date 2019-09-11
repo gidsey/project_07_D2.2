@@ -4,8 +4,55 @@
 
 {% block title %}{{ current_user.first_name }} {{ current_user.last_name }} | Edit profile {% endblock %}
 {% block body %}
-    <div class="grid-75">
-        <h1>Edit Profile</h1>
-        <h2>{{ current_user.first_name }} {{ current_user.last_name }}</h2>
+    <div class="container">
+        <h1 class="display-3 mb-2">Edit Profile</h1>
+        <p class="lead font-weight-bolder ml-2">{{ current_user.first_name }} {{ current_user.last_name }}</p>
+        <form method="POST" action="{% url 'accounts:sign_up' %}" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            {# user form #}
+            {% for hidden_field in form.hidden_fields %}
+                {{ hidden_field }}
+            {% endfor %}
+
+            {% if form.non_field_errors %}
+                <div class="alert alert-danger" role="alert">
+                    {% for error in form.non_field_errors %}
+                        {{ error }}
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            {% for field in form.visible_fields %}
+
+                <div class="form-group">
+                    {{ field.label_tag }}
+
+                    {% if form.is_bound %}
+
+                        {% if field.errors %}
+                            {% render_field field class="form-control is-invalid" %}
+                            {% for error in field.errors %}
+                                <div class="invalid-feedback">
+                                    {{ error }}
+                                </div>
+                            {% endfor %}
+                        {% else %}
+                            {% render_field field class="form-control is-valid" %}
+                        {% endif %}
+                    {% else %}
+                        {% render_field field value=field.value class="form-control" %}
+                        {{ current_user }}
+                    {% endif %}
+
+                    {% if field.help_text %}
+                        <small class="hint">{{ field.help_text|add_help_style|safe }}</small>
+                    {% endif %}
+                </div>
+            {% endfor %}
+            {# /user form #}
+            <br>
+            <input type="submit" class="button-primary" value="Save">
+        </form>
     </div>
 {% endblock %}
