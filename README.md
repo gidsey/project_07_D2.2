@@ -15,5 +15,12 @@ Once you add a Model with some fields or each time you make changes to the Model
 
 `python manage.py makemigrations` to create an initial/new migration file inside the `migrations` folder for that `<app>`. So when you run the `migrate` command it knows how to setup or alter the database tables before data starts getting put in those tables.
 
-# Attributions
-Icon: person by Guilherme Furtado from the Noun Project
+## Requirments
+The project has been updated to run on Django 2.24. 
+See `requirements.txt` for full details of the updated project dependencies.
+
+## Styling
+The project uses Bootstrap 4 for form and presentation styling.
+
+## Attributions
+Icon: person by Guilherme Furtado from the Noun Project.
