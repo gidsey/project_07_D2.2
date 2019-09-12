@@ -152,20 +152,9 @@ def edit_profile(request):
 
 
 @login_required(login_url='accounts/sign_in/')
-def profile_only(request):
-    """Test the Profile Model"""
-    form = forms.ProfileForm()
-    try:
-        user_profile = request.user.profile  # Set Profile instance for the current user
-    except models.Profile.DoesNotExist:
-        user_profile = models.Profile(user=request.user)  # Set the Profile instance for a new user
-
-    if request.method == 'POST':
-        form = forms.ProfileForm(data=request.POST, instance=user_profile)
-        if form.is_valid():
-            form.save()
-            messages.success(request, "Profile updated successfully")
-            return HttpResponseRedirect(reverse('home'))
-
-    return render(request, 'accounts/profile_only.html',
-                  {'form': form, 'current_user': request.user})
+def change_password(request):
+    """Define the change password view."""
+    user = request.user
+    return render(request, 'accounts/change_password.html', {
+        'current_user': user,
+    })

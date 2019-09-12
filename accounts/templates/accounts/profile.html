@@ -13,7 +13,8 @@
         </form>
         <hr>
         <p><a href="{%  url 'accounts:edit_profile' %}">Edit Profile</a></p>
-        <p>Username: {{ current_user.username }}</p>
+        <p><a href="{%  url 'accounts:change_password' %}">Change Password</a></p>
+        <p>Username: <span class="text-light-green">{{ current_user.username }}</span></p>
         <p>Email: {{ current_user.email|urlize }}</p>
         <p>City: {{ current_user.profile.city }}</p>
         {% if current_user.profile.county %}

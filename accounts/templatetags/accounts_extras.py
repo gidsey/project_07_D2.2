@@ -13,7 +13,6 @@ def show_panel(collapse):
         return 'collapse'
 
 
-
 @register.filter('add_help_style')
 def add_help_style(help_text):
     """Adds a class to the <ul> and <li> tags"""
