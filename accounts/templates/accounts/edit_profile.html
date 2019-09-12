@@ -20,7 +20,7 @@
             </p>
         </div>
           <div class="{% show_panel collapse %}  mb-5" id="collapseExample">
-            <div class="card card-body bg-light">
+            <div class="card card-body bg-light pb-0">
          {# edit email form #}
         <form method="POST" action="{% url 'accounts:edit_profile' %}">
             {% csrf_token %}
@@ -61,7 +61,7 @@
                     {% endif %}
                 </div>
             {% endfor %}
-            <input type="submit" name="update_email" class="button-primary btn-sm mt-1 mb-1" value="Update email">
+            <input type="submit" name="update_email" class="button-primary btn-sm px-4 py-3 e-button mb-1" value="Update email">
         </form>
     {# /edit email form #}
             </div>

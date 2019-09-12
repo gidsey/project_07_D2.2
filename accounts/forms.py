@@ -51,20 +51,13 @@ class EditUserForm(forms.ModelForm):
     """Define the Edit User Form."""
     first_name = forms.CharField(required=True)
     last_name = forms.CharField(required=True)
-    # email = forms.EmailField(required=True)
-    # verify_email = forms.EmailField(
-    #     required=True,
-    #     label="Email confirmation:",
-    #     help_text='Enter the same email as before, for verification.'
-    # )
+
 
     class Meta:
         model = User
         fields = (
             'first_name',
             'last_name',
-            # 'email',
-            # 'verify_email',
         )
 # ---/Edit User form
 
@@ -74,7 +67,7 @@ class EditEmailForm(forms.ModelForm):
     """Define the Edit User Form."""
     email = forms.EmailField(
         required=True,
-        label="Enter new email address:")
+        label="Enter your new email address:")
     verify_email = forms.EmailField(
         required=True,
         label="Confirm email:",
