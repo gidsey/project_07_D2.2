@@ -10,6 +10,7 @@ from django.forms import DateField
 
 from . import models
 
+
 # ---Signup form
 class SignUpForm(UserCreationForm):
     """Define the SignUpForm which extends UserCreationForm"""
@@ -18,7 +19,7 @@ class SignUpForm(UserCreationForm):
     email = forms.EmailField(required=True)
     verify_email = forms.EmailField(
         required=True,
-        label="Email confirmation:",
+        label="Confirm email:",
         help_text='Enter the same email as before, for verification.'
     )
 
@@ -71,10 +72,12 @@ class EditUserForm(forms.ModelForm):
 # ---Edit Email form
 class EditEmailForm(forms.ModelForm):
     """Define the Edit User Form."""
-    email = forms.EmailField(required=True)
+    email = forms.EmailField(
+        required=True,
+        label="Enter new email address:")
     verify_email = forms.EmailField(
         required=True,
-        label="Email confirmation:",
+        label="Confirm email:",
         help_text='Enter the same email as before, for verification.'
      )
 
@@ -87,7 +90,7 @@ class EditEmailForm(forms.ModelForm):
 
     def clean(self):
         """Confirm the emails match"""
-        cleaned_data = self().clean()
+        cleaned_data =  super().clean()
         email = cleaned_data.get('email')
         verify = cleaned_data.get('verify_email')
         if email != verify:

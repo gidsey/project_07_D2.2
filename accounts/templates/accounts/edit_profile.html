@@ -6,17 +6,70 @@
 {% block body %}
     <div class="container">
         <h1 class="display-3 mb-2">Edit Profile</h1>
-     <figcaption class="figure-caption mt-2">{{ current_user.first_name }} {{ current_user.last_name }}</figcaption>
+        <figcaption class="figure-caption mt-2">{{ current_user.first_name }} {{ current_user.last_name }}</figcaption>
         <img class="mt-4" src="{{ current_user.profile.avatar.url }}" width="200px"
              alt="{{ current_user.profile.first_name }} {{ current_user.profile.last_name }}">
 
-        <p class="mt-5 mb-4">Username: {{ current_user.username }}</p>
-        <div><p class="mt-3 mb-4">Email: {{ current_user.email }}
-            <button type="button" class="button-primary btn-sm px-4 py-2 d-inline align-top e-button">Edit</button></p></div>
+        <p class="mt-5 mb-4">Username: <span class="text-light-green">{{ current_user.username }}</span></p>
+        <div>
+            <p class="mt-3 mb-4">Email: {{ current_user.email }}
+                <button type="button" data-toggle="collapse" data-target="#collapseExample"
+                        aria-expanded="false" aria-controls="collapseExample"
+                        class="button-primary btn-sm px-4 py-2 d-inline align-top e-button">Edit
+                </button>
+            </p>
+        </div>
+          <div class="{% show_panel collapse %}  mb-5" id="collapseExample">
+            <div class="card card-body bg-light">
+         {# edit email form #}
+        <form method="POST" action="{% url 'accounts:edit_profile' %}">
+            {% csrf_token %}
+            {% for hidden_field in form.hidden_fields %}
+                {{ hidden_field }}
+            {% endfor %}
+
+            {% if email_form.non_field_errors %}
+                <div class="alert alert-danger" role="alert">
+                    {% for error in email_form.non_field_errors %}
+                        {{ error }}
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            {% for field in email_form.visible_fields %}
+                <div class="form-group">
+                    {{ field.label_tag }}
+
+                    {% if email_form.is_bound %}
+
+                        {% if field.errors %}
+                            {% render_field field class="form-control is-invalid" %}
+                            {% for error in field.errors %}
+                                <div class="invalid-feedback">
+                                    {{ error }}
+                                </div>
+                            {% endfor %}
+                        {% else %}
+                            {% render_field field class="form-control is-valid" %}
+                        {% endif %}
+                    {% else %}
+                        {% render_field field class="form-control" %}
+                    {% endif %}
+
+                    {% if field.help_text %}
+                        <small class="hint">{{ field.help_text|add_help_style|safe }}</small>
+                    {% endif %}
+                </div>
+            {% endfor %}
+            <input type="submit" name="update_email" class="button-primary btn-sm mt-1 mb-1" value="Update email">
+        </form>
+    {# /edit email form #}
+            </div>
+        </div>
+
+        {# user form #}
         <form method="POST" action="{% url 'accounts:edit_profile' %}" enctype="multipart/form-data">
             {% csrf_token %}
-
-            {# user form #}
             {% for hidden_field in form.hidden_fields %}
                 {{ hidden_field }}
             {% endfor %}
@@ -30,7 +83,6 @@
             {% endif %}
 
             {% for field in form.visible_fields %}
-
                 <div class="form-group">
                     {{ field.label_tag }}
 
@@ -55,9 +107,8 @@
                     {% endif %}
                 </div>
             {% endfor %}
-            {# /user form #}
-            <br>
-            <input type="submit" class="button-primary" value="Save">
+            <input type="submit" name="update_name" class="button-primary mt-4" value="Save">
         </form>
-    </div>
+    {# /user form #}
+
 {% endblock %}

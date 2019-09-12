@@ -118,17 +118,33 @@ def edit_profile(request):
     """Define the Edit Profile view"""
     user = request.user
     form = forms.EditUserForm(instance=user)
+    email_form = forms.EditEmailForm(instance=user)
     if request.method == 'POST':
-        form = forms.EditUserForm(data=request.POST, instance=user)
-        if form.is_valid():
-            form.save()
-            messages.success(request,
-                             "Profile updated successully."
-                             )
-            return HttpResponseRedirect(reverse('accounts:profile'))
+        if 'update_name' in request.POST:
+            form = forms.EditUserForm(data=request.POST, instance=user)
+            if form.is_valid():
+                form.save()
+                messages.success(request, "Profile updated successully.")
+                return HttpResponseRedirect(reverse('accounts:profile'))
+
+        elif 'update_email' in request.POST:
+            email_form = forms.EditEmailForm(data=request.POST, instance=user)
+            if email_form.is_valid():
+                email_form.save()
+                messages.success(request, "Email updated successully.")
+                return HttpResponseRedirect(reverse('accounts:profile'))
+            else:
+                return render(request, 'accounts/edit_profile.html', {
+                    'current_user': user,
+                    'form': form,
+                    'email_form': email_form,
+                    'collapse': 'false',  # Keep the email panel open to show errors
+                })
+
     return render(request, 'accounts/edit_profile.html', {
         'current_user': user,
         'form': form,
+        'email_form': email_form,
     })
 
 

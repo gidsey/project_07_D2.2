@@ -4,6 +4,16 @@ from django import template
 
 register = template.Library()
 
+
+@register.simple_tag
+def show_panel(collapse):
+    if collapse:
+        return 'collapse.show'
+    else:
+        return 'collapse'
+
+
+
 @register.filter('add_help_style')
 def add_help_style(help_text):
     """Adds a class to the <ul> and <li> tags"""
