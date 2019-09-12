@@ -1,6 +1,6 @@
 {% extends 'layout.html' %}
 
-{% block title %}{{ current_user.first_name }} {{ current_user.last_name }} | User profile {% endblock %}
+{% block title %}View profile | {{ current_user.first_name }} {{ current_user.last_name }}{% endblock %}
 {% block body %}
     <div class="container">
         <h1 class="display-3 mb-2">{{ current_user.first_name }} {{ current_user.last_name }}</h1>

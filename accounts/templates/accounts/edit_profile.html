@@ -2,7 +2,7 @@
 {% load widget_tweaks %}
 {% load accounts_extras %}
 
-{% block title %}{{ current_user.first_name }} {{ current_user.last_name }} | Edit profile {% endblock %}
+{% block title %} Edit profile | {{ current_user.first_name }} {{ current_user.last_name }}{% endblock %}
 {% block body %}
     <div class="container">
         <h1 class="display-3 mb-2">Edit Your Profile</h1>
