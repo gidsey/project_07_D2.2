@@ -22,7 +22,6 @@
         <h1 class="display-3 mb-3">Welcome to Circle<sup>&#8482;</sup> </h1>
        {% if user.is_authenticated %}
         <p>View your profile <a href="{%  url 'accounts:profile' %}">here</a></p>
-           <p><a href="{%  url 'accounts:profile_only' %}">Edit Profile Only (test view)</a></p>
         {%  endif %}
         <img src="{% static 'images/District_3094b.jpg' %}" class="img-fluid" alt="Chiswick Park Tube Station">
         <figcaption class="figure-caption mt-2">Chiswick Park Tube Station. Image &#169; Chris Guy 2009</figcaption>

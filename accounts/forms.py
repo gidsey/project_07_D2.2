@@ -110,7 +110,7 @@ class ProfileForm(forms.ModelForm):
         return bio
 
     date_of_birth = DateField(
-        error_messages={'invalid': 'Date å be entered in one of the following formats: '
+        error_messages={'invalid': 'Date should be in one of the following formats: '
                                    'YYYY-MM-DD or MM/DD/YYY or MM/DD/YY'},
         label="Date of birth (YYYY-MM-DD or MM/DD/YYY or MM/DD/YY)"
     )

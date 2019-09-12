@@ -63,7 +63,6 @@ def create_profile(request):
     profile_form = forms.ProfileForm()
     user = request.user
     if request.method == 'POST':
-        # user.profile = models.Profile.objects.get_or_create(user=user)
         try:
             user.profile = request.user.profile  # Set Profile instance for the current user
         except models.Profile.DoesNotExist:
@@ -119,11 +118,14 @@ def edit_profile(request):
     user = request.user
     form = forms.EditUserForm(instance=user)
     email_form = forms.EditEmailForm(instance=user)
+    profile_form = forms.ProfileForm(instance=user.profile)
     if request.method == 'POST':
         if 'update_name' in request.POST:
             form = forms.EditUserForm(data=request.POST, instance=user)
-            if form.is_valid():
+            profile_form = forms.ProfileForm(data=request.POST, instance=user.profile)
+            if form.is_valid() and profile_form.is_valid():
                 form.save()
+                profile_form.save()
                 messages.success(request, "Profile updated successully.")
                 return HttpResponseRedirect(reverse('accounts:profile'))
 
@@ -145,6 +147,7 @@ def edit_profile(request):
         'current_user': user,
         'form': form,
         'email_form': email_form,
+        'profile_form':  profile_form,
     })
 
 

@@ -19,56 +19,58 @@
                 </button>
             </p>
         </div>
-          <div class="{% show_panel collapse %}  mb-5" id="collapseExample">
+
+        {# edit email form #}
+        <div class="{% show_panel collapse %}  mb-5" id="collapseExample">
             <div class="card card-body bg-light pb-0">
-         {# edit email form #}
-        <form method="POST" action="{% url 'accounts:edit_profile' %}">
-            {% csrf_token %}
-            {% for hidden_field in form.hidden_fields %}
-                {{ hidden_field }}
-            {% endfor %}
-
-            {% if email_form.non_field_errors %}
-                <div class="alert alert-danger" role="alert">
-                    {% for error in email_form.non_field_errors %}
-                        {{ error }}
+                <form method="POST" action="{% url 'accounts:edit_profile' %}">
+                    {% csrf_token %}
+                    {% for hidden_field in form.hidden_fields %}
+                        {{ hidden_field }}
                     {% endfor %}
-                </div>
-            {% endif %}
 
-            {% for field in email_form.visible_fields %}
-                <div class="form-group">
-                    {{ field.label_tag }}
-
-                    {% if email_form.is_bound %}
-
-                        {% if field.errors %}
-                            {% render_field field class="form-control is-invalid" %}
-                            {% for error in field.errors %}
-                                <div class="invalid-feedback">
-                                    {{ error }}
-                                </div>
+                    {% if email_form.non_field_errors %}
+                        <div class="alert alert-danger" role="alert">
+                            {% for error in email_form.non_field_errors %}
+                                {{ error }}
                             {% endfor %}
-                        {% else %}
-                            {% render_field field class="form-control is-valid" %}
-                        {% endif %}
-                    {% else %}
-                        {% render_field field class="form-control" %}
+                        </div>
                     {% endif %}
 
-                    {% if field.help_text %}
-                        <small class="hint">{{ field.help_text|add_help_style|safe }}</small>
-                    {% endif %}
-                </div>
-            {% endfor %}
-            <input type="submit" name="update_email" class="button-primary btn-sm px-4 py-3 e-button mb-1" value="Update email">
-        </form>
-    {# /edit email form #}
+                    {% for field in email_form.visible_fields %}
+                        <div class="form-group">
+                            {{ field.label_tag }}
+
+                            {% if email_form.is_bound %}
+
+                                {% if field.errors %}
+                                    {% render_field field class="form-control is-invalid" %}
+                                    {% for error in field.errors %}
+                                        <div class="invalid-feedback">
+                                            {{ error }}
+                                        </div>
+                                    {% endfor %}
+                                {% else %}
+                                    {% render_field field class="form-control is-valid" %}
+                                {% endif %}
+                            {% else %}
+                                {% render_field field class="form-control" %}
+                            {% endif %}
+
+                            {% if field.help_text %}
+                                <small class="hint">{{ field.help_text|add_help_style|safe }}</small>
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                    <input type="submit" name="update_email" class="button-primary btn-sm px-4 py-3 e-button mb-1"
+                           value="Update email">
+                </form>
             </div>
         </div>
+        {# /edit email form #}
 
         {# user form #}
-        <form method="POST" action="{% url 'accounts:edit_profile' %}" enctype="multipart/form-data">
+        <form method="POST" action="{% url 'accounts:edit_profile' %}">
             {% csrf_token %}
             {% for hidden_field in form.hidden_fields %}
                 {{ hidden_field }}
@@ -107,8 +109,52 @@
                     {% endif %}
                 </div>
             {% endfor %}
+{#            <input type="submit" name="update_name" class="button-primary mt-4" value="Save">#}
+{#        </form>#}
+        {# /user form #}
+
+
+     {# profile form #}
+{#        <form method="POST" action="{% url 'accounts:edit_profile' %}">#}
+{#            {% csrf_token %}#}
+            {% for hidden_field in profile_form.hidden_fields %}
+                {{ hidden_field }}
+            {% endfor %}
+
+            {% if profile_form.non_field_errors %}
+                <div class="alert alert-danger" role="alert">
+                    {% for error in profile_form.non_field_errors %}
+                        {{ error }}
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            {% for field in profile_form.visible_fields %}
+                <div class="form-group">
+                    {{ field.label_tag }}
+
+                    {% if profile_form.is_bound %}
+
+                        {% if field.errors %}
+                            {% render_field field class="form-control is-invalid" %}
+                            {% for error in field.errors %}
+                                <div class="invalid-feedback">
+                                    {{ error }}
+                                </div>
+                            {% endfor %}
+                        {% else %}
+                            {% render_field field class="form-control is-valid" %}
+                        {% endif %}
+                    {% else %}
+                        {% render_field field value=field.value class="form-control" %}
+                    {% endif %}
+
+                    {% if field.help_text %}
+                        <small class="hint">{{ field.help_text|add_help_style|safe }}</small>
+                    {% endif %}
+                </div>
+            {% endfor %}
             <input type="submit" name="update_name" class="button-primary mt-4" value="Save">
         </form>
-    {# /user form #}
-
+        {# /profile form #}
 {% endblock %}
