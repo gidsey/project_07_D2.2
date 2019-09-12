@@ -108,14 +108,9 @@
                     {% endif %}
                 </div>
             {% endfor %}
-{#            <input type="submit" name="update_name" class="button-primary mt-4" value="Save">#}
-{#        </form>#}
-        {# /user form #}
+            {# /user form #}
 
-
-     {# profile form #}
-{#        <form method="POST" action="{% url 'accounts:edit_profile' %}">#}
-{#            {% csrf_token %}#}
+            {# profile form #}
             {% for hidden_field in profile_form.hidden_fields %}
                 {{ hidden_field }}
             {% endfor %}

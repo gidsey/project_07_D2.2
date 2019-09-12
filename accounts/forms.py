@@ -155,16 +155,8 @@ class AvatarForm(forms.ModelForm):
 # ---Change Password form
 class ChangePasswordForm(forms.Form):
     """Define the Edit User Form."""
-    current_password = forms.PasswordInput()
-    new_password = forms.PasswordInput()
-    confirm_password = forms.PasswordInput()
-
-
-    class Meta:
-        fields = (
-            'current_password',
-            'new_password',
-            'confirm_password'
-        )
+    current_password = forms.CharField(widget=forms.PasswordInput, required=True)
+    new_password = forms.CharField(widget=forms.PasswordInput, required=True)
+    confirm_password = forms.CharField(widget=forms.PasswordInput, required=True, label="Confirm new password")
 
 # ---/Change Password form
