@@ -1,13 +1,54 @@
 {% extends "layout.html" %}
+{% load widget_tweaks %}
+{% load accounts_extras %}
 
 {% block title %}Sign In | {{ super }}{% endblock %}
 
 {% block body %}
-<div class="container">
-    <form method="POST" action="{% url 'accounts:sign_in' %}">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" class="button-primary" value="Sign In">
-</form>
-</div>
+    <div class="container">
+        <h1 class="display-3 mb-5">Sign In</h1>
+        <form method="POST" action="{% url 'accounts:sign_in' %}">
+            {% csrf_token %}
+            {# sign in form #}
+            {% for hidden_field in form.hidden_fields %}
+                {{ hidden_field }}
+            {% endfor %}
+
+            {% if form.non_field_errors %}
+                <div class="alert alert-danger" role="alert">
+                    {% for error in form.non_field_errors %}
+                        {{ error }}
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            {% for field in form.visible_fields %}
+                <div class="form-group">
+                    {{ field.label_tag }}
+
+                    {% if form.is_bound %}
+
+                        {% if field.errors %}
+                            {% render_field field class="form-control is-invalid" %}
+                            {% for error in field.errors %}
+                                <div class="invalid-feedback">
+                                    {{ error }}
+                                </div>
+                            {% endfor %}
+                        {% else %}
+                            {% render_field field class="form-control is-valid" %}
+                        {% endif %}
+                    {% else %}
+                        {% render_field field class="form-control" %}
+                    {% endif %}
+
+                    {% if field.help_text %}
+                        <small class="hint">{{ field.help_text|add_help_style|safe }}</small>
+                    {% endif %}
+                </div>
+            {% endfor %}
+            {# /sign in form #}
+            <input type="submit" class="button-primary" value="Sign In">
+        </form>
+    </div>
 {% endblock %}

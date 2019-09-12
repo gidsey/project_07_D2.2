@@ -4,7 +4,7 @@
 {% block body %}
     <div class="container">
         <h1 class="display-3 mb-2">{{ current_user.first_name }} {{ current_user.last_name }}</h1>
-        <img src="{{ current_user.profile.avatar.url }}" width="200px"
+         <img class="mt-4" src="{{ current_user.profile.avatar.url }}" width="200px"
              alt="{{ current_user.profile.first_name }} {{ current_user.profile.last_name }}">
         <form method="POST" action="{% url 'accounts:profile' %}" enctype="multipart/form-data">
             {% csrf_token %}

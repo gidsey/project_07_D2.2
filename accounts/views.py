@@ -155,6 +155,8 @@ def edit_profile(request):
 def change_password(request):
     """Define the change password view."""
     user = request.user
+    change_password_form = forms.ChangePasswordForm()
     return render(request, 'accounts/change_password.html', {
         'current_user': user,
+        'change_password_form': change_password_form,
     })
