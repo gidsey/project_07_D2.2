@@ -35,15 +35,12 @@ class SignUpForm(UserCreationForm):
         )
 
     def clean(self):
-        """Clean the form"""
+        """Confirm the emails match"""
         cleaned_data = super().clean()
         email = cleaned_data.get('email')
         verify = cleaned_data.get('verify_email')
-
-        if email != verify:  # Verify that the emails match.
-            raise ValidationError(
-                "Emails do not match."
-            )
+        if email != verify:
+            raise ValidationError("Emails do not match.")
         return cleaned_data
 # ---/Signup form
 
@@ -72,33 +69,30 @@ class EditUserForm(forms.ModelForm):
 
 
 # ---Edit Email form
-    class EditEmailForm(forms.ModelForm):
-        """Define the Edit User Form."""
-        email = forms.EmailField(required=True)
-        verify_email = forms.EmailField(
-            required=True,
-            label="Email confirmation:",
-            help_text='Enter the same email as before, for verification.'
+class EditEmailForm(forms.ModelForm):
+    """Define the Edit User Form."""
+    email = forms.EmailField(required=True)
+    verify_email = forms.EmailField(
+        required=True,
+        label="Email confirmation:",
+        help_text='Enter the same email as before, for verification.'
+     )
+
+    class Meta:
+        model = User
+        fields = (
+            'email',
+            'verify_email',
         )
 
-        class Meta:
-            model = User
-            fields = (
-                'email',
-                'verify_email',
-            )
-
-        def clean(self):
-            """Clean the form"""
-            cleaned_data = super().clean()
-            email = cleaned_data.get('email')
-            verify = cleaned_data.get('verify_email')
-
-            if email != verify:  # Verify that the emails match.
-                raise ValidationError(
-                    "Emails do not match."
-                )
-            return cleaned_data
+    def clean(self):
+        """Confirm the emails match"""
+        cleaned_data = self().clean()
+        email = cleaned_data.get('email')
+        verify = cleaned_data.get('verify_email')
+        if email != verify:
+            raise ValidationError("Emails do not match.")
+        return cleaned_data
 # ---/Edit User form
 
 

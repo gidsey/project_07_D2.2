@@ -1,13 +1,4 @@
 
-/*.account-help-text {*/
-/*    font-size: 94%;*/
-/*    line-height: 1.2;*/
-/*}*/
-
-/*.marnone {*/
-/*    background-color: #3f5e5d;*/
-/*}*/
-
 .hint {
     display: inline-block;
     position: relative;
@@ -23,4 +14,11 @@
 
 #id_bio, #id_interests {
     font-size: 1.6rem;
+}
+
+.e-button {
+    position: relative;
+    font-size: 1.2rem;
+    top: -3px;
+    left: 2px;
 }
