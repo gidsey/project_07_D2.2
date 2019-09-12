@@ -10,7 +10,7 @@ from django.forms import DateField
 
 from . import models
 
-
+# ---Signup form
 class SignUpForm(UserCreationForm):
     """Define the SignUpForm which extends UserCreationForm"""
     first_name = forms.CharField(required=True)
@@ -42,54 +42,67 @@ class SignUpForm(UserCreationForm):
 
         if email != verify:  # Verify that the emails match.
             raise ValidationError(
-                "Emails do not match"
+                "Emails do not match."
             )
         return cleaned_data
+# ---/Signup form
 
 
+# ---Edit User form
 class EditUserForm(forms.ModelForm):
     """Define the Edit User Form."""
     first_name = forms.CharField(required=True)
     last_name = forms.CharField(required=True)
-    email = forms.EmailField(required=True)
-    verify_email = forms.EmailField(
-        required=True,
-        label="Email confirmation:",
-        help_text='Enter the same email as before, for verification.'
-    )
+    # email = forms.EmailField(required=True)
+    # verify_email = forms.EmailField(
+    #     required=True,
+    #     label="Email confirmation:",
+    #     help_text='Enter the same email as before, for verification.'
+    # )
 
     class Meta:
         model = User
         fields = (
-            'username',
             'first_name',
             'last_name',
-            'email',
-            'verify_email',
-             'password1',
-             'password2',
+            # 'email',
+            # 'verify_email',
+        )
+# ---/Edit User form
+
+
+# ---Edit Email form
+    class EditEmailForm(forms.ModelForm):
+        """Define the Edit User Form."""
+        email = forms.EmailField(required=True)
+        verify_email = forms.EmailField(
+            required=True,
+            label="Email confirmation:",
+            help_text='Enter the same email as before, for verification.'
         )
 
-        exclude = (
-            'username',
-            'password1',
-            'password2',
-        )
-
-
-    def clean(self):
-        """Clean the form"""
-        cleaned_data = super().clean()
-        email = cleaned_data.get('email')
-        verify = cleaned_data.get('verify_email')
-
-        if email != verify:  # Verify that the emails match.
-            raise ValidationError(
-                "Emails do not match"
+        class Meta:
+            model = User
+            fields = (
+                'email',
+                'verify_email',
             )
-        return cleaned_data
+
+        def clean(self):
+            """Clean the form"""
+            cleaned_data = super().clean()
+            email = cleaned_data.get('email')
+            verify = cleaned_data.get('verify_email')
+
+            if email != verify:  # Verify that the emails match.
+                raise ValidationError(
+                    "Emails do not match."
+                )
+            return cleaned_data
+# ---/Edit User form
 
 
+# ---Profile form
 class ProfileForm(forms.ModelForm):
     """Define the Profile Form."""
 
@@ -107,7 +120,6 @@ class ProfileForm(forms.ModelForm):
         return bio
 
     date_of_birth = DateField(
-        # validators=[clean_dob],
         error_messages={'invalid': 'Date å be entered in one of the following formats: '
                                    'YYYY-MM-DD or MM/DD/YYY or MM/DD/YY'},
         label="Date of birth (YYYY-MM-DD or MM/DD/YYY or MM/DD/YY)"
@@ -133,10 +145,10 @@ class ProfileForm(forms.ModelForm):
             'interests': "Interests (optional)",
             'website': "Website (optional)",
         }
+# ---/Profile form
 
 
-
-
+# ---Avatar form
 class AvatarForm(forms.ModelForm):
     """Define the Avatar Form."""
 
@@ -147,3 +159,4 @@ class AvatarForm(forms.ModelForm):
         labels = {
             'avatar': '',
         }
+# ---/Avatar form
