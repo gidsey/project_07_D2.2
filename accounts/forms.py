@@ -96,11 +96,10 @@ class EditEmailForm(forms.ModelForm):
 class ProfileForm(forms.ModelForm):
     """Define the Profile Form."""
 
-    def clean_dob(self):
-        """Vaidate the D.O.B. format"""
-        print('datein = {}'.format(self))
-        raise forms.ValidationError("This is a test Validation Error message")
-        return self
+    # def clean_dob(self):
+    #     """Vaidate the D.O.B. format"""
+    #     raise forms.ValidationError("This is a test Validation Error message")
+    #     return self
 
     def clean_bio(self):
         """Validate the bio field"""
@@ -158,5 +157,15 @@ class ChangePasswordForm(forms.Form):
     current_password = forms.CharField(widget=forms.PasswordInput, required=True)
     new_password = forms.CharField(widget=forms.PasswordInput, required=True)
     confirm_password = forms.CharField(widget=forms.PasswordInput, required=True, label="Confirm new password")
+
+    def clean(self):
+        """Validate that the emails match"""
+        cleaned_data = super().clean()
+        new_password = cleaned_data['new_password']
+        confirm_password = cleaned_data['confirm_password']
+        if new_password != confirm_password:
+            raise ValidationError("Passwords do not match.")
+        return cleaned_data
+
 
 # ---/Change Password form

@@ -156,6 +156,11 @@ def change_password(request):
     """Define the change password view."""
     user = request.user
     change_password_form = forms.ChangePasswordForm()
+    if request.method == 'POST':
+        change_password_form = forms.ChangePasswordForm(data=request.POST)
+        if change_password_form.is_valid():
+            print(change_password_form.cleaned_data['new_password'])
+            return HttpResponseRedirect(reverse('accounts:change_password'))
     return render(request, 'accounts/change_password.html', {
         'current_user': user,
         'change_password_form': change_password_form,
