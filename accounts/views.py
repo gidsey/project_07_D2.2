@@ -2,6 +2,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.hashers import check_password
 from django.urls import reverse
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
@@ -93,14 +94,16 @@ def profile(request):
     """Define the Profile view"""
     avatar_form = forms.AvatarForm()
     user = request.user
-    if not request.user.profile.avatar:  # Use defulat image if no avatar set
-        request.user.profile.avatar = 'placeholder/default.png'
+    # if not request.user.profile.avatar:  # Use default image if no avatar set
+    #     request.user.profile.avatar = 'placeholder/default.png'
 
     if request.method == 'POST':
         user.profile = request.user.profile
         avatar_form = forms.AvatarForm(data=request.POST, files=request.FILES, instance=user.profile)
         if avatar_form.is_valid():
+
             avatar_form.save()
+
             messages.success(request,
                              "Avatar uploaded successully."
                              )
@@ -159,7 +162,16 @@ def change_password(request):
     if request.method == 'POST':
         change_password_form = forms.ChangePasswordForm(data=request.POST)
         if change_password_form.is_valid():
-            print(change_password_form.cleaned_data['new_password'])
+
+            if not check_password(change_password_form.cleaned_data['current_password'], user.password):
+                messages.error(request, "Current Password is incorrect. Please re-try.")
+                return HttpResponseRedirect(reverse('accounts:change_password'))
+
+            if check_password(change_password_form.cleaned_data['new_password'], user.password):
+                messages.error(request, "New password must be differnet from the old one. Please re-try")
+                return HttpResponseRedirect(reverse('accounts:change_password'))
+
+            messages.success(request, "New password = "+change_password_form.cleaned_data['new_password'])
             return HttpResponseRedirect(reverse('accounts:change_password'))
     return render(request, 'accounts/change_password.html', {
         'current_user': user,

@@ -161,6 +161,7 @@ class ChangePasswordForm(forms.Form):
     def clean(self):
         """Validate that the emails match"""
         cleaned_data = super().clean()
+
         new_password = cleaned_data['new_password']
         confirm_password = cleaned_data['confirm_password']
         if new_password != confirm_password:
