@@ -158,9 +158,9 @@ def edit_profile(request):
 def change_password(request):
     """Define the change password view."""
     user = request.user
-    change_password_form = forms.ChangePasswordForm()
+    change_password_form = forms.ChangePasswordForm(user=request.user)
     if request.method == 'POST':
-        change_password_form = forms.ChangePasswordForm(data=request.POST)
+        change_password_form = forms.ChangePasswordForm(data=request.POST, user=request.user)
         if change_password_form.is_valid():
 
             if not check_password(change_password_form.cleaned_data['current_password'], user.password):
