@@ -5,6 +5,7 @@ from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.password_validation import validate_password, UserAttributeSimilarityValidator
 from django.core.exceptions import ValidationError
+from django.utils.translation import gettext as _
 from django.contrib.auth.forms import UserCreationForm
 from django.db.models import TextField
 from django.forms import DateField
@@ -176,6 +177,26 @@ class ChangePasswordForm(forms.Form):
                                                max_similarity=0.4
                                                )
         sim.validate(new_password, user=self.user)
-        return cleaned_data
 
+        MixcaseValidator().validate(new_password)
+
+        return cleaned_data
 # ---/Change Password form
+
+
+# ---Custom Validators
+class MixcaseValidator:
+    """Validate that password conatins both upper and lower case characters."""
+    def validate(self, password):
+        if password.islower() or password.isupper():
+            raise ValidationError(
+                _("Your password must contain both lower and uppercase characters."),
+                code='password_not_mixed_case'
+            )
+
+    def get_help_text(self):
+        return (
+            "Your password must contain both lower and uppercase characters."
+        )
+
+# ---/Custom Validators
