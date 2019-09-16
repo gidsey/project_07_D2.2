@@ -174,6 +174,7 @@ class ChangePasswordForm(forms.Form):
         validate_password(new_password, user=self.user)  # Run built-in validators
         MixcaseValidator().validate(new_password)  # Check for mixed case
         NumberValidator().validate(new_password)  # Check that the password contains at least one number
+        SpecialCharacterValidator().validate(new_password)  # Check for special characters
         UserAttributeSimilarityValidator(user_attributes=[  # Check for user attribute simarlarity
                                         'username',
                                         'first_name',
@@ -225,5 +226,20 @@ class NumberValidator:
     def get_help_text(self):
         return (
             "Your password must contain at least one number."
+        )
+
+
+class SpecialCharacterValidator:
+    """Validate that password contains at least one numerical digit."""
+    def validate(self, password):
+        numbers = re.findall(r'[@#$%^&*£\-+]', password)
+        if not numbers:
+            raise ValidationError(
+                _("Your password must contain at least one special character (e.g. @ # $ % ^ & *)"),
+                code='password_no_specials'
+            )
+    def get_help_text(self):
+        return (
+            "Your password must contain at least one special character (e.g. @ # $ % ^ & *)."
         )
 # ---/Custom Validators
