@@ -6,7 +6,7 @@ from . import models
 from. import validators
 
 from django.contrib.auth.models import User
-from django.contrib.auth.password_validation import validate_password, UserAttributeSimilarityValidator
+from django.contrib.auth.password_validation import validate_password
 from django.core.exceptions import ValidationError
 from django.contrib.auth.forms import UserCreationForm
 from django.db.models import TextField
@@ -38,12 +38,9 @@ class SignUpForm(UserCreationForm):
         )
 
     def clean(self):
-        """Confirm the emails match"""
+        """Validate that the emails match"""
         cleaned_data = super().clean()
-        email = cleaned_data.get('email')
-        verify = cleaned_data.get('verify_email')
-        if email != verify:
-            raise ValidationError("Emails do not match.")
+        validators.EmailMatchValidator().validate(cleaned_data['email'], cleaned_data['verify_email'])
         return cleaned_data
 # ---/Signup form
 
@@ -84,12 +81,9 @@ class EditEmailForm(forms.ModelForm):
         )
 
     def clean(self):
-        """Confirm the emails match"""
-        cleaned_data =  super().clean()
-        email = cleaned_data.get('email')
-        verify = cleaned_data.get('verify_email')
-        if email != verify:
-            raise ValidationError("Emails do not match.")
+        """Validate that the emails match"""
+        cleaned_data = super().clean()
+        validators.EmailMatchValidator().validate(cleaned_data['email'], cleaned_data['verify_email'])
         return cleaned_data
 # ---/Edit User form
 
@@ -97,11 +91,6 @@ class EditEmailForm(forms.ModelForm):
 # ---Profile form
 class ProfileForm(forms.ModelForm):
     """Define the Profile Form."""
-
-    # def clean_dob(self):
-    #     """Vaidate the D.O.B. format"""
-    #     raise forms.ValidationError("This is a test Validation Error message")
-    #     return self
 
     def clean_bio(self):
         """Validate the bio field"""
@@ -171,15 +160,13 @@ class ChangePasswordForm(forms.Form):
         validators.NumberValidator,
         validators.SpecialCharacterValidator,
     ])
-    confirm_password = forms.CharField(widget=forms.PasswordInput, required=True, label="Confirm new password",)
-
+    confirm_password = forms.CharField(widget=forms.PasswordInput, required=True,
+                                       label="Confirm new password",)
 
     def clean(self):
         """Validate that the emails match"""
         cleaned_data = super().clean()
-        new_password = self.data['new_password']
-        confirm_password = cleaned_data['confirm_password']
-        validators.MatchValidator().validate(new_password, confirm_password)  # Check that the passwords match
+        validators.PasswordMatchValidator().validate(self.data['new_password'], cleaned_data['confirm_password'])
         return cleaned_data
 # ---/Change Password form
 

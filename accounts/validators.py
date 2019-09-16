@@ -8,8 +8,6 @@ from django.core.exceptions import ValidationError
 from django.contrib.auth.password_validation import UserAttributeSimilarityValidator
 
 
-
-
 # ---Validator functions
 def MixcaseValidator(value):
     if value.islower() or value.isupper():
@@ -52,6 +50,7 @@ class CurrentPasswordValidator(object):
                 code='invalid_password'
             )
 
+
 class ChangedValidator(object):
     def __init__(self, user):
         self.user = user
@@ -77,7 +76,7 @@ class SimilarValidator(object):
                                         ).validate(value, user=self.user)
 
 
-class MatchValidator:
+class PasswordMatchValidator:
     """Validate the password and confirm password match."""
     def validate(self, password, confirm_password):
         if password != confirm_password:
@@ -86,8 +85,15 @@ class MatchValidator:
                 code='passwords_not_matching'
                 )
 
-    def get_help_text(self):
-        return (
-            "Enter the same password again for confirmation."
-        )
+
+class EmailMatchValidator:
+    """Validate the email and confirm email match."""
+    def validate(self, email, confirm_email):
+        if email != confirm_email:
+            raise ValidationError(
+                _("Emails do not match."),
+                code='emails_not_matching'
+                )
+
+
 # ---/Custom Validators
