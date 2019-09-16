@@ -3,6 +3,7 @@
 from django import forms
 
 from django.contrib.auth.models import User
+from django.contrib.auth.password_validation import validate_password
 from django.core.exceptions import ValidationError
 from django.contrib.auth.forms import UserCreationForm
 from django.db.models import TextField
@@ -161,11 +162,11 @@ class ChangePasswordForm(forms.Form):
     def clean(self):
         """Validate that the emails match"""
         cleaned_data = super().clean()
-
         new_password = cleaned_data['new_password']
         confirm_password = cleaned_data['confirm_password']
         if new_password != confirm_password:
             raise ValidationError("Passwords do not match.")
+        validate_password(new_password)
         return cleaned_data
 
 

@@ -10,6 +10,7 @@
              alt="{{ current_user.profile.first_name }} {{ current_user.profile.last_name }}">
 
         <p class="mt-5 mb-4">Username: <span class="text-light-green">{{ current_user.username }}</span></p>
+        <p><a href="{%  url 'accounts:change_password' %}">Change Password</a></p>
         <div>
             <p class="mt-3 mb-4">Email: {{ current_user.email }}
                 <button type="button" data-toggle="collapse" data-target="#collapseExample"
