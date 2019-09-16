@@ -170,21 +170,35 @@ class ChangePasswordForm(forms.Form):
         cleaned_data = super().clean()
         new_password = cleaned_data['new_password']
         confirm_password = cleaned_data['confirm_password']
-        if new_password != confirm_password:
-            raise ValidationError("Passwords do not match.")
-        validate_password(new_password, user=self.user)
-        sim = UserAttributeSimilarityValidator(user_attributes=['username', 'first_name', 'last_name',],
-                                               max_similarity=0.4
-                                               )
-        sim.validate(new_password, user=self.user)
 
-        MixcaseValidator().validate(new_password)
+        MatchValidator().validate(new_password, confirm_password)  # Check that the passwords match
+        validate_password(new_password, user=self.user)  # Run built-in validators
+        MixcaseValidator().validate(new_password)  # Check for mixed case
+        UserAttributeSimilarityValidator(user_attributes=[  # Check for user attribute simarlarity
+                                        'username',
+                                        'first_name',
+                                        'last_name', ], max_similarity=0.4
+                                        ).validate(new_password, user=self.user)
 
         return cleaned_data
 # ---/Change Password form
 
 
 # ---Custom Validators
+class MatchValidator:
+    """Validate the password and confirm password match."""
+    def validate(self, password, confirm_password):
+        if password != confirm_password:
+            raise ValidationError(
+                _("Passwords do not match."),
+                code='passwords_not_matching'
+                )
+    def get_help_text(self):
+        return (
+            "Enter the same password again for confirmation."
+        )
+
+
 class MixcaseValidator:
     """Validate that password conatins both upper and lower case characters."""
     def validate(self, password):
@@ -193,7 +207,6 @@ class MixcaseValidator:
                 _("Your password must contain both lower and uppercase characters."),
                 code='password_not_mixed_case'
             )
-
     def get_help_text(self):
         return (
             "Your password must contain both lower and uppercase characters."
