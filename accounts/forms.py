@@ -160,11 +160,9 @@ class ChangePasswordForm(forms.Form):
     def __init__(self, user, *args, **kwargs):
         self.user = user
         super(ChangePasswordForm, self).__init__(*args, **kwargs)
+        self.fields["current_password"].validators.append(validators.CurrentPasswordValidator(user))
         self.fields["new_password"].validators.append(validators.ChangedValidator(user))
-
-    # def __init__(self, user, *args, **kwargs):
-    #     self.user = user
-    #     super(ChangePasswordForm, self).__init__(*args, **kwargs)
+        self.fields["new_password"].validators.append(validators.SimilarValidator(user))
 
     current_password = forms.CharField(widget=forms.PasswordInput, required=True)
     new_password = forms.CharField(widget=forms.PasswordInput, required=True, validators=[
@@ -182,12 +180,6 @@ class ChangePasswordForm(forms.Form):
         new_password = self.data['new_password']
         confirm_password = cleaned_data['confirm_password']
         validators.MatchValidator().validate(new_password, confirm_password)  # Check that the passwords match
-        UserAttributeSimilarityValidator(user_attributes=[  # Check for user attribute simarlarity
-                                        'username',
-                                        'first_name',
-                                        'last_name', ], max_similarity=0.4
-                                        ).validate(new_password, user=self.user)
-
         return cleaned_data
 # ---/Change Password form
 

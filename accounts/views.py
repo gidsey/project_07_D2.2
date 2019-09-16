@@ -162,15 +162,6 @@ def change_password(request):
     if request.method == 'POST':
         change_password_form = forms.ChangePasswordForm(request.user, data=request.POST)
         if change_password_form.is_valid():
-
-            if not check_password(change_password_form.cleaned_data['current_password'], user.password):
-                messages.error(request, "Current Password is incorrect. Please re-try.")
-                return HttpResponseRedirect(reverse('accounts:change_password'))
-
-            # if check_password(change_password_form.cleaned_data['new_password'], user.password):
-            #     messages.error(request, "New password must be differnet from the old one. Please re-try")
-            #     return HttpResponseRedirect(reverse('accounts:change_password'))
-
             messages.success(request, "New password = "+change_password_form.cleaned_data['new_password'])
             return HttpResponseRedirect(reverse('accounts:change_password'))
     return render(request, 'accounts/change_password.html', {

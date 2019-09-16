@@ -1,11 +1,13 @@
 """Custom validators."""
+import re
 
 from django.contrib.auth.hashers import check_password
 from django.utils.translation import gettext as _
 from django.utils.translation import gettext_lazy as _
 from django.core.exceptions import ValidationError
+from django.contrib.auth.password_validation import UserAttributeSimilarityValidator
 
-import re
+
 
 
 # ---Validator functions
@@ -39,6 +41,17 @@ def SpecialCharacterValidator(value):
 
 
 # ---Custom Validators
+class CurrentPasswordValidator(object):
+    def __init__(self, user):
+        self.user = user
+
+    def __call__(self, value):
+        if not check_password(value, self.user.password):
+            raise ValidationError(
+                _("Password is incorrect."),
+                code='invalid_password'
+            )
+
 class ChangedValidator(object):
     def __init__(self, user):
         self.user = user
@@ -49,6 +62,19 @@ class ChangedValidator(object):
                 _("The new password must be differnet from the old one."),
                 code='password_not_changed'
             )
+
+
+class SimilarValidator(object):
+    """Validates whether the password is sufficiently different from certain attributes of the user. """
+    def __init__(self, user):
+        self.user = user
+
+    def __call__(self, value):
+        return UserAttributeSimilarityValidator(user_attributes=[
+                                        'username',
+                                        'first_name',
+                                        'last_name', ], max_similarity=0.4
+                                        ).validate(value, user=self.user)
 
 
 class MatchValidator:
