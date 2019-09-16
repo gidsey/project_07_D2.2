@@ -158,18 +158,18 @@ def edit_profile(request):
 def change_password(request):
     """Define the change password view."""
     user = request.user
-    change_password_form = forms.ChangePasswordForm(user=request.user)
+    change_password_form = forms.ChangePasswordForm(request.user)
     if request.method == 'POST':
-        change_password_form = forms.ChangePasswordForm(data=request.POST, user=request.user)
+        change_password_form = forms.ChangePasswordForm(request.user, data=request.POST)
         if change_password_form.is_valid():
 
             if not check_password(change_password_form.cleaned_data['current_password'], user.password):
                 messages.error(request, "Current Password is incorrect. Please re-try.")
                 return HttpResponseRedirect(reverse('accounts:change_password'))
 
-            if check_password(change_password_form.cleaned_data['new_password'], user.password):
-                messages.error(request, "New password must be differnet from the old one. Please re-try")
-                return HttpResponseRedirect(reverse('accounts:change_password'))
+            # if check_password(change_password_form.cleaned_data['new_password'], user.password):
+            #     messages.error(request, "New password must be differnet from the old one. Please re-try")
+            #     return HttpResponseRedirect(reverse('accounts:change_password'))
 
             messages.success(request, "New password = "+change_password_form.cleaned_data['new_password'])
             return HttpResponseRedirect(reverse('accounts:change_password'))
