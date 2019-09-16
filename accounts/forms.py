@@ -1,6 +1,9 @@
 """Accounts Forms."""
 
 from django import forms
+from . import models
+
+import re
 
 from django.contrib.auth.models import User
 from django.contrib.auth.password_validation import validate_password, UserAttributeSimilarityValidator
@@ -9,10 +12,6 @@ from django.utils.translation import gettext as _
 from django.contrib.auth.forms import UserCreationForm
 from django.db.models import TextField
 from django.forms import DateField
-
-
-from . import models
-
 
 # ---Signup form
 class SignUpForm(UserCreationForm):
@@ -174,6 +173,7 @@ class ChangePasswordForm(forms.Form):
         MatchValidator().validate(new_password, confirm_password)  # Check that the passwords match
         validate_password(new_password, user=self.user)  # Run built-in validators
         MixcaseValidator().validate(new_password)  # Check for mixed case
+        NumberValidator().validate(new_password)  # Check that the password contains at least one number
         UserAttributeSimilarityValidator(user_attributes=[  # Check for user attribute simarlarity
                                         'username',
                                         'first_name',
@@ -200,7 +200,7 @@ class MatchValidator:
 
 
 class MixcaseValidator:
-    """Validate that password conatins both upper and lower case characters."""
+    """Validate that password contains both upper and lower case characters."""
     def validate(self, password):
         if password.islower() or password.isupper():
             raise ValidationError(
@@ -212,4 +212,18 @@ class MixcaseValidator:
             "Your password must contain both lower and uppercase characters."
         )
 
+
+class NumberValidator:
+    """Validate that password contains at least one numerical digit."""
+    def validate(self, password):
+        numbers = re.findall(r'\d', password)
+        if not numbers:
+            raise ValidationError(
+                _("Your password must contain at least one number."),
+                code='password_no_numbers'
+            )
+    def get_help_text(self):
+        return (
+            "Your password must contain at least one number."
+        )
 # ---/Custom Validators
