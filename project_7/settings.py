@@ -141,9 +141,18 @@ SUMMERNOTE_THEME = 'bs4'
 SUMMERNOTE_CONFIG = {
    'summernote': {
         'iframe': False,
-
-
         'width': '100%',
         'height': 300,
+        'disable_attachment': True,
+        'toolbar': [
+          ['style', ['style']],
+          ['font', ['bold', 'underline', 'clear']],
+          ['fontname', ['fontname']],
+          ['color', ['color']],
+          ['para', ['ul', 'ol', 'paragraph']],
+          ['table', ['table']],
+          ['insert', ['link']],
+          ['view', ['fullscreen', 'codeview', 'help']],
+        ],
 },
 }
