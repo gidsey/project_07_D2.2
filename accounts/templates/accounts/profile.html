@@ -22,7 +22,7 @@
         {%  endif %}
         <p>Country: {{ current_user.profile.country}}</p>
         <p>D.O.B: {{ current_user.profile.date_of_birth}}</p>
-        <p>Bio: {{ current_user.profile.bio }}</p>
+        <p>Bio: {{ current_user.profile.bio|safe }}</p>
         <p>Interests: {{ current_user.profile.interests }}</p>
         <p>Website: {{ current_user.profile.website|urlize}}</p>
         <p>Date Joined: {{ current_user.date_joined }}</p>

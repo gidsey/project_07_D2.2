@@ -11,7 +11,7 @@ from django.core.exceptions import ValidationError
 from django.contrib.auth.forms import UserCreationForm
 from django.db.models import TextField
 from django.forms import DateField
-
+from django_summernote.widgets import SummernoteWidget, SummernoteInplaceWidget
 
 # ---Signup form
 class SignUpForm(UserCreationForm):
@@ -105,10 +105,11 @@ class ProfileForm(forms.ModelForm):
         label="Date of birth (YYYY-MM-DD or MM/DD/YYY or MM/DD/YY)"
     )
 
-    bio = TextField(validators=[clean_bio])
+    # bio = TextField(validators=[clean_bio])
 
     class Meta:
         model = models.Profile
+
         fields = (
             'city',
             'county',
@@ -118,7 +119,9 @@ class ProfileForm(forms.ModelForm):
             'interests',
             'website',
         )
-
+        widgets = {
+            'bio': SummernoteInplaceWidget(),
+        }
         labels = {
             'bio': 'Short biography',
             'county': 'State / County',

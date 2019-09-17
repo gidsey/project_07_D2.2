@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'widget_tweaks',
 ]
 
+INSTALLED_APPS += ('django_summernote', )
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -130,5 +132,18 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'assets'),
 ]
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+
+SUMMERNOTE_THEME = 'bs4'
+
+SUMMERNOTE_CONFIG = {
+   'summernote': {
+        'iframe': False,
+
+
+        'width': '100%',
+        'height': 300,
+},
+}

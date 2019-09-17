@@ -141,7 +141,13 @@
                             {% render_field field class="form-control is-valid" %}
                         {% endif %}
                     {% else %}
+                       {% if field.name != 'bio' %}
                         {% render_field field value=field.value class="form-control" %}
+                           {% else %}
+                           {% render_field field value=field.value %}
+                        {%  endif %}
+
+{#                        {{ profile_form.bio }}#}
                     {% endif %}
 
                     {% if field.help_text %}
