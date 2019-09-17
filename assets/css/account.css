@@ -26,3 +26,7 @@
 .text-light-green {
     color: rgba(83, 125, 123,.7);
 }
+
+.clean-button button{
+    box-shadow: none;
+}

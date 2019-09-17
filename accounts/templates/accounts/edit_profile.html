@@ -144,7 +144,7 @@
                        {% if field.name != 'bio' %}
                         {% render_field field value=field.value class="form-control" %}
                            {% else %}
-                           {% render_field field value=field.value %}
+                           {% render_field field value=field.value class="clean-button"%}
                         {%  endif %}
 
 {#                        {{ profile_form.bio }}#}
