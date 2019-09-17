@@ -29,7 +29,7 @@ def NumberValidator(value):
 
 def SpecialCharacterValidator(value):
     """Validate that password contains at least one numerical digit."""
-    numbers = re.findall(r'[@#$%^&*£\-+]', value)
+    numbers = re.findall(r'[~!@#$%^&*()£_\-+{}\":;\'\[\]]', value)
     if not numbers:
         raise ValidationError(
             _("The password must contain at least one special character (e.g. @ # $ % ^ & *)."),
