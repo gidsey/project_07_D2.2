@@ -31,21 +31,41 @@
                     {% if profile_form.is_bound %}
 
                         {% if field.errors %}
-                            {% render_field field class="form-control is-invalid" %}
+                            {% if field.name != 'bio' %}
+                                {% render_field field class="form-control is-invalid" %}
+                            {% else %}
+                                {% render_field field value=field.error class="clean-button wsiwyg-is-invalid" %}
+                            {% endif %}
                             {% for error in field.errors %}
-                                <div class="invalid-feedback">
-                                    {{ error }}
-                                </div>
+                                {% if field.name != 'bio' %}
+                                    <div class="invalid-feedback">
+                                        {{ error }}
+                                    </div>
+                                {% else %}
+                                    <div class="wsiwyg-invalid-message">
+                                        {{ error }}
+                                    </div>
+                                {% endif %}
+
                             {% endfor %}
                         {% else %}
-                            {% render_field field class="form-control is-valid" %}
+                            {% if field.name != 'bio' %}
+                                {% render_field field value=field.value class="form-control is-valid" %}
+                            {% else %}
+                                {% render_field field value=field.value class="clean-button wsiwyg-is-valid" %}
+                            {% endif %}
                         {% endif %}
                     {% else %}
-                        {% render_field field class="form-control" %}
+                        {% if field.name != 'bio' %}
+                            {% render_field field class="form-control" %}
+                        {% else %}
+                            {% render_field field class="clean-button" %}
+                        {% endif %}
                     {% endif %}
 
+
                     {% if field.help_text %}
-                         <small class="hint">{{ field.help_text|add_help_style|safe }}</small>
+                        <small class="hint">{{ field.help_text|add_help_style|safe }}</small>
                     {% endif %}
                 </div>
             {% endfor %}

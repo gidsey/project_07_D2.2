@@ -96,7 +96,7 @@ class ProfileForm(forms.ModelForm):
         """Validate the bio field"""
         bio = self.cleaned_data['bio']
         if len(bio) < 10:
-            raise ValidationError("Bio must contain at least 10 characters.")
+            raise ValidationError('Biography must contain at least 10 characters.')
         return bio
 
     date_of_birth = DateField(
@@ -105,7 +105,7 @@ class ProfileForm(forms.ModelForm):
         label="Date of birth (YYYY-MM-DD or MM/DD/YYY or MM/DD/YY)"
     )
 
-    # bio = TextField(validators=[clean_bio])
+    bio = TextField(validators=[clean_bio])
 
     class Meta:
         model = models.Profile

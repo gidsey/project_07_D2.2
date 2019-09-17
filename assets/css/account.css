@@ -27,6 +27,34 @@
     color: rgba(83, 125, 123,.7);
 }
 
-.clean-button button{
+.clean-button .note-statusbar{
+    /*margin-bottom: -19px;*/
+}
+
+.clean-button button {
     box-shadow: none;
+}
+
+.wsiwyg-invalid-message {
+    color: rgb(220, 53, 69);
+    margin-top: .2rem;
+    margin-bottom: 1rem;
+    font-size: 80%;
+}
+
+.wsiwyg-is-invalid {
+    border-top : 1px solid rgb(220, 53, 69);
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+}
+
+.wsiwyg-is-valid {
+    border-top: 1px solid #28a745;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+}
+
+
+.note-statusbar {
+    margin-bottom: 0;
 }

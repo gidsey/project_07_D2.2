@@ -142,7 +142,7 @@ SUMMERNOTE_CONFIG = {
    'summernote': {
         'iframe': False,
         'width': '100%',
-        'height': 300,
+        'height': 220,
         'disable_attachment': True,
         'toolbar': [
           ['style', ['style']],
@@ -154,5 +154,6 @@ SUMMERNOTE_CONFIG = {
           ['insert', ['link']],
           ['view', ['fullscreen', 'codeview', 'help']],
         ],
+
 },
 }
