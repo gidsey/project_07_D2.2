@@ -7,168 +7,174 @@
     <div class="container">
         <h1 class="display-3 mb-2">Edit Your Profile</h1>
         <img class="mt-4" src="{{ current_user.profile.avatar.url }}" width="200px"
-             alt="{{ current_user.profile.first_name }} {{ current_user.profile.last_name }}">
+             alt="{{ current_user.first_name }} {{ current_user.last_name }}">
+        <hr>
+        <h4 class="mt-4 mb-4">{{ current_user.first_name }} {{ current_user.last_name }}</h4>
+        <p class="mt-3 mb-4">Username: <span class="text-light-green">{{ current_user.username }}</span></p>
+        <p class="mt-3 mb-4">Password: <span class="text-light-green">
+            &#x2022;&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;</span>
+            <a class="button button-primary btn-sm px-4 py-2 d-inline e-button"
+               href="{% url 'accounts:change_password' %}" role="button">Change</a></p>
+        <p class="mt-3 mb-4">Email: {{ current_user.email }}
+            <button type="button" data-toggle="collapse" data-target="#collapseExample"
+                    aria-expanded="false" aria-controls="collapseExample"
+                    class="button-primary btn-sm px-4 py-2 d-inline align-top e-button">Edit
+            </button>
+        </p>
+    </div>
 
-        <p class="mt-5 mb-4">Username: <span class="text-light-green">{{ current_user.username }}</span></p>
-        <p><a href="{% url 'accounts:change_password' %}">Change Password</a></p>
-        <div>
-            <p class="mt-3 mb-4">Email: {{ current_user.email }}
-                <button type="button" data-toggle="collapse" data-target="#collapseExample"
-                        aria-expanded="false" aria-controls="collapseExample"
-                        class="button-primary btn-sm px-4 py-2 d-inline align-top e-button">Edit
-                </button>
-            </p>
-        </div>
+    {# edit email form #}
+    <div class="{% show_panel collapse %}  mb-5" id="collapseExample">
+        <div class="card card-body bg-light pb-0">
+            <form method="POST" action="{% url 'accounts:edit_profile' %}">
+                {% csrf_token %}
+                {% for hidden_field in form.hidden_fields %}
+                    {{ hidden_field }}
+                {% endfor %}
 
-        {# edit email form #}
-        <div class="{% show_panel collapse %}  mb-5" id="collapseExample">
-            <div class="card card-body bg-light pb-0">
-                <form method="POST" action="{% url 'accounts:edit_profile' %}">
-                    {% csrf_token %}
-                    {% for hidden_field in form.hidden_fields %}
-                        {{ hidden_field }}
-                    {% endfor %}
+                {% if email_form.non_field_errors %}
+                    <div class="alert alert-danger" role="alert">
+                        {% for error in email_form.non_field_errors %}
+                            {{ error }}
+                        {% endfor %}
+                    </div>
+                {% endif %}
 
-                    {% if email_form.non_field_errors %}
-                        <div class="alert alert-danger" role="alert">
-                            {% for error in email_form.non_field_errors %}
-                                {{ error }}
-                            {% endfor %}
-                        </div>
-                    {% endif %}
+                {% for field in email_form.visible_fields %}
+                    <div class="form-group">
+                        {{ field.label_tag }}
 
-                    {% for field in email_form.visible_fields %}
-                        <div class="form-group">
-                            {{ field.label_tag }}
+                        {% if email_form.is_bound %}
 
-                            {% if email_form.is_bound %}
-
-                                {% if field.errors %}
-                                    {% render_field field class="form-control is-invalid" %}
-                                    {% for error in field.errors %}
-                                        <div class="invalid-feedback">
-                                            {{ error }}
-                                        </div>
-                                    {% endfor %}
-                                {% else %}
-                                    {% render_field field class="form-control is-valid" %}
-                                {% endif %}
-                            {% else %}
-                                {% render_field field class="form-control" %}
-                            {% endif %}
-
-                            {% if field.help_text %}
-                                <small class="hint">{{ field.help_text|add_help_style|safe }}</small>
-                            {% endif %}
-                        </div>
-                    {% endfor %}
-                    <input type="submit" name="update_email" class="button-primary btn-sm px-4 py-3 e-button mb-1"
-                           value="Update email">
-                </form>
-            </div>
-        </div>
-        {# /edit email form #}
-
-        {# user form #}
-        <form method="POST" action="{% url 'accounts:edit_profile' %}">
-            {% csrf_token %}
-            {% for hidden_field in form.hidden_fields %}
-                {{ hidden_field }}
-            {% endfor %}
-
-            {% if form.non_field_errors %}
-                <div class="alert alert-danger" role="alert">
-                    {% for error in form.non_field_errors %}
-                        {{ error }}
-                    {% endfor %}
-                </div>
-            {% endif %}
-
-            {% for field in form.visible_fields %}
-                <div class="form-group">
-                    {{ field.label_tag }}
-
-                    {% if form.is_bound %}
-
-                        {% if field.errors %}
-                            {% render_field field class="form-control is-invalid" %}
-                            {% for error in field.errors %}
-                                <div class="invalid-feedback">
-                                    {{ error }}
-                                </div>
-                            {% endfor %}
-                        {% else %}
-                            {% render_field field class="form-control is-valid" %}
-                        {% endif %}
-                    {% else %}
-                        {% render_field field value=field.value class="form-control" %}
-                    {% endif %}
-
-                    {% if field.help_text %}
-                        <small class="hint">{{ field.help_text|add_help_style|safe }}</small>
-                    {% endif %}
-                </div>
-            {% endfor %}
-            {# /user form #}
-
-            {# profile form #}
-            {% for hidden_field in profile_form.hidden_fields %}
-                {{ hidden_field }}
-            {% endfor %}
-
-            {% if profile_form.non_field_errors %}
-                <div class="alert alert-danger" role="alert">
-                    {% for error in profile_form.non_field_errors %}
-                        {{ error }}
-                    {% endfor %}
-                </div>
-            {% endif %}
-
-            {% for field in profile_form.visible_fields %}
-                <div class="form-group">
-                    {{ field.label_tag }}
-
-                    {% if profile_form.is_bound %}
-
-                        {% if field.errors %}
-                            {% if field.name != 'bio' and field.name != 'interests' %}
+                            {% if field.errors %}
                                 {% render_field field class="form-control is-invalid" %}
-                            {% else %}
-                                {% render_field field value=field.error class="clean-button wsiwyg-is-invalid" %}
-                            {% endif %}
-                            {% for error in field.errors %}
-                                {% if field.name != 'bio' and field.name != 'interests' %}
+                                {% for error in field.errors %}
                                     <div class="invalid-feedback">
                                         {{ error }}
                                     </div>
-                                {% else %}
-                                    <div class="wsiwyg-invalid-message">
-                                        {{ error }}
-                                    </div>
-                                {% endif %}
-
-                            {% endfor %}
-                        {% else %}
-                            {% if field.name != 'bio' and field.name != 'interests' %}
-                                {% render_field field value=field.value class="form-control is-valid" %}
+                                {% endfor %}
                             {% else %}
-                                {% render_field field value=field.value class="clean-button wsiwyg-is-valid" %}
+                                {% render_field field class="form-control is-valid" %}
                             {% endif %}
+                        {% else %}
+                            {% render_field field class="form-control" %}
                         {% endif %}
+
+                        {% if field.help_text %}
+                            <small class="hint">{{ field.help_text|add_help_style|safe }}</small>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+                <input type="submit" name="update_email" class="button-primary btn-sm px-4 py-3 e-button mb-1"
+                       value="Update email">
+            </form>
+        </div>
+    </div>
+    {# /edit email form #}
+        <hr>
+
+    {# user form #}
+    <div class="container ninety">
+    <form method="POST" action="{% url 'accounts:edit_profile' %}">
+        {% csrf_token %}
+        {% for hidden_field in form.hidden_fields %}
+            {{ hidden_field }}
+        {% endfor %}
+
+        {% if form.non_field_errors %}
+            <div class="alert alert-danger" role="alert">
+                {% for error in form.non_field_errors %}
+                    {{ error }}
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        {% for field in form.visible_fields %}
+            <div class="form-group">
+                {{ field.label_tag }}
+
+                {% if form.is_bound %}
+
+                    {% if field.errors %}
+                        {% render_field field class="form-control is-invalid" %}
+                        {% for error in field.errors %}
+                            <div class="invalid-feedback">
+                                {{ error }}
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        {% render_field field class="form-control is-valid" %}
+                    {% endif %}
+                {% else %}
+                    {% render_field field value=field.value class="form-control" %}
+                {% endif %}
+
+                {% if field.help_text %}
+                    <small class="hint">{{ field.help_text|add_help_style|safe }}</small>
+                {% endif %}
+            </div>
+        {% endfor %}
+        {# /user form #}
+
+        {# profile form #}
+        {% for hidden_field in profile_form.hidden_fields %}
+            {{ hidden_field }}
+        {% endfor %}
+
+        {% if profile_form.non_field_errors %}
+            <div class="alert alert-danger" role="alert">
+                {% for error in profile_form.non_field_errors %}
+                    {{ error }}
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        {% for field in profile_form.visible_fields %}
+            <div class="form-group">
+                {{ field.label_tag }}
+
+                {% if profile_form.is_bound %}
+
+                    {% if field.errors %}
+                        {% if field.name != 'bio' and field.name != 'interests' %}
+                            {% render_field field class="form-control is-invalid" %}
+                        {% else %}
+                            {% render_field field value=field.error class="clean-button wsiwyg-is-invalid" %}
+                        {% endif %}
+                        {% for error in field.errors %}
+                            {% if field.name != 'bio' and field.name != 'interests' %}
+                                <div class="invalid-feedback">
+                                    {{ error }}
+                                </div>
+                            {% else %}
+                                <div class="wsiwyg-invalid-message">
+                                    {{ error }}
+                                </div>
+                            {% endif %}
+
+                        {% endfor %}
                     {% else %}
                         {% if field.name != 'bio' and field.name != 'interests' %}
-                            {% render_field field value=field.value class="form-control" %}
+                            {% render_field field value=field.value class="form-control is-valid" %}
                         {% else %}
-                            {% render_field field value=field.value class="clean-button" %}
+                            {% render_field field value=field.value class="clean-button wsiwyg-is-valid" %}
                         {% endif %}
                     {% endif %}
-
-                    {% if field.help_text %}
-                        <small class="hint">{{ field.help_text|add_help_style|safe }}</small>
+                {% else %}
+                    {% if field.name != 'bio' and field.name != 'interests' %}
+                        {% render_field field value=field.value class="form-control" %}
+                    {% else %}
+                        {% render_field field value=field.value class="clean-button" %}
                     {% endif %}
-                </div>
-            {% endfor %}
-            <input type="submit" name="update_name" class="button-primary mt-4" value="Save">
-        </form>
-        {# /profile form #}
+                {% endif %}
+
+                {% if field.help_text %}
+                    <small class="hint">{{ field.help_text|add_help_style|safe }}</small>
+                {% endif %}
+            </div>
+        {% endfor %}
+        <input type="submit" name="update_name" class="button-primary mt-4" value="Save">
+    </form>
+    {# /profile form #}
+    </div>
 {% endblock %}

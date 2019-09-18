@@ -12,7 +12,6 @@ from django.contrib.auth.forms import UserCreationForm
 from django.db.models import TextField
 from django.forms import DateField
 from django_summernote.widgets import SummernoteInplaceWidget
-# from bootstrap_datepicker_plus import DatePickerInput
 
 
 # ---Signup form
@@ -128,7 +127,7 @@ class ProfileForm(forms.ModelForm):
         }
         labels = {
             'bio': 'Short biography',
-            'county': 'State / County',
+            'county': 'State / County (optional)',
             'interests': "Interests (optional)",
             'website': "Website (optional)",
         }
