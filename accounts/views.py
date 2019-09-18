@@ -93,11 +93,14 @@ def profile(request):
     """Define the Profile view"""
     avatar_form = forms.AvatarForm()
     user = request.user
-    # if not request.user.profile.avatar:  # Use default image if no avatar set
-    #     request.user.profile.avatar = 'placeholder/default.png'
 
     if request.method == 'POST':
-        user.profile = request.user.profile
+        # user.profile = request.user.profile
+        try:
+            user.profile = request.user.profile  # Set Profile instance for the current user
+        except models.Profile.DoesNotExist:
+            user.profile = models.Profile(user=request.user)  # Set the Profile instance for new user
+
         avatar_form = forms.AvatarForm(data=request.POST, files=request.FILES, instance=user.profile)
         if avatar_form.is_valid():
 

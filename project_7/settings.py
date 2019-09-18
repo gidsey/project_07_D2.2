@@ -144,7 +144,7 @@ SUMMERNOTE_CONFIG = {
         'width': '100%',
         'height': 220,
         'disable_attachment': True,
-        'focus': True,
+        'focus': False,
         'toolbar': [
           ['style', ['style']],
           ['font', ['bold', 'underline', 'clear']],
