@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'accounts',
     'widget_tweaks',
-    'bootstrap_datepicker_plus',
+    # 'bootstrap_datepicker_plus',
     'django_summernote',
 ]
 
