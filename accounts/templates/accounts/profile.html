@@ -9,15 +9,13 @@
              alt="Default Avatar">
         {%  endif %}
         <img class="mt-4" src="{{ current_user.profile.avatar.url }}" width="200px"
-             alt="{{ current_user.profile.first_name }} {{ current_user.profile.last_name }}">
+             alt="{{ current_user.first_name }} {{ current_user.last_name }}">
         <form method="POST" action="{% url 'accounts:profile' %}" enctype="multipart/form-data">
             {% csrf_token %}
             {{ avatar_form.as_p }}
             <input type="submit" class="button-primary" value="Upload image">
         </form>
         <hr>
-        <p><a href="{% url 'accounts:edit_profile' %}">Edit Profile</a></p>
-        <p><a href="{% url 'accounts:change_password' %}">Change Password</a></p>
         <h4 class="mt-5 mb-2">Username</h4>
         <p><span class="text-light-green">{{ current_user.username }}</span></p>
         <h4 class="mt-5 mb-2">Email</h4>

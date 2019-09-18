@@ -126,7 +126,7 @@ class ProfileForm(forms.ModelForm):
             'interests': SummernoteInplaceWidget(),
         }
         labels = {
-            'bio': 'Short biography',
+            'bio': 'Biography',
             'county': 'State / County (optional)',
             'interests': "Interests (optional)",
             'website': "Website (optional)",

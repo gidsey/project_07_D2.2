@@ -136,8 +136,9 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
+# Sumernote WYSIWYG Editor
+# https://summernote.org/
 SUMMERNOTE_THEME = 'bs4'
-
 SUMMERNOTE_CONFIG = {
    'summernote': {
         'iframe': False,
@@ -148,7 +149,6 @@ SUMMERNOTE_CONFIG = {
         'toolbar': [
           ['style', ['style']],
           ['font', ['bold', 'underline', 'clear']],
-          ['fontname', ['fontname']],
           ['color', ['color']],
           ['para', ['ul', 'ol', 'paragraph']],
           ['table', ['table']],
