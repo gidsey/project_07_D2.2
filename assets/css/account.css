@@ -27,9 +27,6 @@
     color: rgba(83, 125, 123,.7);
 }
 
-.clean-button .note-statusbar{
-    /*margin-bottom: -19px;*/
-}
 
 .clean-button button {
     box-shadow: none;
@@ -42,8 +39,9 @@
     font-size: 80%;
 }
 
+
 .wsiwyg-is-invalid {
-    border-top : 1px solid rgb(220, 53, 69);
+    border-top: 1px solid rgb(220, 53, 69);
     border-top-left-radius: 4px;
     border-top-right-radius: 4px;
 }
@@ -55,6 +53,6 @@
 }
 
 
-.note-statusbar {
-    margin-bottom: 0;
+.note-editor.note-frame {
+    /*border: 1px solid rgb(220, 53, 69);*/
 }

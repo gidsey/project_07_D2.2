@@ -4,7 +4,7 @@
 {% block body %}
     <div class="container">
         <h1 class="display-3 mb-2">{{ current_user.first_name }} {{ current_user.last_name }}</h1>
-         <img class="mt-4" src="{{ current_user.profile.avatar.url }}" width="200px"
+        <img class="mt-5" src="{{ current_user.profile.avatar.url }}" width="200px"
              alt="{{ current_user.profile.first_name }} {{ current_user.profile.last_name }}">
         <form method="POST" action="{% url 'accounts:profile' %}" enctype="multipart/form-data">
             {% csrf_token %}
@@ -12,21 +12,31 @@
             <input type="submit" class="button-primary" value="Upload image">
         </form>
         <hr>
-        <p><a href="{%  url 'accounts:edit_profile' %}">Edit Profile</a></p>
-        <p><a href="{%  url 'accounts:change_password' %}">Change Password</a></p>
-        <p>Username: <span class="text-light-green">{{ current_user.username }}</span></p>
-        <p>Email: {{ current_user.email|urlize }}</p>
-        <p>City: {{ current_user.profile.city }}</p>
+        <p><a href="{% url 'accounts:edit_profile' %}">Edit Profile</a></p>
+        <p><a href="{% url 'accounts:change_password' %}">Change Password</a></p>
+        <h4 class="mt-5 mb-2">Username</h4>
+        <p><span class="text-light-green">{{ current_user.username }}</span></p>
+        <h4 class="mt-5 mb-2">Email</h4>
+        <p>{{ current_user.email|urlize }}</p>
+        <h4 class="mt-5 mb-2">City</h4>
+        <p>{{ current_user.profile.city }}</p>
         {% if current_user.profile.county %}
-        <p>County: {{ current_user.profile.county }}</p>
-        {%  endif %}
-        <p>Country: {{ current_user.profile.country}}</p>
-        <p>D.O.B: {{ current_user.profile.date_of_birth}}</p>
+            <h4 class="mt-5 mb-2">County</h4> <p>{{ current_user.profile.county }}</p>
+        {% endif %}
+        <h4 class="mt-5 mb-2">Country</h4>
+        <p>{{ current_user.profile.country }}</p>
+        <h4 class="mt-5 mb-2">Date of birth</h4>
+        <p>{{ current_user.profile.date_of_birth }}</p>
         <hr>
+        <h4 class="mt-5 mb-2">Bio</h4>
         <p>{{ current_user.profile.bio|safe }}</p>
         <hr>
-        <p>Interests: {{ current_user.profile.interests }}</p>
-        <p>Website: {{ current_user.profile.website|urlize}}</p>
-        <p>Date Joined: {{ current_user.date_joined }}</p>
+        <h4 class="mt-5 mb-2">Interests</h4>
+        <p>{{ current_user.profile.interests|safe }}</p>
+        <hr>
+        <h4 class="mt-5 mb-2">Website</h4>
+        <p>{{ current_user.profile.website|urlize }}</p>
+        <h4 class="mt-5 mb-2">Date joined</h4>
+        <p>{{ current_user.date_joined }}</p>
     </div>
 {% endblock %}

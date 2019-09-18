@@ -154,6 +154,7 @@ SUMMERNOTE_CONFIG = {
           ['insert', ['link']],
           ['view', ['fullscreen', 'codeview', 'help']],
         ],
+        'disableResizeEditor': False,
 
 },
 }

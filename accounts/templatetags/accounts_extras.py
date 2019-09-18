@@ -21,3 +21,4 @@ def add_help_style(help_text):
     help_text = help_text.replace('<li>', '<div class="alert alert-info">')
     help_text = help_text.replace('</li>', '</div>')
     return help_text
+

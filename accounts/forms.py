@@ -11,7 +11,8 @@ from django.core.exceptions import ValidationError
 from django.contrib.auth.forms import UserCreationForm
 from django.db.models import TextField
 from django.forms import DateField
-from django_summernote.widgets import SummernoteWidget, SummernoteInplaceWidget
+from django_summernote.widgets import SummernoteInplaceWidget
+
 
 # ---Signup form
 class SignUpForm(UserCreationForm):
@@ -121,6 +122,8 @@ class ProfileForm(forms.ModelForm):
         )
         widgets = {
             'bio': SummernoteInplaceWidget(),
+            'interests': SummernoteInplaceWidget(),
+
         }
         labels = {
             'bio': 'Short biography',
