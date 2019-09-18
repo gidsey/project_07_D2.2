@@ -108,6 +108,7 @@ class ProfileForm(forms.ModelForm):
 
     bio = TextField(validators=[clean_bio])
 
+
     class Meta:
         model = models.Profile
 

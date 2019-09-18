@@ -17,7 +17,7 @@ class Profile(models.Model):
     bio = models.TextField(null=True, help_text='Required. Min 10 characters')
     avatar = models.ImageField(upload_to=user_directory_path, max_length=255, null=True, blank=True, default='placeholder/default.png')
     city = models.CharField(max_length=100, null=True)
-    county = models.CharField(max_length=255, null=True)
+    county = models.CharField(max_length=255, null=True, blank=True)
     country = models.CharField(max_length=100, null=True)
     interests = models.TextField(null=True, blank=True)
     website = models.URLField(null=True, blank=True,)

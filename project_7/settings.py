@@ -144,6 +144,7 @@ SUMMERNOTE_CONFIG = {
         'width': '100%',
         'height': 220,
         'disable_attachment': True,
+        'focus': True,
         'toolbar': [
           ['style', ['style']],
           ['font', ['bold', 'underline', 'clear']],
@@ -154,7 +155,6 @@ SUMMERNOTE_CONFIG = {
           ['insert', ['link']],
           ['view', ['fullscreen', 'codeview', 'help']],
         ],
-        'disableResizeEditor': False,
 
 },
 }

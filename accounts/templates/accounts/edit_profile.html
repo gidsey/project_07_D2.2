@@ -131,32 +131,32 @@
                     {% if profile_form.is_bound %}
 
                         {% if field.errors %}
-                            {% if field.name != 'bio' %}
+                            {% if field.name != 'bio' and field.name != 'interests' %}
                                 {% render_field field class="form-control is-invalid" %}
                             {% else %}
-                                {% render_field field value=field.error class="clean-button" %}
+                                {% render_field field value=field.error class="clean-button wsiwyg-is-invalid" %}
                             {% endif %}
                             {% for error in field.errors %}
-                                {% if field.name != 'bio' %}
+                                {% if field.name != 'bio' and field.name != 'interests' %}
                                     <div class="invalid-feedback">
                                         {{ error }}
                                     </div>
                                 {% else %}
-                                    <div class="clean-invalid">
+                                    <div class="wsiwyg-invalid-message">
                                         {{ error }}
                                     </div>
                                 {% endif %}
 
                             {% endfor %}
                         {% else %}
-                            {% if field.name != 'bio' %}
+                            {% if field.name != 'bio' and field.name != 'interests' %}
                                 {% render_field field value=field.value class="form-control is-valid" %}
                             {% else %}
-                                {% render_field field value=field.value class="clean-button clean-valid" %}
+                                {% render_field field value=field.value class="clean-button wsiwyg-is-valid" %}
                             {% endif %}
                         {% endif %}
                     {% else %}
-                        {% if field.name != 'bio' %}
+                        {% if field.name != 'bio' and field.name != 'interests' %}
                             {% render_field field value=field.value class="form-control" %}
                         {% else %}
                             {% render_field field value=field.value class="clean-button" %}
