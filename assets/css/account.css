@@ -39,6 +39,10 @@
     float: left;
 }
 
+.seventy {
+     width: 70%;
+    float: left;
+}
 
 /*Text Editor Sytles*/
 .clean-button button {

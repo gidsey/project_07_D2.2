@@ -2,7 +2,7 @@
 
 {% block title %}View profile | {{ current_user.first_name }} {{ current_user.last_name }}{% endblock %}
 {% block body %}
-    <div class="container">
+    <div class="container seventy">
         <h1 class="display-3 mb-2">{{ current_user.first_name }} {{ current_user.last_name }}</h1>
         {%  if not current_user.profile.avatar.url %}
         <img class="mt-4" src="/media/placeholder/default.png" width="200px"
