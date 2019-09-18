@@ -31,11 +31,15 @@
         <h4 class="mt-5 mb-2">Bio</h4>
         <p>{{ current_user.profile.bio|safe }}</p>
         <hr>
+        {%  if current_user.profile.interests and current_user.profile.interests != '<br>'%}
         <h4 class="mt-5 mb-2">Interests</h4>
         <p>{{ current_user.profile.interests|safe }}</p>
         <hr>
+        {%  endif %}
+        {% if current_user.profile.website %}
         <h4 class="mt-5 mb-2">Website</h4>
         <p>{{ current_user.profile.website|urlize }}</p>
+        {%  endif %}
         <h4 class="mt-5 mb-2">Date joined</h4>
         <p>{{ current_user.date_joined }}</p>
     </div>

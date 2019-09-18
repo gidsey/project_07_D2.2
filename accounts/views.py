@@ -120,6 +120,11 @@ def edit_profile(request):
     user = request.user
     form = forms.EditUserForm(instance=user)
     email_form = forms.EditEmailForm(instance=user)
+    try:
+        user.profile = request.user.profile  # Set Profile instance for the current user
+    except models.Profile.DoesNotExist:
+        user.profile = models.Profile(user=request.user)  # Set the Profile instance for new user
+
     profile_form = forms.ProfileForm(instance=user.profile)
     if request.method == 'POST':
         if 'update_name' in request.POST:
