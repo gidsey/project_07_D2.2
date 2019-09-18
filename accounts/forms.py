@@ -104,7 +104,7 @@ class ProfileForm(forms.ModelForm):
     date_of_birth = DateField(
         error_messages={'invalid': 'Date should be in one of the following formats: '
                                    'YYYY-MM-DD or MM/DD/YYY or MM/DD/YY'},
-        label="Date of birth (YYYY-MM-DD or MM/DD/YYY or MM/DD/YY)"
+        label="Date of birth",
     )
 
     bio = TextField(validators=[clean_bio])
@@ -114,10 +114,10 @@ class ProfileForm(forms.ModelForm):
         model = models.Profile
 
         fields = (
+            'date_of_birth',
             'city',
             'county',
             'country',
-            'date_of_birth',
             'bio',
             'interests',
             'website',
