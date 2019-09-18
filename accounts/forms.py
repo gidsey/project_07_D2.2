@@ -3,7 +3,7 @@
 from django import forms
 
 from . import models
-from. import validators
+from . import validators
 
 from django.contrib.auth.models import User
 from django.contrib.auth.password_validation import validate_password
@@ -12,6 +12,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.db.models import TextField
 from django.forms import DateField
 from django_summernote.widgets import SummernoteInplaceWidget
+from bootstrap_datepicker_plus import DatePickerInput
 
 
 # ---Signup form
@@ -122,9 +123,9 @@ class ProfileForm(forms.ModelForm):
             'website',
         )
         widgets = {
+            'date_of_birth': DatePickerInput(),
             'bio': SummernoteInplaceWidget(),
             'interests': SummernoteInplaceWidget(),
-
         }
         labels = {
             'bio': 'Short biography',

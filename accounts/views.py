@@ -20,7 +20,7 @@ def sign_in(request):
                 if user.is_active:
                     login(request, user)
                     return HttpResponseRedirect(
-                        reverse('home')  # TODO: go to profile
+                        reverse('accounts:profile')
                     )
                 else:
                     messages.error(

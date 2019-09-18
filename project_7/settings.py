@@ -39,9 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'accounts',
     'widget_tweaks',
+    'bootstrap_datepicker_plus',
+    'django_summernote',
 ]
-
-INSTALLED_APPS += ('django_summernote', )
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
