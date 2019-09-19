@@ -13,12 +13,12 @@
         <p class="mt-3 mb-4">Username: <span class="text-light-green">{{ current_user.username }}</span></p>
         <p class="mt-3 mb-4">Password: <span class="text-light-green">
             &#x2022;&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;</span>
-            <a class="button button-primary btn-sm px-4 py-2 d-inline e-button"
+            <a class="button button-primary btn-sm px-4 py-2 e-button"
                href="{% url 'accounts:change_password' %}" role="button">Change</a></p>
         <p class="mt-3 mb-4">Email: {{ current_user.email }}
             <button type="button" data-toggle="collapse" data-target="#collapseExample"
                     aria-expanded="false" aria-controls="collapseExample"
-                    class="button-primary btn-sm px-4 py-2 d-inline align-top e-button">Edit
+                    class="button-primary btn-sm px-4 py-2 align-top e-button">Edit
             </button>
         </p>
     </div>

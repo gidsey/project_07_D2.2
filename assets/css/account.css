@@ -26,7 +26,7 @@
     font-weight: normal;
 }
 
-.e-button:hover, .e-button:active{
+a.e-button:hover, a.e-button:active, a.e-button:visited {
     text-decoration: none;
 }
 
