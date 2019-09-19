@@ -6,8 +6,17 @@
 
 {% block body %}
 <div class="container">
-<h1 class="display-3 mb-5">Set Avatar</h1>
-    <p>User: {{ current_user.first_name }} {{ current_user.last_name }}</p>
-
+        <h1 class="display-3 mb-2">{{ current_user.first_name }} {{ current_user.last_name }}</h1>
+        {%  if not current_user.profile.avatar.url %}
+        <img class="mt-4" src="/media/placeholder/default.png" width="200px"
+             alt="Default Avatar">
+        {%  endif %}
+        <img class="mt-4" src="{{ current_user.profile.avatar.url }}" width="200px"
+             alt="{{ current_user.first_name }} {{ current_user.last_name }}">
+<form method="POST" action="{% url 'accounts:set_avavtar' %}" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ avatar_form.as_p }}
+            <input type="submit" class="button-primary" value="Upload image">
+        </form>
 </div>
 {% endblock %}

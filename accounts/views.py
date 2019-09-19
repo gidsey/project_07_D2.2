@@ -91,29 +91,8 @@ def sign_out(request):
 @login_required(login_url='accounts/sign_in/')
 def profile(request):
     """Define the Profile view"""
-    avatar_form = forms.AvatarForm()
-    user = request.user
-
-    if request.method == 'POST':
-        # user.profile = request.user.profile
-        try:
-            user.profile = request.user.profile  # Set Profile instance for the current user
-        except models.Profile.DoesNotExist:
-            user.profile = models.Profile(user=request.user)  # Set the Profile instance for new user
-
-        avatar_form = forms.AvatarForm(data=request.POST, files=request.FILES, instance=user.profile)
-        if avatar_form.is_valid():
-
-            avatar_form.save()
-
-            messages.success(request,
-                             "Avatar uploaded successully."
-                             )
-        return HttpResponseRedirect(reverse('accounts:profile'))
-
     return render(request, 'accounts/profile.html', {
         'current_user': request.user,
-        'avatar_form': avatar_form,
     })
 
 
@@ -184,6 +163,21 @@ def change_password(request):
 def set_avatar(request):
     """Set or edit the avatar image."""
     user = request.user
-    return  render(request, 'accounts/set_avatar.html', {
+    avatar_form = forms.AvatarForm()
+    if request.method == 'POST':
+        try:
+            user.profile = request.user.profile  # Set Profile instance for the current user
+        except models.Profile.DoesNotExist:
+            user.profile = models.Profile(user=request.user)  # Set the Profile instance for new user
+        avatar_form = forms.AvatarForm(data=request.POST, files=request.FILES, instance=user.profile)
+        if avatar_form.is_valid():
+            avatar_form.save()
+            messages.success(request,
+                             "Avatar uploaded successully."
+                             )
+        return HttpResponseRedirect(reverse('accounts:profile'))
+
+    return render(request, 'accounts/set_avatar.html', {
         'current_user': user,
+        'avatar_form': avatar_form,
     })

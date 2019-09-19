@@ -10,14 +10,11 @@
         {%  endif %}
         <img class="mt-4" src="{{ current_user.profile.avatar.url }}" width="200px"
              alt="{{ current_user.first_name }} {{ current_user.last_name }}">
-        <p><a href="{% url 'accounts:set_avavtar' %}">Change</a></p>
-        <br><br>
-        <form method="POST" action="{% url 'accounts:profile' %}" enctype="multipart/form-data">
-            {% csrf_token %}
-            {{ avatar_form.as_p }}
-            <input type="submit" class="button-primary" value="Upload image">
-        </form>
-        <hr>
+    <p class="mt-4 mb-0"><a class="button button-primary btn-sm px-4 py-2 e-button"
+               href="{% url 'accounts:set_avavtar' %}" role="button">Choose profile image</a></p>
+    <p class="mt-4 mb-0"><a class="button button-primary btn-sm px-4 py-2 e-button"
+               href="{% url 'accounts:edit_profile' %}" role="button">Edit profile</a></p>
+        <hr class="mt-2">
         <h4 class="mt-5 mb-2">Username</h4>
         <p><span class="text-light-green">{{ current_user.username }}</span></p>
         <h4 class="mt-5 mb-2">Email</h4>
