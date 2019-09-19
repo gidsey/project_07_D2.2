@@ -5,18 +5,19 @@
 {% block title %}Set Avatar | {{ current_user.first_name }} {{ current_user.last_name }}{% endblock %}
 
 {% block body %}
-<div class="container">
+    <div class="container">
         <h1 class="display-3 mb-2">{{ current_user.first_name }} {{ current_user.last_name }}</h1>
-        {%  if not current_user.profile.avatar.url %}
-        <img class="mt-4" src="/media/placeholder/default.png" width="200px"
-             alt="Default Avatar">
-        {%  endif %}
-        <img class="mt-4" src="{{ current_user.profile.avatar.url }}" width="200px"
+        {% if not current_user.profile.avatar.url %}
+            <img class="mt-4" src="/media/placeholder/default.png" alt="Default Avatar">
+        {% endif %}
+        <img class="mt-4 img-fluid" src="{{ current_user.profile.avatar.url }}"
              alt="{{ current_user.first_name }} {{ current_user.last_name }}">
-<form method="POST" action="{% url 'accounts:set_avavtar' %}" enctype="multipart/form-data">
+
+
+        <form method="POST" action="{% url 'accounts:set_avavtar' %}" enctype="multipart/form-data">
             {% csrf_token %}
             {{ avatar_form.as_p }}
             <input type="submit" class="button-primary" value="Upload image">
         </form>
-</div>
+    </div>
 {% endblock %}
