@@ -178,3 +178,12 @@ def change_password(request):
         'current_user': user,
         'change_password_form': change_password_form,
     })
+
+
+@login_required(login_url='accounts/sign_in/')
+def set_avatar(request):
+    """Set or edit the avatar image."""
+    user = request.user
+    return  render(request, 'accounts/set_avatar.html', {
+        'current_user': user,
+    })

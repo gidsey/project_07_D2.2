@@ -10,6 +10,8 @@
         {%  endif %}
         <img class="mt-4" src="{{ current_user.profile.avatar.url }}" width="200px"
              alt="{{ current_user.first_name }} {{ current_user.last_name }}">
+        <p><a href="{% url 'accounts:set_avavtar' %}">Change</a></p>
+        <br><br>
         <form method="POST" action="{% url 'accounts:profile' %}" enctype="multipart/form-data">
             {% csrf_token %}
             {{ avatar_form.as_p }}
