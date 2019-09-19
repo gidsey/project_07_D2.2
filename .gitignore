@@ -5,3 +5,4 @@ venv
 extra_credit_image_editor
 
 */__pycache__
+*/*/__pycache__
