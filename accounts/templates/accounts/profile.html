@@ -5,10 +5,10 @@
     <div class="container seventy">
         <h1 class="display-3 mb-2">{{ current_user.first_name }} {{ current_user.last_name }}</h1>
         {%  if not current_user.profile.avatar.url %}
-        <img class="mt-4" src="/media/placeholder/default.png" width="200px"
+        <img class="img-thumbnail mt-4" src="/media/placeholder/default.png" width="200px"
              alt="Default Avatar">
         {%  endif %}
-        <img class="mt-4" src="{{ current_user.profile.avatar.url }}" width="200px"
+        <img class="img-thumbnail mt-4" src="{{ current_user.profile.avatar.url }}" width="200px"
              alt="{{ current_user.first_name }} {{ current_user.last_name }}">
     <p class="mt-4 mb-0"><a class="button button-primary btn-sm px-4 py-2 e-button"
                href="{% url 'accounts:set_avavtar' %}" role="button">Change profile image</a></p>

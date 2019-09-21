@@ -12,5 +12,8 @@ urlpatterns = [
     path('profile/edit/', views.edit_profile, name='edit_profile'),
     path('profile/', views.profile, name='profile'),
     path('profile/change_password', views.change_password, name='change_password'),
+
     path('profile/set_avatar', views.set_avatar, name='set_avavtar'),
+    path('profile/rotate_90_cc', views.rotate_90_cc, name='rotate_90_cc'),
+
 ]

@@ -5,10 +5,12 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.urls import reverse
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
+from random import randint
 
 from . import forms
 from . import models
 
+from PIL import Image
 
 def sign_in(request):
     form = AuthenticationForm()
@@ -175,9 +177,27 @@ def set_avatar(request):
             messages.success(request,
                              "Avatar uploaded successully."
                              )
-        return HttpResponseRedirect(reverse('accounts:profile'))
+        return HttpResponseRedirect(reverse('accounts:set_avavtar'))
 
     return render(request, 'accounts/set_avatar.html', {
         'current_user': user,
         'avatar_form': avatar_form,
+    })
+
+
+@login_required(login_url='accounts/sign_in/')
+def rotate_90_cc(request):
+    """Rotate the image 90deg counter-clockwise."""
+    user = request.user
+    user.profile = request.user.profile
+    avatar_form = forms.AvatarForm()
+
+    # avatar = Image.open(user.profile.avatar)
+    # avatar.show()
+
+    print (ran)
+    return render(request, 'accounts/set_avatar.html', {
+        'current_user': user,
+        'avatar_form': avatar_form,
+        'ran': ran,
     })
