@@ -5,12 +5,13 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.urls import reverse
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
-from random import randint
+from django.conf import settings
 
 from . import forms
 from . import models
 
 from PIL import Image
+
 
 def sign_in(request):
     form = AuthenticationForm()
@@ -161,6 +162,7 @@ def change_password(request):
     })
 
 
+
 @login_required(login_url='accounts/sign_in/')
 def set_avatar(request):
     """Set or edit the avatar image."""
@@ -185,19 +187,28 @@ def set_avatar(request):
     })
 
 
+
+
 @login_required(login_url='accounts/sign_in/')
 def rotate_90_cc(request):
+    click = 0
+
     """Rotate the image 90deg counter-clockwise."""
     user = request.user
     user.profile = request.user.profile
     avatar_form = forms.AvatarForm()
 
-    # avatar = Image.open(user.profile.avatar)
-    # avatar.show()
+    if click >= 0:
+        click += 1
 
-    print (ran)
+    avatar = Image.open(user.profile.avatar)
+
+    avatar_90_cc = '/{0}/{1}/{2}'.format('avatars', user, 'rotated_90_cc.jpg')
+    tmp_file = settings.MEDIA_ROOT + avatar_90_cc
+    avatar.rotate(click*90, resample=3, expand=True).save(tmp_file)
+
     return render(request, 'accounts/set_avatar.html', {
         'current_user': user,
         'avatar_form': avatar_form,
-        'ran': ran,
+        'avatar_90_cc': avatar_90_cc,
     })
