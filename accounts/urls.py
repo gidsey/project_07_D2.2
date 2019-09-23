@@ -1,6 +1,7 @@
 from django.urls import path
 
 from . import views
+from . import avatar
 
 app_name = "accounts"  # required when using namespace in URLS
 
@@ -13,7 +14,7 @@ urlpatterns = [
     path('profile/', views.profile, name='profile'),
     path('profile/change_password', views.change_password, name='change_password'),
 
-    path('profile/set_avatar', views.set_avatar, name='set_avavtar'),
-    path('profile/rotate_90_cc', views.rotate_90_cc, name='rotate_90_cc'),
+    path('profile/set_avatar', avatar.set_avatar, name='set_avavtar'),
+    path('profile/rotate_90_cc', avatar.rotate_90_cc, name='rotate_90_cc'),
 
 ]

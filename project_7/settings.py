@@ -127,6 +127,10 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
+# Set the default Login URL
+LOGIN_URL = '/accounts/sign_in/'
+LOGOUT_REDIRECT_URL = '/accounts/sign_in/'
+
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'assets'),
