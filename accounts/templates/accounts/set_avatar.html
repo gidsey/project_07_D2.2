@@ -9,37 +9,39 @@
         <h1 class="display-3 mb-2">{{ current_user.first_name }} {{ current_user.last_name }}</h1>
 
         <div class="mt-4 img-editor-control">
-
-            {% if not current_user.profile.avatar.url %}
-                <img class="img-fluid img-edit" src="/media/placeholder/default.png" alt="Default Avatar">
-            {% endif %}
-
-
-            {%  if avatar_90_cc %}
-             <img class="img-edit pt-4" src="/media{{ avatar_90_cc }}"
-                 alt="{{ current_user.first_name }} {{ current_user.last_name }}">
-
-            {% else %}
-            <img class="img-edit pt-4" src="{{ current_user.profile.avatar.url }}"
-                 alt="{{ current_user.first_name }} {{ current_user.last_name }}">
-         {% endif %}
+            <div class="img-area">
+                {% if not current_user.profile.avatar.url %}
+                    <img class="img-fluid img-edit" src="/media/placeholder/default.png" alt="Default Avatar">
+                {% endif %}
 
 
+                {% if avatar_90_cc %}
+                    <img class="img-edit pt-4" src="/media{{ avatar_90_cc }}"
+                         alt="{{ current_user.first_name }} {{ current_user.last_name }}">
 
-        <div class="controls">
-            <ul>
-                <li><a href="#">CROP</a></li>
-                <li><a href="{% url 'accounts:rotate_90_cc' %}">ROTATE 90 COUNTER-CLOCKWISE</a></li>
-                <li><a href="#">ROTATE 90 CLOCKWISE</a></li>
-                <li><a href="#">SAVE</a></li>
-                <li><a href="#">CANCEL</a></li>
-                <li><a href="#">DOWNLOAD</a></li>
-            </ul>
+                {% else %}
+                    <img class="img-edit pt-4" src="{{ current_user.profile.avatar.url }}"
+                         alt="{{ current_user.first_name }} {{ current_user.last_name }}" id="target">
+                    <script>
+                        Jcrop.attach('target');
+                    </script>
+                {% endif %}
+            </div>
+
+
+            <div class="controls">
+                <ul>
+                    <li><a href="#">CROP</a></li>
+                    <li><a href="{% url 'accounts:rotate_90_cc' %}">ROTATE 90 COUNTER-CLOCKWISE</a></li>
+                    <li><a href="#">ROTATE 90 CLOCKWISE</a></li>
+                    <li><a href="#">SAVE</a></li>
+                    <li><a href="#">CANCEL</a></li>
+                    <li><a href="#">DOWNLOAD</a></li>
+                </ul>
+            </div>
         </div>
 
-        </div>
-
-    <br><br>
+        <br><br>
         <form method="POST" action="{% url 'accounts:set_avavtar' %}" enctype="multipart/form-data">
             {% csrf_token %}
             {{ avatar_form.as_p }}
@@ -47,6 +49,4 @@
         </form>
 
     </div>
-
-
 {% endblock %}

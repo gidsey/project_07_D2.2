@@ -82,13 +82,18 @@ a.e-button:hover, a.e-button:active, a.e-button:visited {
     display: block;
     width: 100%;
     height: 600px;
-    background-color: #999999;
+    background-color: #323232;
 }
 
 .img-edit {
     display: block;
     max-width: 500px;
+    max-height: 500px;
     margin: 20px auto 0;
+}
+
+.img-area {
+    height: 520px;
 }
 
 .controls {
@@ -99,7 +104,7 @@ a.e-button:hover, a.e-button:active, a.e-button:visited {
 }
 .controls ul {
     width: 650px;
-    margin: 20px auto;
+    margin: 0 auto;
     list-style: none;
     padding: 0;
     overflow: hidden;
