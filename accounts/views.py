@@ -139,7 +139,6 @@ def edit_profile(request):
     })
 
 
-# @login_required(login_url='accounts/sign_in/')
 @login_required
 def change_password(request):
     """Define the change password view."""

@@ -39,21 +39,17 @@ def set_avatar(request):
 
 @login_required
 def rotate_90_cc(request):
-    click = 0
 
     """Rotate the image 90deg counter-clockwise."""
     user = request.user
     user.profile = request.user.profile
     avatar_form = forms.AvatarForm()
 
-    if click >= 0:
-        click += 1
-
     avatar = Image.open(user.profile.avatar)
 
     avatar_90_cc = '/{0}/{1}/{2}'.format('avatars', user, 'rotated_90_cc.jpg')
     tmp_file = settings.MEDIA_ROOT + avatar_90_cc
-    avatar.rotate(click*90, resample=3, expand=True).save(tmp_file)
+    avatar.rotate(90, resample=3, expand=True).save(tmp_file)
 
     return render(request, 'accounts/set_avatar.html', {
         'current_user': user,
