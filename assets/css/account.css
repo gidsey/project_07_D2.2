@@ -79,25 +79,21 @@ a.e-button:hover, a.e-button:active, a.e-button:visited {
 /*Image Editor styles*/
 
 .img-editor-control {
-    display: block;
+    position: relative;
     width: 100%;
     height: 600px;
     background-color: #323232;
+    z-index: -2;
 }
 
 .img-edit {
-    display: block;
     max-width: 500px;
     max-height: 500px;
-    margin: 20px auto 0;
+    /*margin: 20px auto 0;*/
 }
 
-.img-area {
-    height: 520px;
-}
 
 .controls {
-    display: block;
     background-color: #eee;
     width: 90%;
     margin: 0 auto;
