@@ -1,6 +1,4 @@
 {% extends "layout.html" %}
-{#{% load widget_tweaks %}#}
-{#{% load accounts_extras %}#}
 
 {% block title %}Set Avatar | {{ current_user.first_name }} {{ current_user.last_name }}{% endblock %}
 
@@ -26,17 +24,11 @@
 
                     <script>
                         const jcp = Jcrop.attach('target', {multi: false});
-
                         const rect = Jcrop.Rect.fromPoints([10, 10], [300, 300]);
-
                         const crop = jcp.newWidget(rect, {
                             aspectRatio: rect.aspect,
                             canRemove: false
                         });
-
-
-
-
                     </script>
 
                 {% endif %}
@@ -45,7 +37,7 @@
 
         <div class="controls">
             <ul>
-                <li><button id="crop_button">Crop</button></li>
+                <li><button class="button button-primary btn-sm px-4 mt-4 py-2 e-button" id="crop_button">Crop</button></li>
                 <li><a href="{% url 'accounts:rotate_90_cc' %}">ROTATE 90 COUNTER-CLOCKWISE</a></li>
                 <li><a href="#">ROTATE 90 CLOCKWISE</a></li>
                 <li><a href="#">SAVE</a></li>
