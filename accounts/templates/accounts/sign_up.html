@@ -42,7 +42,9 @@
                             {% render_field field class="form-control is-valid" %}
                         {% endif %}
                     {% else %}
+                        <div>
                         {% render_field field class="form-control" %}
+                        </div>
                     {% endif %}
 
                     {% if field.help_text %}

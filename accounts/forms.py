@@ -52,7 +52,6 @@ class EditUserForm(forms.ModelForm):
     first_name = forms.CharField(required=True)
     last_name = forms.CharField(required=True)
 
-
     class Meta:
         model = User
         fields = (
@@ -107,7 +106,6 @@ class ProfileForm(forms.ModelForm):
     )
 
     bio = TextField(validators=[clean_bio])
-
 
     class Meta:
         model = models.Profile

@@ -50,10 +50,12 @@ $(document).ready(function () {
         return "<a class='button " + state + "'>" + text + "</div>";
     });
 
-    // Password Strength Meter
+    // Password Strength Meter for Change Password Page
     $('#id_new_password').password({
-        minimumLength: 14, // minimum password length (below this threshold, the score is 0)
-        showPercent: false
+        field: "#name-check", // select the match field (selector or jQuery instance) for better password checks
+        fieldPartialMatch: true,
+        containsField: 'The password contains your name',
+        minimumLength: 14 // minimum password length (below this threshold, the score is 0)
     });
 
     $('#id_new_password').on('password.score', (e, score) => {
@@ -65,5 +67,26 @@ $(document).ready(function () {
         console.log('Called every time the text is changed (less updated than password.score)')
         console.log('Current message is %s with a score of %d', text, score)
     })
+
+
+        // Password Strength Meter Create Account Page
+    $('#id_password1').password({
+        field: false, // select the match field (selector or jQuery instance) for better password checks
+        fieldPartialMatch: true,
+        containsField: 'The password contains your name',
+        minimumLength: 14 // minimum password length (below this threshold, the score is 0)
+    });
+
+    $('#id_password1').on('password.score', (e, score) => {
+        console.log('Called every time a new score is calculated (this means on every keyup)')
+        console.log('Current score is %d', score)
+    })
+
+    $('#id_password1').on('password.text', (e, text, score) => {
+        console.log('Called every time the text is changed (less updated than password.score)')
+        console.log('Current message is %s with a score of %d', text, score)
+    })
+
+
 
 });

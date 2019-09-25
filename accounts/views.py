@@ -149,7 +149,7 @@ def change_password(request):
         if change_password_form.is_valid():
             user.set_password(change_password_form.cleaned_data['new_password'])
             user.save()
-            update_session_auth_hash(request, user)
+            update_session_auth_hash(request, user)  # sign the user back in
             messages.success(request, "Password updated successfully.")
             return HttpResponseRedirect(reverse('accounts:profile'))
     return render(request, 'accounts/change_password.html', {
