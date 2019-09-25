@@ -18,7 +18,7 @@ def set_avatar(request):
     """Set or edit the avatar image."""
     user = request.user
     avatar_form = forms.AvatarForm()
-    if request.method == 'POST':
+    if request.method == 'POST' and request.FILES:
         try:
             user.profile = request.user.profile  # Set Profile instance for the current user
         except models.Profile.DoesNotExist:

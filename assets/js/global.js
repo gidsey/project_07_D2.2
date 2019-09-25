@@ -69,7 +69,7 @@ $(document).ready(function () {
     })
 
 
-        // Password Strength Meter Create Account Page
+    // Password Strength Meter Create Account Page
     $('#id_password1').password({
         field: false, // select the match field (selector or jQuery instance) for better password checks
         fieldPartialMatch: true,
@@ -86,6 +86,17 @@ $(document).ready(function () {
         console.log('Called every time the text is changed (less updated than password.score)')
         console.log('Current message is %s with a score of %d', text, score)
     })
+
+
+    //  Datepicker
+    $(function () {
+        $("#id_date_of_birth").datepicker({
+            format: 'YYYY-MM-DD',
+        });
+    });
+
+
+
 
 
 
