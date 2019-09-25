@@ -20,17 +20,7 @@
                     Image width: {{ current_user.profile.avatar_width }}<br>
                     Image height: {{ current_user.profile.avatar_height }}
                     <img class="img-edit" src="{{ current_user.profile.avatar.url }}"
-                         alt="{{ current_user.first_name }} {{ current_user.last_name }}" id="target">
-
-                    <script>
-                        const jcp = Jcrop.attach('target', {multi: false});
-                        const rect = Jcrop.Rect.fromPoints([10, 10], [300, 300]);
-                        const crop = jcp.newWidget(rect, {
-                            aspectRatio: rect.aspect,
-                            canRemove: false
-                        });
-                    </script>
-
+                         alt="{{ current_user.first_name }} {{ current_user.last_name }}" id="avatar_original">
                 {% endif %}
             </div>
 

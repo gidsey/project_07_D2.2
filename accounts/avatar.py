@@ -52,7 +52,6 @@ def rotate_90_cc(request):
     avatar.rotate(rotation, resample=3, expand=True).save(tmp_file)
     request.session['rotation'] += 90
 
-
     return render(request, 'accounts/set_avatar.html', {
         'current_user': user,
         'avatar_form': avatar_form,
