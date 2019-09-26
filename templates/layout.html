@@ -18,13 +18,13 @@
     <link href='https://fonts.googleapis.com/css?family=Cousine'
           rel='stylesheet' type='text/css'>
 
-    <!-- CSS
+    <link rel="stylesheet" href="{% static "css/global.css" %}">
+    <!-- jQuery
     –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-          crossorigin="anonymous">
 
-
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+            crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
             integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
             crossorigin="anonymous"></script>
@@ -33,16 +33,15 @@
     –––––––––––––––––––––––––––––––––––––––––––––––––– -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
 
-    <!-- jQuery & JS
+
+    <!-- JavaScript & CSS
     –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
-            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-            crossorigin="anonymous"></script>
+
     <script type="text/javascript"
             src="{% static "js/autogrow.js" %}"></script>
     <script type="text/javascript" src="{% static "js/global.js" %}"></script>
+
 
     <!-- Bootstrap JS
     –––––––––––––––––––––––––––––––––––––––––––––––––– -->
@@ -50,10 +49,6 @@
             integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
             crossorigin="anonymous"></script>
 
-    <!-- Summernote CSS & JS
-    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-    <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote.css" rel="stylesheet">
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote.js"></script>
 
     <!-- Datepicker CSS & JS
       –––––––––––––––––––––––––––––––––––––––––––––––––– -->
@@ -64,11 +59,19 @@
 
     <!-- Jcrop
       –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-    <link rel="stylesheet" href="https://unpkg.com/jcrop/dist/jcrop.css">
-    <script src="https://unpkg.com/jcrop"></script>
+{#    <link rel="stylesheet" href="https://unpkg.com/jcrop/dist/jcrop.css">#}
+{#    <script src="https://unpkg.com/jcrop"></script>#}
 
 {#    <script type="text/javascript" src="{% static "js/jcrop.js" %}"></script>#}
 {#    <link href="{% static "css/jcrop.css" %}" rel="stylesheet" type="text/css" />#}
+
+
+  <!-- jquery cropper
+      –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <script type="text/javascript" src="{% static "js/cropper.min.js" %}"></script>
+    <script type="text/javascript" src="{% static "js/jquery-cropper.min.js" %}"></script>
+    <link rel="stylesheet" href="{% static "css/cropper.min.css" %}">
+
 
 
     <!-- Password Strength Meter CSS & JS
@@ -76,9 +79,18 @@
     <link rel="stylesheet" href="{% static "css/password.min.css" %}">
     <script type="text/javascript" src="{% static "js/password.min.js" %}"></script>
 
+
+    <!-- Summernote CSS & JS
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+{#    <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote.css" rel="stylesheet">#}
+{#    <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote.js"></script>#}
+  <script type="text/javascript" src="{% static "js/summernote-bs4.min.js" %}"></script>
+{# <script type="text/javascript" src="{% static "js/summernote-bs4.js.map" %}"></script>#}
+    <link rel="stylesheet" href="{% static "css/summernote-bs4.min.css" %}">
+
+
     <!-- Custom & local css
     –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-    <link rel="stylesheet" href="{% static "css/global.css" %}">
     <link rel="stylesheet" href="{% static "css/account.css" %}">
 
     <!-- Favicon
@@ -133,5 +145,7 @@
 
     {% block body %}{% endblock %}
 </div>
+    {% block javascript %}
+    {% endblock %}
 </body>
 </html>

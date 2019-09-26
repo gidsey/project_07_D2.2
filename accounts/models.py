@@ -25,17 +25,6 @@ class Profile(models.Model):
     )
     avatar_width = models.PositiveIntegerField(blank=True, default=0)
     avatar_height = models.PositiveIntegerField(blank=True, default=0)
-    avatar_crop = models.ImageField(
-        upload_to=user_directory_path,
-        max_length=255,
-        null=True,
-        blank=True,
-        default='',
-        width_field='avatar_crop_width',
-        height_field='avatar__crop_height',
-    )
-    avatar_crop_width = models.PositiveIntegerField(blank=True, default=0)
-    avatar_crop_height = models.PositiveIntegerField(blank=True, default=0)
     city = models.CharField(max_length=100, null=True)
     county = models.CharField(max_length=255, blank=True)  # Optional field
     country = models.CharField(max_length=100, null=True)

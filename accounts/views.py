@@ -88,14 +88,6 @@ def sign_out(request):
 
 
 @login_required
-def profile(request):
-    """Define the Profile view"""
-    return render(request, 'accounts/profile.html', {
-        'current_user': request.user,
-    })
-
-
-@login_required
 def edit_profile(request):
     """Define the Edit Profile view"""
     user = request.user
@@ -155,6 +147,26 @@ def change_password(request):
     return render(request, 'accounts/change_password.html', {
         'current_user': user,
         'change_password_form': change_password_form,
+    })
+
+
+@login_required
+def profile(request):
+    """Define the Profile view"""
+    user_profile = models.Profile.objects.all()
+
+    if request.method == 'POST':
+        form = forms.AvatarForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('accounts:profile'))
+    else:
+        form = forms.AvatarForm()
+
+    return render(request, 'accounts/profile.html', {
+        'current_user': request.user,
+        'form': form,
+        'user_profile': user_profile,
     })
 
 
