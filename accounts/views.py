@@ -9,6 +9,7 @@ from django.shortcuts import render
 from . import forms
 from . import models
 
+
 def sign_in(request):
     form = AuthenticationForm()
     if request.method == 'POST':
@@ -153,10 +154,9 @@ def change_password(request):
 @login_required
 def profile(request):
     """Define the Profile view"""
-    user_profile = models.Profile.objects.all()
-
+    photos = models.Profile.objects.all()
     if request.method == 'POST':
-        form = forms.AvatarForm(request.POST, request.FILES)
+        form = forms.AvatarForm(instance=request.user, data=request.POST, files=request.FILES)
         if form.is_valid():
             form.save()
             return HttpResponseRedirect(reverse('accounts:profile'))
@@ -166,7 +166,7 @@ def profile(request):
     return render(request, 'accounts/profile.html', {
         'current_user': request.user,
         'form': form,
-        'user_profile': user_profile,
+        'photos': photos,
     })
 
 

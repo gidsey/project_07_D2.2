@@ -25,6 +25,7 @@ class Profile(models.Model):
     )
     avatar_width = models.PositiveIntegerField(blank=True, default=0)
     avatar_height = models.PositiveIntegerField(blank=True, default=0)
+    file = models.ImageField()
     city = models.CharField(max_length=100, null=True)
     county = models.CharField(max_length=255, blank=True)  # Optional field
     country = models.CharField(max_length=100, null=True)
