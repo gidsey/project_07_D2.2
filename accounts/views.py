@@ -156,7 +156,7 @@ def profile(request):
     """Define the Profile view"""
     photos = models.Profile.objects.all()
     if request.method == 'POST':
-        form = forms.AvatarForm(instance=request.user, data=request.POST, files=request.FILES)
+        form = forms.AvatarForm(data=request.POST, files=request.FILES)
         if form.is_valid():
             form.save()
             return HttpResponseRedirect(reverse('accounts:profile'))
