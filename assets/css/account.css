@@ -47,8 +47,12 @@ a.e-button:hover, a.e-button:active, a.e-button:visited {
 /*Text Editor Sytles*/
 .clean-button button {
     box-shadow: none;
+    color: black;
 }
 
+.modal button {
+    box-shadow: none;
+}
 
 .wsiwyg-invalid-message {
     color: rgb(220, 53, 69);
