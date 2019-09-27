@@ -163,7 +163,7 @@ class AvatarForm(forms.ModelForm):
         resized_image.save(photo.file.path)
 
         return photo
-# ---/Avatar form
+# # ---/Avatar form
 
 
 # ---Change Password form

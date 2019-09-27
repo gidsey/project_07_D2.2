@@ -154,9 +154,10 @@ def change_password(request):
 @login_required
 def profile(request):
     """Define the Profile view"""
-    photos = models.Profile.objects.all()
+    user = request.user
+    user.profile = request.user.profile
     if request.method == 'POST':
-        form = forms.AvatarForm(data=request.POST, files=request.FILES)
+        form = forms.AvatarForm(instance=user.profile, data=request.POST, files=request.FILES)
         if form.is_valid():
             form.save()
             return HttpResponseRedirect(reverse('accounts:profile'))
@@ -166,7 +167,6 @@ def profile(request):
     return render(request, 'accounts/profile.html', {
         'current_user': request.user,
         'form': form,
-        'photos': photos,
     })
 
 
