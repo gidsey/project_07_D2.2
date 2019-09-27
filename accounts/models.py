@@ -20,12 +20,7 @@ class Profile(models.Model):
         null=True,
         blank=True,
         default='placeholder/default.png',
-        width_field='avatar_width',
-        height_field='avatar_height',
     )
-    avatar_width = models.PositiveIntegerField(blank=True, default=0)
-    avatar_height = models.PositiveIntegerField(blank=True, default=0)
-    file = models.ImageField()
     city = models.CharField(max_length=100, null=True)
     county = models.CharField(max_length=255, blank=True)  # Optional field
     country = models.CharField(max_length=100, null=True)
