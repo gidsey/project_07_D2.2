@@ -140,10 +140,11 @@ class AvatarForm(forms.ModelForm):
     y = forms.FloatField(widget=forms.HiddenInput())
     width = forms.FloatField(widget=forms.HiddenInput())
     height = forms.FloatField(widget=forms.HiddenInput())
+    rotate = forms.FloatField(widget=forms.HiddenInput())
 
     class Meta:
         model = models.Profile
-        fields = ('avatar', 'x', 'y', 'width', 'height', )
+        fields = ('avatar', 'x', 'y', 'width', 'height', 'rotate')
         labels = {'avatar': '', }
         widgets = {
             'avatar': forms.FileInput(attrs={
@@ -157,12 +158,15 @@ class AvatarForm(forms.ModelForm):
         y = self.cleaned_data.get('y')
         w = self.cleaned_data.get('width')
         h = self.cleaned_data.get('height')
+        r = self.cleaned_data.get('rotate')
+
+        r = -r  # swap negative to positive and vise versa
 
         image = Image.open(photo.avatar)
-        cropped_image = image.crop((x, y, w + x, h + y))
+        rotated_image = image.rotate(r, expand=True)
+        cropped_image = rotated_image.crop((x, y, w + x, h + y))
         resized_image = cropped_image.resize((400, 400), Image.ANTIALIAS)
         resized_image.save(photo.avatar.path)
-
 
         return photo
 # # ---/Avatar form

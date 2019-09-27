@@ -30,7 +30,7 @@
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
-                        <h4 class="modal-title">Crop the photo</h4>
+                        <h4 class="modal-title">Choose your crop</h4>
                     </div>
                     <div class="modal-body">
                         <div>
@@ -45,9 +45,15 @@
                             <button type="button" class="btn btn-default js-zoom-out">
                                 <span class="glyphicon glyphicon-zoom-out"></span>
                             </button>
+                            <button type="button" class="btn btn-default js-rotate-clockwise">
+                                <span class="glyphicon glyphicon-repeat"></span>
+                            </button>
+                            <button type="button" class="btn btn-default js-rotate-counter-clockwise">
+                                <span class="glyphicon glyphicon-repeat flip"></span>
+                            </button>
                         </div>
                         <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                        <button type="button" class="btn btn-primary js-crop-and-upload">Crop and upload</button>
+                        <button type="button" class="btn btn-primary js-crop-and-upload">Save</button>
                     </div>
                 </div>
             </div>
@@ -131,6 +137,14 @@
                 $image.cropper("zoom", -0.1);
             });
 
+            $(".js-rotate-clockwise").click(function () {
+                $image.cropper("rotate", 11.25);
+            });
+
+            $(".js-rotate-counter-clockwise").click(function () {
+                $image.cropper("rotate", -11.25);
+            });
+
             /* SCRIPT TO COLLECT THE DATA AND POST TO THE SERVER */
             $(".js-crop-and-upload").click(function () {
                 var cropData = $image.cropper("getData");
@@ -138,6 +152,7 @@
                 $("#id_y").val(cropData["y"]);
                 $("#id_height").val(cropData["height"]);
                 $("#id_width").val(cropData["width"]);
+                $("#id_rotate").val(cropData["rotate"]);
                 $("#formUpload").submit();
             });
         });
