@@ -1,8 +1,10 @@
 {% extends "layout.html" %}
+{% load static from staticfiles %}
 {% load widget_tweaks %}
 {% load accounts_extras %}
-
-
+{% block css %}
+    <link rel="stylesheet" href="{% static "css/password.min.css" %}">
+{% endblock %}
 {% block title %}Sign Up | {{ super }}{% endblock %}
 
 {% block body %}
@@ -43,7 +45,7 @@
                         {% endif %}
                     {% else %}
                         <div>
-                        {% render_field field class="form-control" %}
+                            {% render_field field class="form-control" %}
                         </div>
                     {% endif %}
 
