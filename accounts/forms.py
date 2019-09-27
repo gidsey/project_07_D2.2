@@ -143,9 +143,9 @@ class AvatarForm(forms.ModelForm):
 
     class Meta:
         model = models.Profile
-        fields = ('file', 'x', 'y', 'width', 'height', )
+        fields = ('avatar', 'x', 'y', 'width', 'height', )
         widgets = {
-            'file': forms.FileInput(attrs={
+            'avatar': forms.FileInput(attrs={
                 'accept': 'image/*'  # this is not an actual validation! don't rely on that!
             })
         }
@@ -160,7 +160,8 @@ class AvatarForm(forms.ModelForm):
         image = Image.open(photo.file)
         cropped_image = image.crop((x, y, w + x, h + y))
         resized_image = cropped_image.resize((200, 200), Image.ANTIALIAS)
-        resized_image.save(photo.file.path)
+        resized_image.save(photo.avatar.path)
+
 
         return photo
 # # ---/Avatar form
