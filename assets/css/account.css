@@ -19,12 +19,18 @@
 
 .e-button {
     position: relative;
-    font-size: 1.2rem;
+    font-size: 1.2rem !important;
     top: -3px;
     left: 2px;
     font-family: "Work Sans", sans-serif;
     font-weight: normal;
 }
+
+.sudo_btn {
+    padding: 0.9rem 1rem !important;
+    border-radius: 3px;
+}
+
 
 a.e-button:hover, a.e-button:active, a.e-button:visited {
     text-decoration: none;
@@ -47,12 +53,25 @@ a.e-button:hover, a.e-button:active, a.e-button:visited {
 /*Text Editor Sytles*/
 .clean-button button {
     box-shadow: none;
-    color: black;
+
 }
 
 .modal button {
     box-shadow: none;
 }
+
+button {
+    box-shadow: none;
+    border-radius: 0;
+    margin: 2px;
+    padding: 8px 12px 6px 12px!important;
+    font-size: 1rem !important
+}
+
+.note-toolbar .note-color .dropdown-toggle {
+    padding-left: 7px !important;
+}
+
 
 .wsiwyg-invalid-message {
     color: rgb(220, 53, 69);
@@ -69,59 +88,6 @@ a.e-button:hover, a.e-button:active, a.e-button:visited {
     border: 1px solid #28a745;
 }
 
-.panel {
-    margin-bottom: 0; /* Set the bottom margin on the WYSIWYG Editor */
-}
-
-.note-toolbar {
-    z-index: auto; /* Stop the WYSIWYG dropdowns overlapping the second editor */
-}
-
-.dropdown-toggle::after {
-    display: none; /* Hide the second unnecessary arrrow */
-}
-
-/*Image Editor styles*/
-
-.img-editor-control {
-    position: relative;
-    width: 100%;
-    height: 600px;
-    background-color: #323232;
-    z-index: -2;
-}
-
-.img-edit {
-    max-width: 500px;
-    max-height: 500px;
-    /*margin: 20px auto 0;*/
-}
-
-
-.controls {
-    background-color: #eee;
-    width: 90%;
-    margin: 0 auto;
-}
-.controls ul {
-    width: 650px;
-    margin: 0 auto;
-    list-style: none;
-    padding: 0;
-    overflow: hidden;
-}
-
-.controls li {
-    float: left;
-}
-
-.controls li a {
-    display: block;
-    color: black;
-    font-size: 1.2rem;
-    padding: 10px;
-    margin-top: 12px;
-}
 
 .flip {
   -webkit-transform: scaleX(-1);

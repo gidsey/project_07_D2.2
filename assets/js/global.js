@@ -95,4 +95,9 @@ $(document).ready(function () {
         });
     });
 
+    // Summernote (multiple editors)
+    $(document).ready(function () {
+        $('.summernote').summernote();
+    });
+
 });

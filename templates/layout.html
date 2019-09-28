@@ -22,44 +22,43 @@
     –––––––––––––––––––––––––––––––––––––––––––––––––– -->
     <script type="text/javascript" src="{% static "js/jquery-3.1.1.min.js" %}"></script>
 
-    <!-- Bootstrap CSS
+    <!-- Bootstrap CSS & JS
     –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-   <link rel="stylesheet" href="{% static "css/bootstrap.min.css" %}">
+    <link rel="stylesheet" href="{% static "css/bs-4/bootstrap.min.css" %}">
+    <script type="text/javascript" src="{% static "js/bs-4/bootstrap.bundle.min.js" %}"></script>
 
     <!-- JavaScript
     –––––––––––––––––––––––––––––––––––––––––––––––––– -->
     <script type="text/javascript" src="{% static "js/autogrow.js" %}"></script>
     <script type="text/javascript" src="{% static "js/global.js" %}"></script>
 
-    <!-- Bootstrap JS
-    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-    <script type="text/javascript" src="{% static "js/bootstrap.min.js" %}"></script>
 
     <!-- Datepicker CSS & JS
       –––––––––––––––––––––––––––––––––––––––––––––––––– -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.min.js"
             integrity="sha256-/7FLTdzP6CfC1VBAj/rsp3Rinuuu9leMRGd354hvk0k=" crossorigin="anonymous"></script>
 
-      <!-- Password Strength Meter JS
-      –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <!-- Password Strength Meter JS
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
     <script type="text/javascript" src="{% static "js/password.min.js" %}"></script>
 
     <!-- Summernote JS
     –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-    <script type="text/javascript" src="{% static "js/summernote.min.js" %}"></script>
+    <script type="text/javascript" src="{% static "js/bs-4/summernote-bs4.min.js" %}"></script>
 
-  <!-- jquery cropper
-      –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <!-- jquery cropper
+        –––––––––––––––––––––––––––––––––––––––––––––––––– -->
     <script type="text/javascript" src="{% static "js/cropper.min.js" %}"></script>
     <script type="text/javascript" src="{% static "js/jquery-cropper.min.js" %}"></script>
 
-    <!-- Template specific  CSS
-    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-    {%  block css %}{%  endblock %}
 
     <!-- Global CSS
     –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-   <link rel="stylesheet" href="{% static "css/global.css" %}">
+    <link rel="stylesheet" href="{% static "css/global.css" %}">
+
+    <!-- Template specific  CSS
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    {% block css %}{% endblock %}
 
     <!-- Custom css
     –––––––––––––––––––––––––––––––––––––––––––––––––– -->
@@ -116,6 +115,6 @@
     {% endif %}
     {% block body %}{% endblock %}
 </div>
-    {% block javascript %}{% endblock %}
+{% block javascript %}{% endblock %}
 </body>
 </html>
