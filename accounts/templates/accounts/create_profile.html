@@ -5,12 +5,11 @@
 {% block css %}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.min.css"
           integrity="sha256-b88RdwbRJEzRx95nCuuva+hO5ExvXXnpX+78h8DjyOE=" crossorigin="anonymous"/>
-    <link rel="stylesheet" href="{% static "css/summernote.min.css" %}">
+     <link rel="stylesheet" href="{% static "css/bs-4/summernote-bs4.min.css" %}">
 {% endblock %}
 {% block title %}Create Profile | {{ super }}{% endblock %}
 
 {% block body %}
-
     <div class="container">
         <h1 class="display-3 mb-2">Complete your profile</h1>
         <p class="lead font-weight-bolder ml-2">Step 2 of 2</p>
@@ -18,7 +17,6 @@
             {% csrf_token %}
 
             {# profile form #}
-
             {% for hidden_field in profile_form.hidden_fields %}
                 {{ hidden_field }}
             {% endfor %}
