@@ -93,3 +93,15 @@ button {
   -webkit-transform: scaleX(-1);
   transform: scaleX(-1);
 }
+
+.img-icons {
+    font-size: 2rem;
+}
+
+.pink {
+    background-color: hotpink;
+}
+
+.blue {
+    background-color: lightskyblue;
+}
