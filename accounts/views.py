@@ -48,7 +48,7 @@ def sign_up(request):
             login(request, user)
             messages.success(
                 request,
-                "Account setup successully! You've been signed in too."
+                "Account setup successfully! You've been signed in too."
             )
             return HttpResponseRedirect(reverse('accounts:create_profile'))
 
@@ -73,7 +73,7 @@ def create_profile(request):
             profile_form.save()
             messages.success(
                 request,
-                "Profile saved successully."
+                "Profile saved successfully."
             )
             return HttpResponseRedirect(reverse('accounts:profile'))
 
@@ -94,6 +94,7 @@ def edit_profile(request):
     user = request.user
     form = forms.EditUserForm(instance=user)
     email_form = forms.EditEmailForm(instance=user)
+    avatar_form = forms.AvatarForm()
     try:
         user.profile = request.user.profile  # Set Profile instance for the current user
     except models.Profile.DoesNotExist:
@@ -101,20 +102,27 @@ def edit_profile(request):
 
     profile_form = forms.ProfileForm(instance=user.profile)
     if request.method == 'POST':
-        if 'update_name' in request.POST:
+        if 'rotate' in request.POST:
+            avatar_form = forms.AvatarForm(instance=user.profile, data=request.POST, files=request.FILES)
+            if avatar_form.is_valid():
+                avatar_form.save()
+                messages.success(request, "Avatar image updated successfully.")
+                return HttpResponseRedirect(reverse('accounts:profile'))
+
+        elif 'update_name' in request.POST:
             form = forms.EditUserForm(data=request.POST, instance=user)
             profile_form = forms.ProfileForm(data=request.POST, instance=user.profile)
             if form.is_valid() and profile_form.is_valid():
                 form.save()
                 profile_form.save()
-                messages.success(request, "Profile updated successully.")
+                messages.success(request, "Profile updated successfully.")
                 return HttpResponseRedirect(reverse('accounts:profile'))
 
         elif 'update_email' in request.POST:
             email_form = forms.EditEmailForm(data=request.POST, instance=user)
             if email_form.is_valid():
                 email_form.save()
-                messages.success(request, "Email updated successully.")
+                messages.success(request, "Email updated successfully.")
                 return HttpResponseRedirect(reverse('accounts:profile'))
             else:
                 return render(request, 'accounts/edit_profile.html', {
@@ -129,6 +137,7 @@ def edit_profile(request):
         'form': form,
         'email_form': email_form,
         'profile_form':  profile_form,
+        'avatar_form': avatar_form,
     })
 
 
@@ -156,17 +165,16 @@ def profile(request):
     """Define the Profile view"""
     user = request.user
     user.profile = request.user.profile
+    avatar_form = forms.AvatarForm()
     if request.method == 'POST':
-        form = forms.AvatarForm(instance=user.profile, data=request.POST, files=request.FILES)
-        if form.is_valid():
-            form.save()
+        avatar_form = forms.AvatarForm(instance=user.profile, data=request.POST, files=request.FILES)
+        if avatar_form.is_valid():
+            avatar_form.save()
+            messages.success(request, "Avatar image updated successfully.")
             return HttpResponseRedirect(reverse('accounts:profile'))
-    else:
-        form = forms.AvatarForm()
-
     return render(request, 'accounts/profile.html', {
         'current_user': request.user,
-        'form': form,
+        'avatar_form': avatar_form,
     })
 
 
