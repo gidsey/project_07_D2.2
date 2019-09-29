@@ -164,7 +164,10 @@ def change_password(request):
 def profile(request):
     """Define the Profile view"""
     user = request.user
-    user.profile = request.user.profile
+    try:
+        user.profile = request.user.profile  # Set Profile instance for the current user
+    except models.Profile.DoesNotExist:
+        user.profile = models.Profile(user=request.user)  # Set the Profile instance for new user
     avatar_form = forms.AvatarForm()
     if request.method == 'POST':
         avatar_form = forms.AvatarForm(instance=user.profile, data=request.POST, files=request.FILES)
