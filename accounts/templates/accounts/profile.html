@@ -1,6 +1,7 @@
 {% extends 'layout.html' %}
 {% load static from staticfiles %}
-{%  block css %}<link rel="stylesheet" href="{% static "css/cropper.min.css" %}">{%  endblock %}
+{% block css %}
+    <link rel="stylesheet" href="{% static "css/cropper.min.css" %}">{% endblock %}
 {% block title %}View profile | {{ current_user.first_name }} {{ current_user.last_name }}{% endblock %}
 {% block body %}
     <div class="container seventy">
@@ -11,7 +12,7 @@
         {% endif %}
         <img class="img-thumbnail mt-4" src="{{ current_user.profile.avatar.url }}" width="200px"
              alt="{{ current_user.first_name }} {{ current_user.last_name }}">
-         <form method="post" enctype="multipart/form-data" id="formUpload">
+        <form method="post" enctype="multipart/form-data" id="formUpload">
             {% csrf_token %}
             {{ avatar_form.non_field_errors }}
             {% for hidden_field in avatar_form.hidden_fields %}
@@ -29,19 +30,27 @@
         <p><span class="text-light-green">{{ current_user.username }}</span></p>
         <h4 class="mt-5 mb-2">Email</h4>
         <p>{{ current_user.email|urlize }}</p>
-        <h4 class="mt-5 mb-2">City</h4>
-        <p>{{ current_user.profile.city }}</p>
+        {% if current_user.profile.city %}
+            <h4 class="mt-5 mb-2">City</h4>
+            <p>{{ current_user.profile.city }}</p>
+        {% endif %}
         {% if current_user.profile.county %}
             <h4 class="mt-5 mb-2">State / County</h4> <p>{{ current_user.profile.county }}</p>
         {% endif %}
-        <h4 class="mt-5 mb-2">Country</h4>
-        <p>{{ current_user.profile.country }}</p>
-        <h4 class="mt-5 mb-2">Date of birth</h4>
-        <p>{{ current_user.profile.date_of_birth }}</p>
-        <hr>
-        <h4 class="mt-5 mb-2">Bio</h4>
-        <p>{{ current_user.profile.bio|safe }}</p>
-        <hr>
+        {% if current_user.profile.country %}
+            <h4 class="mt-5 mb-2">Country</h4>
+            <p>{{ current_user.profile.country }}</p>
+        {% endif %}
+        {% if current_user.profile.date_of_birth %}
+            <h4 class="mt-5 mb-2">Date of birth</h4>
+            <p>{{ current_user.profile.date_of_birth }}</p>
+        {% endif %}
+        {% if current_user.profile.bio %}
+            <hr>
+            <h4 class="mt-5 mb-2">Bio</h4>
+            <p>{{ current_user.profile.bio|safe }}</p>
+            <hr>
+        {% endif %}
         {% if current_user.profile.interests and current_user.profile.interests != '<br>' %}
             <h4 class="mt-5 mb-2">Interests</h4>
             <p>{{ current_user.profile.interests|safe }}</p>
