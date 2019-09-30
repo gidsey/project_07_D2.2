@@ -13,21 +13,21 @@ A user profile app which includes the following features:
 
 ## Running Locally
 
-` 
+```bash
 git clone https://github.com/gidsey/project_07_D2.2.git
-`
+```
 
-`
+```bash
 pip install -r requirements.txt
-`
+```
   
- `
+```bash
  python manage.py migrate
- `
+```
 
- `
+```bash
  python manage.py runserver
- `
+```
 
 
 ## Requirments
