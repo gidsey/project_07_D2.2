@@ -42,9 +42,9 @@ The project uses Bootstrap 4 for form and presentation styling.
 ## Tests
 The project includes unit tests which cover:
 
-* Anonymous users access to restriced areas
+* Anonymous users access denied to restriced areas
 * User creation
-* Correct template usage for all URLs
+* Template usage for all URLs
 * Chamge Password form
 * Profile form
 
@@ -56,5 +56,5 @@ Icon: person by Guilherme Furtado from [the Noun Project](https://thenounproject
 
 Image editor based on a [tutorial by Vitor Freitas](https://simpleisbetterthancomplex.com/tutorial/2017/03/02/how-to-crop-images-in-a-django-application.html) 
 
-**Project built by Chris Guy, September 2019**
+_Project built by Chris Guy, September 2019_
 
