@@ -1,26 +1,51 @@
 # User Profile with Django
 
-Step to get the project running.
+## Description
 
-1. Use the `requirements.txt` file to install the project dependencies.
+A user profile app which includes the following features:
 
-2. Run your migrations to create the tables in the database.
-   `python manage.py migrate`
+* Extended user profile information
+* Drop-down date picker
+* WYSIWYG editor for test formatting
+* Online image editor for avatar editing
+* Password strength meter
 
-3. Run the server.
-   `python manage.py runserver`
 
+## Running Locally
 
-Once you add a Model with some fields or each time you make changes to the Model, make sure you run:
+` git clone https://github.com/gidsey/project_07_D2.2.git`
 
-`python manage.py makemigrations` to create an initial/new migration file inside the `migrations` folder for that `<app>`. So when you run the `migrate` command it knows how to setup or alter the database tables before data starts getting put in those tables.
+`pip install -r requirements.txt`
+  
+ `python manage.py migrate`
+
+ `python manage.py runserver`
+
 
 ## Requirments
 The project has been updated to run on Django 2.24. 
 See `requirements.txt` for full details of the updated project dependencies.
 
+
 ## Styling
 The project uses Bootstrap 4 for form and presentation styling.
 
+
+## Tests
+The project includes unit tests which cover:
+
+* Anonymous users access to restriced areas
+* User creation
+* Correct template usage for all URLs
+* Chamge Password form
+* Profile form
+
+These tests can be found in the `tests.py` file.
+
+
 ## Attributions
-Icon: person by Guilherme Furtado from the Noun Project.
+Icon: person by Guilherme Furtado from [the Noun Project](https://thenounproject.com/).
+Image editor based on a [tutorial by Vitor Freitas](https://simpleisbetterthancomplex.com/tutorial/2017/03/02/how-to-crop-images-in-a-django-application.html) 
+
+**Project built by Chris Guy, September 2019**
+

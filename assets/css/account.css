@@ -1,4 +1,4 @@
-
+/* Additional form styles */
 .hint {
     display: inline-block;
     position: relative;
@@ -17,64 +17,6 @@
     font-size: 1.6rem;
 }
 
-.e-button {
-    position: relative;
-    font-size: 1.2rem !important;
-    top: -3px;
-    left: 2px;
-    font-family: "Work Sans", sans-serif;
-    font-weight: normal;
-    border-radius: 3px !important;
-}
-
-.sudo_btn {
-    padding: 0.9rem 1rem !important;
-    border-radius: 3px;
-    border: 1px solid #537d7b;
-}
-
-a.e-button:hover, a.e-button:active, a.e-button:visited {
-    text-decoration: none;
-}
-
-.text-light-green {
-    color: rgba(83, 125, 123, .7);
-}
-
-.ninety {
-    width: 90%;
-    float: left;
-}
-
-.seventy {
-    width: 70%;
-    float: left;
-}
-
-/*Text Editor Sytles*/
-.clean-button button {
-    box-shadow: none;
-
-}
-
-.modal button {
-    box-shadow: none;
-}
-
-button {
-    box-shadow: none;
-    border-radius: 3px;
-    margin: 2px;
-    padding: 8px 12px 6px 12px !important;
-    font-size: 1rem !important;
-    transition-property: none !important;
-}
-
-.note-toolbar .note-color .dropdown-toggle {
-    padding-left: 7px !important;
-}
-
-
 .wsiwyg-invalid-message {
     color: rgb(220, 53, 69);
     margin-top: .2rem;
@@ -90,7 +32,69 @@ button {
     border: 1px solid #28a745;
 }
 
+.text-light-green {
+    color: rgba(83, 125, 123, .7);
+}
 
+
+/* Button Sytles */
+button {
+    box-shadow: none;
+    border-radius: 3px;
+    margin: 2px;
+    padding: 8px 12px 6px 12px !important;
+    font-size: 1rem !important;
+    transition-property: none !important;
+}
+
+.e-button {
+    position: relative;
+    font-size: 1.2rem !important;
+    top: -3px;
+    left: 2px;
+    font-family: "Work Sans", sans-serif;
+    font-weight: normal;
+    border-radius: 3px !important;
+}
+
+a.e-button:hover, a.e-button:active, a.e-button:visited {
+    text-decoration: none;
+}
+
+.sudo_btn {
+    padding: 0.9rem 1rem !important;
+    border-radius: 3px;
+    border: 1px solid #537d7b;
+}
+
+.clean-button button {
+    box-shadow: none;
+}
+
+.modal button {
+    box-shadow: none;
+}
+
+
+/* Page Sytles */
+.ninety {
+    width: 90%;
+    float: left;
+}
+
+.seventy {
+    width: 70%;
+    float: left;
+}
+
+
+/* Text Editor Sytles */
+.note-toolbar .note-color .dropdown-toggle {
+    padding-left: 7px !important;
+}
+
+
+/* Image Editor Sytles */
 .flip {
     -webkit-transform: scaleX(-1);
     transform: scaleX(-1);
@@ -109,7 +113,6 @@ button {
 .close-icon {
     font-size: 3rem;
 }
-
 
 .fileUpload {
     position: relative;
