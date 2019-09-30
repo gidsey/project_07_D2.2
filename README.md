@@ -51,10 +51,24 @@ The project includes unit tests which cover:
 These tests can be found in `tests.py`.
 
 
+## Known issues
+
+The jQuery password strength meter does not validate the password to the same standard as the 
+server-side form validation. As a result a password marked as 'Strong' by the password strength
+meter can still fail the strict form vaildation. 
+
+
 ## Attributions
 Icon: person by Guilherme Furtado from [the Noun Project](https://thenounproject.com/).
 
-Image editor based on a [tutorial by Vitor Freitas](https://simpleisbetterthancomplex.com/tutorial/2017/03/02/how-to-crop-images-in-a-django-application.html) 
+WYSIWYG Editor by [Summernote](https://summernote.org/)
+
+Date Picker by [Fengyuan Chen](https://fengyuanchen.github.io/datepicker/) 
+
+Password Strength Meter by [Òscar Casajuana](https://github.com/elboletaire/password-strength-meter) 
+
+Image editor based on a tutorial by [Vitor Freitas](https://simpleisbetterthancomplex.com/tutorial/2017/03/02/how-to-crop-images-in-a-django-application.html)
+
 
 _Project built by Chris Guy, September 2019_
 

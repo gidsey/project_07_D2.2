@@ -148,7 +148,7 @@ class AvatarForm(forms.ModelForm):
         labels = {'avatar': '', }
         widgets = {
             'avatar': forms.FileInput(attrs={
-                'accept': 'image/*'  # this is not an actual validation! don't rely on that!
+                'accept': 'image/*'
             })
         }
 
