@@ -5,21 +5,29 @@
 A user profile app which includes the following features:
 
 * Extended user profile information
-* Drop-down date picker
 * WYSIWYG editor for test formatting
+* Drop-down date picker
 * Online image editor for avatar editing
 * Password strength meter
 
 
 ## Running Locally
 
-` git clone https://github.com/gidsey/project_07_D2.2.git`
+` 
+git clone https://github.com/gidsey/project_07_D2.2.git
+`
 
-`pip install -r requirements.txt`
+`
+pip install -r requirements.txt
+`
   
- `python manage.py migrate`
+ `
+ python manage.py migrate
+ `
 
- `python manage.py runserver`
+ `
+ python manage.py runserver
+ `
 
 
 ## Requirments
@@ -40,11 +48,12 @@ The project includes unit tests which cover:
 * Chamge Password form
 * Profile form
 
-These tests can be found in the `tests.py` file.
+These tests can be found in `tests.py`.
 
 
 ## Attributions
 Icon: person by Guilherme Furtado from [the Noun Project](https://thenounproject.com/).
+
 Image editor based on a [tutorial by Vitor Freitas](https://simpleisbetterthancomplex.com/tutorial/2017/03/02/how-to-crop-images-in-a-django-application.html) 
 
 **Project built by Chris Guy, September 2019**
