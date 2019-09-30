@@ -3,6 +3,8 @@ from django.urls import reverse
 from django.test import Client
 from django.contrib.auth.models import User
 
+from . import forms
+
 client = Client()
 
 
@@ -65,5 +67,53 @@ class TestProfile(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'accounts/edit_profile.html')
 
+    def test_change_password_form(self):
+        """Test the positive form validation for change passowrd."""
+        form_data = {
+            'current_password': 'm00nlight$hadow3',
+            'new_password': 'Pa$$w0rd!Pa$$w0rd!7',
+            'confirm_password': 'Pa$$w0rd!Pa$$w0rd!7',
+        }
+        form = forms.ChangePasswordForm(user=self.user, data=form_data)
+        self.assertTrue(form.is_valid())
 
+    def test_change_password_form_fail(self):
+        """Test the negative form validation for change passowrd."""
+        form_data = {
+            'current_password': 'm00nlight$hadow3',
+            'new_password': 'DaveAngel77%66',
+            'confirm_password': 'DaveAngel77%66',
+        }
+        form = forms.ChangePasswordForm(user=self.user, data=form_data)
+        self.assertFalse(form.is_valid())
 
+    def test_profile_form(self):
+        """Test the profile form."""
+        form_data = {
+            'date_of_birth': '1980-02-03',
+            'city': 'Basildon',
+            'county': "Essex",
+            'country': 'UK',
+            'bio': "A classic Essex geezer who, despite his get-up and rather lavish lifestyle, is improbably "
+                   "concerned about saving the planet (though this is often undermined by his wife's behaviour), "
+                   "Mike Oldfield records, and Swinging. 'Moonlight Shadow' by Mike Oldfield and Maggie Reilly is "
+                   "used as the theme tune to sketches featuring this character",
+            'interets': 'Mike Oldfield, saving the planet',
+            'website': 'https://en.wikipedia.org/wiki/The_Fast_Show',
+        }
+        form = forms.ProfileForm(data=form_data)
+        self.assertTrue(form.is_valid())
+
+    def test_profile_form_fail(self):
+        """Test the profile form."""
+        form_data = {
+            'date_of_birth': '1980-02-03',
+            'city': 'Basildon',
+            'county': "Essex",
+            'country': 'UK',
+            'bio': "A classic",
+            'interets': 'Mike Oldfield, saving the planet',
+            'website': 'https://en.wikipedia.org/wiki/The_Fast_Show',
+        }
+        form = forms.ProfileForm(data=form_data)
+        self.assertFalse(form.is_valid())
