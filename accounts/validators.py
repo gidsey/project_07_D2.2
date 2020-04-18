@@ -58,7 +58,7 @@ class ChangedValidator(object):
     def __call__(self, value):
         if check_password(value, self.user.password):
             raise ValidationError(
-                _("The new password must be differnet from the old one."),
+                _("The new password must be different from the old one."),
                 code='password_not_changed'
             )
 
@@ -91,7 +91,7 @@ class EmailMatchValidator:
     def validate(self, email, confirm_email):
         if email != confirm_email:
             raise ValidationError(
-                _("Emails do not match"),
+                _("Emails do not match."),
                 code='emails_not_matching'
                 )
 

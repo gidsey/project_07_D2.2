@@ -22,7 +22,7 @@ class SignUpForm(UserCreationForm):
     last_name = forms.CharField(required=True)
     email = forms.EmailField(required=True)
     verify_email = forms.EmailField(
-
+        required=True,
         label="Confirm email:",
         help_text='Enter the same email as before, for verification.'
     )
