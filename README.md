@@ -73,6 +73,7 @@ Password Strength Meter by [Òscar Casajuana](https://github.com/elboletaire/pas
 
 Image editor based on a tutorial by [Vitor Freitas](https://simpleisbetterthancomplex.com/tutorial/2017/03/02/how-to-crop-images-in-a-django-application.html)
 
-
-_Project built by Chris Guy, September 2019_
+Original photography by [Gidsey](https://gidsey.com)
+ 
+_Project built by [Chris Guy](https://www.linkedin.com/in/gidsey/), September 2019_
 
