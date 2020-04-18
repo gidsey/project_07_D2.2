@@ -91,7 +91,7 @@ class EmailMatchValidator:
     def validate(self, email, confirm_email):
         if email != confirm_email:
             raise ValidationError(
-                _("Emails do not match."),
+                _("Emails do not match"),
                 code='emails_not_matching'
                 )
 
