@@ -1,5 +1,7 @@
 # User Profile with Django
 
+![application screenshot](media/django-user-profile-screenshot.png)
+
 ## Description
 
 A user profile app which includes the following features:
