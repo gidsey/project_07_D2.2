@@ -59,7 +59,7 @@ def sign_up(request):
 
 @login_required
 def create_profile(request):
-    """Propulate the Profile after the user has been created."""
+    """Populate the Profile after the user has been created."""
     profile_form = forms.ProfileForm()
     user = request.user
     if request.method == 'POST':
