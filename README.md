@@ -2,6 +2,8 @@
 
 ![application screenshot](media/django-user-profile-screenshot.png)
 
+![application screenshots](media/django-user-profile-screenshots.jpg)
+
 ## Description
 
 A user profile app which includes the following features:
