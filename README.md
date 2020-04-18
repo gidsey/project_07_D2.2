@@ -2,7 +2,7 @@
 
 ![application screenshot](media/django-user-profile-screenshot.png)
 
-![application screenshots](media/django-user-profile-screenshots.jpg)
+![application screenshots](media/django-user-profile-multi-screenshots.jpg)
 
 ## Description
 
