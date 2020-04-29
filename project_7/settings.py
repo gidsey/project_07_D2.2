@@ -131,7 +131,7 @@ USE_TZ = True
 LOGIN_URL = '/accounts/sign_in/'
 LOGOUT_REDIRECT_URL = '/accounts/sign_in/'
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'assets')
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'assets'),
