@@ -131,6 +131,7 @@ USE_TZ = True
 LOGIN_URL = '/accounts/sign_in/'
 LOGOUT_REDIRECT_URL = '/accounts/sign_in/'
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'assets')
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'assets'),
@@ -138,7 +139,6 @@ STATICFILES_DIRS = [
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
 
 # Sumernote WYSIWYG Editor
 # https://summernote.org/
