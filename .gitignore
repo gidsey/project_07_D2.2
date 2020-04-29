@@ -7,6 +7,5 @@ extra_credit_image_editor
 __pycache__/
 */__pycache__
 */*/__pycache__
-
-*.sqlite3
+db.sqlite3
 
