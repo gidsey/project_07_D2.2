@@ -1,9 +1,12 @@
 <component name="ProjectDictionaryState">
   <dictionary name="chrisguy">
     <words>
+      <w>allauth</w>
+      <w>filebased</w>
       <w>gunicorn</w>
       <w>herokuapp</w>
       <w>pythonpath</w>
+      <w>socialaccount</w>
       <w>sumernote</w>
       <w>summernote</w>
       <w>whitenoise</w>

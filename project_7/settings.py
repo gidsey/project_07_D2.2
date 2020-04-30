@@ -53,6 +53,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.github',
     'accounts',
     'widget_tweaks',
     'django_summernote',
@@ -169,12 +174,22 @@ SUMMERNOTE_CONFIG = {
         'toolbar': [
           ['style', ['style']],
           ['font', ['bold', 'underline', 'clear']],
-          ['color', ['color']],
+          # ['color', ['color']],
           ['para', ['ul', 'ol', 'paragraph']],
-          ['table', ['table']],
+          # ['table', ['table']],
           ['insert', ['link']],
           ['view', ['fullscreen', 'codeview', 'help']],
         ],
-
 },
 }
+
+AUTHENTICATION_BACKENDS = (
+    "django.contrib.auth.backends.ModelBackend",
+    "allauth.account.auth_backends.AuthenticationBackend",
+)
+
+SITE_ID = 1
+
+EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
+EMAIL_FILE_PATH = os.path.join(BASE_DIR, "sent_emails")
+
