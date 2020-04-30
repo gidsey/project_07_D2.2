@@ -33,6 +33,10 @@ pip install -r requirements.txt
  python manage.py runserver
 ```
 
+## Hosted on Heroku
+
+https://project7-userprofile.herokuapp.com/
+
 
 ## Requirments
 The project has been updated to run on Django 2.24. 
