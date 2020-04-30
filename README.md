@@ -40,7 +40,7 @@ https://project7-userprofile.herokuapp.com/
 
 ## Requirments
 The project has been updated to run on Django 2.24. 
-See `requirements.txt` for full details of the updated project dependencies.
+See `requirements.txt` for full details of the updated project dependencies.git 
 
 
 ## Styling
