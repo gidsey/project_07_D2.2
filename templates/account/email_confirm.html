@@ -7,11 +7,11 @@
 
     {% if confirmation %}
     <p>Please confirm that <strong>{{ confirmation.email_address.email }}</strong>
-    is a valid address for <strong>{{ confirmation.email_address.user }}</strong></p>
+    is a valid address for the user '<strong>{{ confirmation.email_address.user }}</strong>'</p>
 
     <form method="post">
         {% csrf_token %}
-        <button class="btn btn-primary" type="submit">Confirm NOW</button>
+        <button class="button-primary" type="submit">Confirm</button>
     </form>
     {% else %}
     <p>This email confirmation link has expired. Please <a href="{% url 'account_email' %}">
