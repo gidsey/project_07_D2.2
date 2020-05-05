@@ -204,7 +204,7 @@ SOCIALACCOUNT_PROVIDERS = {
         # credentials, or list them here:
         'APP': {
             'client_id': '7b9ffa2429dcd1c0d062',
-            'secret': 'e8ddc1be43effe6e2a2a2035ef3a628f64e79f81',
+            'secret': 'd250863ff0d4d71245ec80ab1e13920792636e30',
             'key': ''
         }
     }
